@@ -1,0 +1,515 @@
+---
+title: Why You Should be Writing Your Own React Hooks
+slug: why-you-should-be-writing-your-own-react-hooks
+publishedOn: 2019-11-30
+heroImage:
+---
+
+Custom React hooks can provide a great place to draw a boundary between imperative and declarative code.
+
+In this example, we'll look at extracting essential complexity into composable, encapsulated, reusable objects while keeping your components clean and declarative.
+
+## Composability
+
+Trick question: what is the one place you can use React hooks outside of a Component? The answer, of course, is in other hooks.
+
+As you likely know, when you write your own hooks you are writing plain old Javascript functions that follow the [convention of React Hooks](https://reactjs.org/docs/hooks-rules.html). They don't have a specific signature; there is nothing special about them and you can use them however you need to.
+
+As you build an app, adding features and making it more useful, components tend to take on more complexity. Experience helps you prevent avoidable complexity, but this only goes so far. A certain amount of complexity is necessary.
+
+It's a great feeling to take some messy but necessary logic scattered around a component and wrap it up in a hook with a clear API and single purpose.
+
+Let's look at a simple stopwatch component. Here is the implementation in codesandbox to play with.
+
+{/* {% codesandbox 01-timer-e25wn %} */}
+
+And this is the code.
+
+```js
+function Stopwatch() {
+  const [isCounting, setIsCounting] = React.useState(false);
+  const [runningTime, setRunningTime] = React.useState(0);
+
+  const intervalId = React.useRef();
+
+  const startCounting = () =>
+    (intervalId.current = setInterval(intervalCallback(), 0));
+
+  const stopCounting = () => clearInterval(intervalId.current);
+
+  const intervalCallback = () => {
+    const startTime = new Date().getTime();
+
+    return () => setRunningTime(runningTime + new Date().getTime() - startTime);
+  };
+
+  React.useEffect(() => stopCounting, []);
+
+  const handleStartStop = () => {
+    isCounting ? stopCounting() : startCounting();
+    setIsCounting(!isCounting);
+  };
+
+  const handleReset = () => {
+    stopCounting();
+    setIsCounting(false);
+    setRunningTime(0);
+  };
+
+  return (
+    <>
+      <h1>{runningTime}ms</h1>
+      <div>
+        <button onClick={handleStartStop}>Start/Stop</button>
+        <button onClick={handleReset}>Reset</button>
+      </div>
+    </>
+  );
+}
+```
+
+## Quick explanation of the component
+
+Let's walk through the code really quick so we are all on the same page.
+
+We start off with a couple of `useState` hooks to keep track of _if_ and _how long_ the timer has been running.
+
+```js
+const [isCounting, setIsCounting] = React.useState(false);
+const [runningTime, setRunningTime] = React.useState(0);
+```
+
+---
+
+Next we have a couple of functions that start and stop the timer by setting and clearing an interval. We store the interval ID as a Ref because we need a bit of state, but we don't care about it triggering a rerender.
+
+We are not using `setInterval` to do any timing, we just need it to repeatedly call a function without blocking.
+
+```js
+const intervalId = React.useRef();
+
+const startCounting = () =>
+  (intervalId.current = setInterval(intervalCallback(), 0));
+
+const stopCounting = () => clearInterval(intervalId.current);
+```
+
+---
+
+The time counting logic is in a callback which gets returned by this function and passed to `setInterval`. It closes over `startTime` at the moment the stopwatch is started.
+
+```js
+const intervalCallback = () => {
+  const startTime = new Date().getTime();
+
+  return () => setRunningTime(runningTime + new Date().getTime() - startTime);
+};
+```
+
+---
+
+We need to use `useEffect` here to return a clean-up function to prevent memory leaks when the component is unmounted.
+
+```js
+React.useEffect(() => stopCounting, []);
+```
+
+---
+
+And finally we define a couple of handlers for our start/stop and reset buttons.
+
+```js
+const handleStartStop = () => {
+  isCounting ? stopCounting() : startCounting();
+  setIsCounting(!isCounting);
+};
+
+const handleReset = () => {
+  stopCounting();
+  setIsCounting(false);
+  setRunningTime(0);
+};
+```
+
+---
+
+Pretty straightforward, but the component is handling multiple concerns.
+This code knows too much. It knows how to start and stop counting time and how it should be laid out on the page. We know we should refactor it, but let's think about why.
+
+There are two main reasons we might want to extract this logic out, _so we can add unrelated features_, and _so we can add similar components_ that use this same feature.
+
+The first reason is that when we need to add more features, we don't want the component to grow out of control and be difficult to reason about. We want to [encapsulate] (https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)) this timer logic so that new, unrelated logic doesn't get mixed in with this logic. This is adhering to the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle).
+
+The second reason is for simple reuse without repeating ourselves.
+
+As a side note, if the code in question didn't contain any hooks, we could just extract it into a normal function.
+
+As it is, we'll need to extract it into our own hook.
+
+Let's do that.
+
+```js
+const useClock = () => {
+  const [isCounting, setIsCounting] = React.useState(false);
+  const [runningTime, setRunningTime] = React.useState(0);
+
+  const intervalId = React.useRef();
+
+  const startCounting = () =>
+    (intervalId.current = setInterval(intervalCallback(), 0));
+
+  const stopCounting = () => clearInterval(intervalId.current);
+
+  const intervalCallback = () => {
+    const startTime = new Date().getTime();
+
+    return () => setRunningTime(runningTime + new Date().getTime() - startTime);
+  };
+
+  React.useEffect(() => stopCounting, []);
+
+  const handleStartStop = () => {
+    isCounting ? stopCounting() : startCounting();
+    setIsCounting(!isCounting);
+  };
+
+  const handleReset = () => {
+    stopCounting();
+    setIsCounting(false);
+    setRunningTime(0);
+  };
+
+  return { runningTime, handleStartStop, handleReset };
+};
+```
+
+Notice we are returning the running time of the clock and our handlers in an object which we immediately destructure in our component like this.
+
+```js
+function Stopwatch() {
+  const { runningTime, handleStartStop, handleReset } = useClock();
+
+  return (
+    <>
+      <h1>{runningTime}ms</h1>
+      <div>
+        <button onClick={handleStartStop}>Start/Stop</button>
+        <button onClick={handleReset}>Reset</button>
+      </div>
+    </>
+  );
+}
+```
+
+So far so good. It works ([codesandbox demo](https://codesandbox.io/s/02-timer-3m7ty)), and the immediate benefit is that our component becomes completely declarative, which is the way React components should be. One way to think about this is that the component describes it's final state, that is, all of it's possible states, at the same time. It's declarative because it simply declares how it is, but not the steps it takes to get it into those states.
+
+## Adding a Timer
+
+Let's say we don't just need a stopwatch that counts up. We also need a timer that counts down.
+
+We'll need 95% of the `Stopwatch` logic in the timer, and that should be easy since we just extracted it.
+
+Our first inclination might be to pass it a flag and add the conditional logic where it is needed. Here is the relevant parts of what that might look like.
+
+```js
+const useClock = ({ variant }) => {
+  // <snip>
+
+  const intervalCallback = () => {
+    const startTime = new Date().getTime();
+
+    if (variant === "Stopwatch") {
+      return () =>
+        setRunningTime(runningTime + new Date().getTime() - startTime);
+    } else if (variant === "Timer") {
+      return () =>
+        setRunningTime(runningTime - new Date().getTime() + startTime);
+    }
+  };
+
+  // <snip>
+};
+
+function Stopwatch() {
+  const { runningTime, handleStartStop, handleReset } = useClock({
+    variant: "Stopwatch",
+  });
+
+  return (
+    <>
+      <h1>{runningTime}ms</h1>
+      <div>
+        <button onClick={handleStartStop}>Start/Stop</button>
+        <button onClick={handleReset}>Reset</button>
+      </div>
+    </>
+  );
+}
+
+function Timer() {
+  const { runningTime, handleStartStop, handleReset } = useClock({
+    variant: "Timer",
+  });
+
+  return (
+    <>
+      <h1>{runningTime}ms</h1>
+      <div>
+        <button onClick={handleStartStop}>Start/Stop</button>
+        <button onClick={handleReset}>Reset</button>
+      </div>
+    </>
+  );
+}
+```
+
+OK, this works ([codesandbox demo](https://codesandbox.io/s/03-timer-sqfzj)), but we can see that it is already getting harder to read. If we had several more of these "features" its going to get out of control.
+
+A better way might be to extract out the unique part, give it a name (not always easy) and pass it into our hook, like this.
+
+```js
+const useClock = ({ counter }) => {
+  // <snip>
+
+  const intervalCallback = () => {
+    const startTime = new Date().getTime();
+
+    return () => setRunningTime(counter(startTime, runningTime));
+  };
+
+  // <snip>
+};
+
+function Stopwatch() {
+  const { runningTime, handleStartStop, handleReset } = useClock({
+    counter: (startTime, runningTime) =>
+      runningTime + new Date().getTime() - startTime,
+  });
+
+  return (
+    <>
+      <h1>{runningTime}ms</h1>
+      <div>
+        <button onClick={handleStartStop}>Start/Stop</button>
+        <button onClick={handleReset}>Reset</button>
+      </div>
+    </>
+  );
+}
+
+function Timer() {
+  const { runningTime, handleStartStop, handleReset } = useClock({
+    counter: (startTime, runningTime) =>
+      runningTime - new Date().getTime() + startTime,
+  });
+
+  return (
+    <>
+      <h1>{runningTime}ms</h1>
+      <div>
+        <button onClick={handleStartStop}>Start/Stop</button>
+        <button onClick={handleReset}>Reset</button>
+      </div>
+    </>
+  );
+}
+```
+
+Awesome, it works ([codesandbox demo](https://codesandbox.io/s/04-timer-nbdgw)), and our `useClock` hook stays nice and clean. It may arguably be more readable than the original since we have named one of its squishy parts.
+
+However, the changes we have introduced to our `Stopwatch` and `Timer` components have made them less declarative. This new _imperative_ code is instructing as to how it works, not declaring what it does.
+
+To fix this, we can just push that code out into into a couple more hooks. This demonstrates the beauty of the React hook api; they are composable.
+
+```js
+const useStopwatch = () =>
+  useClock({
+    counter: (startTime, runningTime) =>
+      runningTime + new Date().getTime() - startTime,
+  });
+
+function Stopwatch() {
+  const { runningTime, handleStartStop, handleReset } = useStopwatch();
+
+  return (
+    <>
+      <h1>{runningTime}ms</h1>
+      <div>
+        <button onClick={handleStartStop}>Start/Stop</button>
+        <button onClick={handleReset}>Reset</button>
+      </div>
+    </>
+  );
+}
+
+const useTimer = () =>
+  useClock({
+    counter: (startTime, runningTime) =>
+      runningTime - new Date().getTime() + startTime,
+  });
+
+function Timer() {
+  const { runningTime, handleStartStop, handleReset } = useTimer();
+
+  return (
+    <>
+      <h1>{runningTime}ms</h1>
+      <div>
+        <button onClick={handleStartStop}>Start/Stop</button>
+        <button onClick={handleReset}>Reset</button>
+      </div>
+    </>
+  );
+}
+```
+
+Much better ([codesandbox demo](https://codesandbox.io/s/05-timer-quwhm)), our components are back to being fully declarative, and our imperative code is nicely encapsulated.
+
+To demonstrate why this is a good thing, lets see how easy it is to add more features without mucking up our code.
+
+## Adding a start time
+
+We don't want our timer to count down from zero, so let's add an initial time.
+
+```js
+function App() {
+  return (
+    <div className="App">
+      <Stopwatch />
+      <Timer initialTime={5 * 1000} />
+    </div>
+  );
+}
+
+const useClock = ({ counter, initialTime = 0 }) => {
+  const [isCounting, setIsCounting] = React.useState(false);
+  const [runningTime, setRunningTime] = React.useState(initialTime);
+
+  // <snip>
+
+  const handleReset = () => {
+    stopCounting();
+    setIsCounting(false);
+    setRunningTime(initialTime);
+  };
+
+  return { runningTime, handleStartStop, handleReset };
+};
+
+const useTimer = (initialTime) =>
+  useClock({
+    counter: (startTime, runningTime) =>
+      runningTime - new Date().getTime() + startTime,
+    initialTime,
+  });
+
+function Timer({ initialTime }) {
+  const { runningTime, handleStartStop, handleReset } = useTimer(initialTime);
+
+  return (
+    <>
+      <h1>{runningTime}ms</h1>
+      <div>
+        <button onClick={handleStartStop}>Start/Stop</button>
+        <button onClick={handleReset}>Reset</button>
+      </div>
+    </>
+  );
+}
+```
+
+Not too bad ([codesandbox](https://codesandbox.io/s/06-timer-qc8ni)). We just added a prop and passed it on to our `useClock` hook.
+
+## Adding Timer Notification
+
+Now we want our Timer component to notify us when the time is up. Ding, Ding!
+
+We'll add a `useState` hook to the `useClock` hook to keep track of when our timer runs out.
+
+Additionally, inside a `useEffect` hook, we need to check if the time is up, stop counting and set `isDone` to true.
+
+We also switch it back to false in our reset handler.
+
+```js
+const useClock = ({ counter, initialTime = 0 }) => {
+  // <snip>
+  const [isDone, setIsDone] = React.useState(false);
+
+  // <snip>
+
+  React.useEffect(() => {
+    if (runningTime <= 0) {
+      stopCounting();
+      setIsDone(true);
+    }
+  }, [runningTime]);
+
+  // <snip>
+
+  const handleReset = () => {
+    // <snip>
+    setIsDone(false);
+  };
+
+  return { runningTime, handleStartStop, handleReset, isDone };
+};
+
+function Timer({ initialTime }) {
+  const { runningTime, handleStartStop, handleReset, isDone } =
+    useTimer(initialTime);
+
+  return (
+    <>
+      {!isDone && <h1>{runningTime}ms</h1>}
+      {isDone && <h1>Time's Up!</h1>}
+      <div>
+        <button onClick={handleStartStop}>Start/Stop</button>
+        <button onClick={handleReset}>Reset</button>
+      </div>
+    </>
+  );
+}
+```
+
+That works ([codesandbox](https://codesandbox.io/s/07-timer-m2v6i) demo). Notice we didn't need to touch `useTimer` because we just pass the `isDone` flag through in the same object.
+
+---
+
+In the end we have nicely declarative components that are now very easy add styling to.
+
+Our hooks turned out pretty clean too because we didn't add conditional logic but instead we injected the logic that makes them unique.
+
+After moving things into their own modules, and adding some style oriented components with [Material-UI](https://material-ui.com/) our `Stopwatch` and `Timer` look like this.
+
+```js
+function Stopwatch() {
+  const { runningTime, ...other } = useStopwatch();
+
+  return (
+    <Clock>
+      <TimeDisplay time={runningTime} />
+      <Buttons {...other} />
+    </Clock>
+  );
+}
+
+function Timer({ initialTime }) {
+  const { runningTime, isDone, ...other } = useTimer(initialTime);
+
+  return (
+    <Clock>
+      {!isDone && <TimeDisplay time={runningTime} />}
+      {isDone && <TimeContainer>Time's Up!</TimeContainer>}
+      <Buttons {...other} />
+    </Clock>
+  );
+}
+```
+
+And here is the end result.
+
+{/* {% codesandbox 08-timer-83jkn %} */}
+
+## Conclusion
+
+Custom React hooks are easy and fun! And they are a great way to hide away imperative code in reusable, composable functions while keeping your components simple and able to cleanly declare what you want your application to look like. Yay.
