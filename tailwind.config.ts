@@ -3,6 +3,7 @@ import typography from '@tailwindcss/typography'
 import { createPreset } from 'fumadocs-ui/tailwind-plugin'
 
 const config: Config = {
+  darkMode: 'class',
   content: [
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
@@ -20,7 +21,12 @@ const config: Config = {
     },
   },
   plugins: [typography],
-  presets: [createPreset()],
+  presets: [
+    createPreset({
+      // purple, default: defaultPreset, ocean: oceanPreset, catppuccin, neutral, dusk
+      preset: 'catppuccin',
+    }),
+  ],
 }
 
 export default config
