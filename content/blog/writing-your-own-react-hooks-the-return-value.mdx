@@ -1,6 +1,6 @@
 ---
 title: Writing Your Own React Hooks, the Return Value
-date: 2019-12-19
+summary: A look at when to return an array or an object from a custom React hook
 publishedAt: 2019-12-19
 ---
 
@@ -9,8 +9,8 @@ JavaScript can only return one value from a function. However, destructuring in 
 We can return multiple values in arrays or objects from a function and instantly destructure them. And, as you know, a React hook is just a convention-following function.
 
 ```js
-const [one, two] = useNumbers();
-const { a, b, c } = useAlphabet();
+const [one, two] = useNumbers()
+const { a, b, c } = useAlphabet()
 ```
 
 _**So why use one method over another?**_
@@ -23,9 +23,9 @@ We can also just return a single value, such as a string or integer. An example 
 
 ```js
 function OnlineUsers() {
-  const userCount = useOnlineUserCount();
+  const userCount = useOnlineUserCount()
 
-  return <Users count={userCount} />;
+  return <Users count={userCount} />
 }
 ```
 
@@ -36,15 +36,15 @@ function OnlineUsers() {
 A hook that has a very general use case benefits from exporting return values as an array. A great example of this is actually the built-in `React.useState` hook. Exporting an array makes it easy to customize the names of the state variables and their setters. Unique names enable us to use the hook repeatedly.
 
 ```js
-const [color, setColor] = useState("MintCream");
-const [width, setWidth] = useState("100vw");
+const [color, setColor] = useState('MintCream')
+const [width, setWidth] = useState('100vw')
 ```
 
 A slightly-contrived example of a custom hook that would benefit from returning an array might be CSS builder that also holds on to some state.
 
 ```js
-const [leftStyle, setLeftTheme] = useStyleBuilder("dank-kitty");
-const [rightStyle, setRightTheme] = useStyleBuilder("no-drama-llama");
+const [leftStyle, setLeftTheme] = useStyleBuilder('dank-kitty')
+const [rightStyle, setRightTheme] = useStyleBuilder('no-drama-llama')
 ```
 
 ### When to Return an Array
@@ -63,14 +63,14 @@ Object destructuring doesn't rely on ordering and it is easier to ignore values 
 
 ```js
 const { color, count, isValid, handleChangeColor, handleChangeCount } =
-  useItemOptions();
+  useItemOptions()
 ```
 
 ### When to Return an Object
 
-  - _**The number of values that need to be returned is high.**_ We don't have to remember the order or even use all the values when returning an object.
+- _**The number of values that need to be returned is high.**_ We don't have to remember the order or even use all the values when returning an object.
 
-  - _**The hook is not expected to be used more than once in the same component.**_ We can use the original property names when destructuring an object returned from a hook that will only be used once in a component.
+- _**The hook is not expected to be used more than once in the same component.**_ We can use the original property names when destructuring an object returned from a hook that will only be used once in a component.
 
 ---
 
@@ -79,8 +79,8 @@ const { color, count, isValid, handleChangeColor, handleChangeCount } =
 If a hook needs to return a larger number of values _AND_ is expected to be used more than once, we don't have to destructure at all. This can occasionally be useful.
 
 ```js
-const leftOptions = useItemOptions();
-const rightOptions = useItemOptions();
+const leftOptions = useItemOptions()
+const rightOptions = useItemOptions()
 
 return (
   <>
@@ -101,7 +101,7 @@ return (
       handleChangeCount={rightOptions.handleChangeCount}
     />
   </>
-);
+)
 ```
 
 ---
@@ -113,15 +113,15 @@ If we are careful with the naming of the properties in the object that our hook 
 The above component could be rewritten using the spread syntax like this:
 
 ```js
-const leftOptions = useItemOptions();
-const rightOptions = useItemOptions();
+const leftOptions = useItemOptions()
+const rightOptions = useItemOptions()
 
 return (
   <>
     <Column side="left" {...leftOptions} />
     <Column side="right" {...rightOptions} />
   </>
-);
+)
 ```
 
 _(Apparently, Dev.to syntax highlighting for the spread operator in JSX is not yet supported, but this works.)_

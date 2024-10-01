@@ -1,6 +1,6 @@
 ---
 title: Why You Should be Writing Your Own React Hooks
-slug: why-you-should-be-writing-your-own-react-hooks
+summary: In this example, we'll look at extracting essential complexity into composable, encapsulated, reusable objects while keeping your components clean and declarative.
 publishedOn: 2019-11-30
 heroImage:
 ---
@@ -27,34 +27,34 @@ And this is the code.
 
 ```js
 function Stopwatch() {
-  const [isCounting, setIsCounting] = React.useState(false);
-  const [runningTime, setRunningTime] = React.useState(0);
+  const [isCounting, setIsCounting] = React.useState(false)
+  const [runningTime, setRunningTime] = React.useState(0)
 
-  const intervalId = React.useRef();
+  const intervalId = React.useRef()
 
   const startCounting = () =>
-    (intervalId.current = setInterval(intervalCallback(), 0));
+    (intervalId.current = setInterval(intervalCallback(), 0))
 
-  const stopCounting = () => clearInterval(intervalId.current);
+  const stopCounting = () => clearInterval(intervalId.current)
 
   const intervalCallback = () => {
-    const startTime = new Date().getTime();
+    const startTime = new Date().getTime()
 
-    return () => setRunningTime(runningTime + new Date().getTime() - startTime);
-  };
+    return () => setRunningTime(runningTime + new Date().getTime() - startTime)
+  }
 
-  React.useEffect(() => stopCounting, []);
+  React.useEffect(() => stopCounting, [])
 
   const handleStartStop = () => {
-    isCounting ? stopCounting() : startCounting();
-    setIsCounting(!isCounting);
-  };
+    isCounting ? stopCounting() : startCounting()
+    setIsCounting(!isCounting)
+  }
 
   const handleReset = () => {
-    stopCounting();
-    setIsCounting(false);
-    setRunningTime(0);
-  };
+    stopCounting()
+    setIsCounting(false)
+    setRunningTime(0)
+  }
 
   return (
     <>
@@ -64,7 +64,7 @@ function Stopwatch() {
         <button onClick={handleReset}>Reset</button>
       </div>
     </>
-  );
+  )
 }
 ```
 
@@ -75,8 +75,8 @@ Let's walk through the code really quick so we are all on the same page.
 We start off with a couple of `useState` hooks to keep track of _if_ and _how long_ the timer has been running.
 
 ```js
-const [isCounting, setIsCounting] = React.useState(false);
-const [runningTime, setRunningTime] = React.useState(0);
+const [isCounting, setIsCounting] = React.useState(false)
+const [runningTime, setRunningTime] = React.useState(0)
 ```
 
 ---
@@ -86,12 +86,12 @@ Next we have a couple of functions that start and stop the timer by setting and 
 We are not using `setInterval` to do any timing, we just need it to repeatedly call a function without blocking.
 
 ```js
-const intervalId = React.useRef();
+const intervalId = React.useRef()
 
 const startCounting = () =>
-  (intervalId.current = setInterval(intervalCallback(), 0));
+  (intervalId.current = setInterval(intervalCallback(), 0))
 
-const stopCounting = () => clearInterval(intervalId.current);
+const stopCounting = () => clearInterval(intervalId.current)
 ```
 
 ---
@@ -100,10 +100,10 @@ The time counting logic is in a callback which gets returned by this function an
 
 ```js
 const intervalCallback = () => {
-  const startTime = new Date().getTime();
+  const startTime = new Date().getTime()
 
-  return () => setRunningTime(runningTime + new Date().getTime() - startTime);
-};
+  return () => setRunningTime(runningTime + new Date().getTime() - startTime)
+}
 ```
 
 ---
@@ -111,7 +111,7 @@ const intervalCallback = () => {
 We need to use `useEffect` here to return a clean-up function to prevent memory leaks when the component is unmounted.
 
 ```js
-React.useEffect(() => stopCounting, []);
+React.useEffect(() => stopCounting, [])
 ```
 
 ---
@@ -120,15 +120,15 @@ And finally we define a couple of handlers for our start/stop and reset buttons.
 
 ```js
 const handleStartStop = () => {
-  isCounting ? stopCounting() : startCounting();
-  setIsCounting(!isCounting);
-};
+  isCounting ? stopCounting() : startCounting()
+  setIsCounting(!isCounting)
+}
 
 const handleReset = () => {
-  stopCounting();
-  setIsCounting(false);
-  setRunningTime(0);
-};
+  stopCounting()
+  setIsCounting(false)
+  setRunningTime(0)
+}
 ```
 
 ---
@@ -150,44 +150,44 @@ Let's do that.
 
 ```js
 const useClock = () => {
-  const [isCounting, setIsCounting] = React.useState(false);
-  const [runningTime, setRunningTime] = React.useState(0);
+  const [isCounting, setIsCounting] = React.useState(false)
+  const [runningTime, setRunningTime] = React.useState(0)
 
-  const intervalId = React.useRef();
+  const intervalId = React.useRef()
 
   const startCounting = () =>
-    (intervalId.current = setInterval(intervalCallback(), 0));
+    (intervalId.current = setInterval(intervalCallback(), 0))
 
-  const stopCounting = () => clearInterval(intervalId.current);
+  const stopCounting = () => clearInterval(intervalId.current)
 
   const intervalCallback = () => {
-    const startTime = new Date().getTime();
+    const startTime = new Date().getTime()
 
-    return () => setRunningTime(runningTime + new Date().getTime() - startTime);
-  };
+    return () => setRunningTime(runningTime + new Date().getTime() - startTime)
+  }
 
-  React.useEffect(() => stopCounting, []);
+  React.useEffect(() => stopCounting, [])
 
   const handleStartStop = () => {
-    isCounting ? stopCounting() : startCounting();
-    setIsCounting(!isCounting);
-  };
+    isCounting ? stopCounting() : startCounting()
+    setIsCounting(!isCounting)
+  }
 
   const handleReset = () => {
-    stopCounting();
-    setIsCounting(false);
-    setRunningTime(0);
-  };
+    stopCounting()
+    setIsCounting(false)
+    setRunningTime(0)
+  }
 
-  return { runningTime, handleStartStop, handleReset };
-};
+  return { runningTime, handleStartStop, handleReset }
+}
 ```
 
 Notice we are returning the running time of the clock and our handlers in an object which we immediately destructure in our component like this.
 
 ```js
 function Stopwatch() {
-  const { runningTime, handleStartStop, handleReset } = useClock();
+  const { runningTime, handleStartStop, handleReset } = useClock()
 
   return (
     <>
@@ -197,7 +197,7 @@ function Stopwatch() {
         <button onClick={handleReset}>Reset</button>
       </div>
     </>
-  );
+  )
 }
 ```
 
@@ -216,24 +216,24 @@ const useClock = ({ variant }) => {
   // <snip>
 
   const intervalCallback = () => {
-    const startTime = new Date().getTime();
+    const startTime = new Date().getTime()
 
-    if (variant === "Stopwatch") {
+    if (variant === 'Stopwatch') {
       return () =>
-        setRunningTime(runningTime + new Date().getTime() - startTime);
-    } else if (variant === "Timer") {
+        setRunningTime(runningTime + new Date().getTime() - startTime)
+    } else if (variant === 'Timer') {
       return () =>
-        setRunningTime(runningTime - new Date().getTime() + startTime);
+        setRunningTime(runningTime - new Date().getTime() + startTime)
     }
-  };
+  }
 
   // <snip>
-};
+}
 
 function Stopwatch() {
   const { runningTime, handleStartStop, handleReset } = useClock({
-    variant: "Stopwatch",
-  });
+    variant: 'Stopwatch',
+  })
 
   return (
     <>
@@ -243,13 +243,13 @@ function Stopwatch() {
         <button onClick={handleReset}>Reset</button>
       </div>
     </>
-  );
+  )
 }
 
 function Timer() {
   const { runningTime, handleStartStop, handleReset } = useClock({
-    variant: "Timer",
-  });
+    variant: 'Timer',
+  })
 
   return (
     <>
@@ -259,7 +259,7 @@ function Timer() {
         <button onClick={handleReset}>Reset</button>
       </div>
     </>
-  );
+  )
 }
 ```
 
@@ -272,19 +272,19 @@ const useClock = ({ counter }) => {
   // <snip>
 
   const intervalCallback = () => {
-    const startTime = new Date().getTime();
+    const startTime = new Date().getTime()
 
-    return () => setRunningTime(counter(startTime, runningTime));
-  };
+    return () => setRunningTime(counter(startTime, runningTime))
+  }
 
   // <snip>
-};
+}
 
 function Stopwatch() {
   const { runningTime, handleStartStop, handleReset } = useClock({
     counter: (startTime, runningTime) =>
       runningTime + new Date().getTime() - startTime,
-  });
+  })
 
   return (
     <>
@@ -294,14 +294,14 @@ function Stopwatch() {
         <button onClick={handleReset}>Reset</button>
       </div>
     </>
-  );
+  )
 }
 
 function Timer() {
   const { runningTime, handleStartStop, handleReset } = useClock({
     counter: (startTime, runningTime) =>
       runningTime - new Date().getTime() + startTime,
-  });
+  })
 
   return (
     <>
@@ -311,7 +311,7 @@ function Timer() {
         <button onClick={handleReset}>Reset</button>
       </div>
     </>
-  );
+  )
 }
 ```
 
@@ -326,10 +326,10 @@ const useStopwatch = () =>
   useClock({
     counter: (startTime, runningTime) =>
       runningTime + new Date().getTime() - startTime,
-  });
+  })
 
 function Stopwatch() {
-  const { runningTime, handleStartStop, handleReset } = useStopwatch();
+  const { runningTime, handleStartStop, handleReset } = useStopwatch()
 
   return (
     <>
@@ -339,17 +339,17 @@ function Stopwatch() {
         <button onClick={handleReset}>Reset</button>
       </div>
     </>
-  );
+  )
 }
 
 const useTimer = () =>
   useClock({
     counter: (startTime, runningTime) =>
       runningTime - new Date().getTime() + startTime,
-  });
+  })
 
 function Timer() {
-  const { runningTime, handleStartStop, handleReset } = useTimer();
+  const { runningTime, handleStartStop, handleReset } = useTimer()
 
   return (
     <>
@@ -359,7 +359,7 @@ function Timer() {
         <button onClick={handleReset}>Reset</button>
       </div>
     </>
-  );
+  )
 }
 ```
 
@@ -378,33 +378,33 @@ function App() {
       <Stopwatch />
       <Timer initialTime={5 * 1000} />
     </div>
-  );
+  )
 }
 
 const useClock = ({ counter, initialTime = 0 }) => {
-  const [isCounting, setIsCounting] = React.useState(false);
-  const [runningTime, setRunningTime] = React.useState(initialTime);
+  const [isCounting, setIsCounting] = React.useState(false)
+  const [runningTime, setRunningTime] = React.useState(initialTime)
 
   // <snip>
 
   const handleReset = () => {
-    stopCounting();
-    setIsCounting(false);
-    setRunningTime(initialTime);
-  };
+    stopCounting()
+    setIsCounting(false)
+    setRunningTime(initialTime)
+  }
 
-  return { runningTime, handleStartStop, handleReset };
-};
+  return { runningTime, handleStartStop, handleReset }
+}
 
 const useTimer = (initialTime) =>
   useClock({
     counter: (startTime, runningTime) =>
       runningTime - new Date().getTime() + startTime,
     initialTime,
-  });
+  })
 
 function Timer({ initialTime }) {
-  const { runningTime, handleStartStop, handleReset } = useTimer(initialTime);
+  const { runningTime, handleStartStop, handleReset } = useTimer(initialTime)
 
   return (
     <>
@@ -414,7 +414,7 @@ function Timer({ initialTime }) {
         <button onClick={handleReset}>Reset</button>
       </div>
     </>
-  );
+  )
 }
 ```
 
@@ -433,30 +433,30 @@ We also switch it back to false in our reset handler.
 ```js
 const useClock = ({ counter, initialTime = 0 }) => {
   // <snip>
-  const [isDone, setIsDone] = React.useState(false);
+  const [isDone, setIsDone] = React.useState(false)
 
   // <snip>
 
   React.useEffect(() => {
     if (runningTime <= 0) {
-      stopCounting();
-      setIsDone(true);
+      stopCounting()
+      setIsDone(true)
     }
-  }, [runningTime]);
+  }, [runningTime])
 
   // <snip>
 
   const handleReset = () => {
     // <snip>
-    setIsDone(false);
-  };
+    setIsDone(false)
+  }
 
-  return { runningTime, handleStartStop, handleReset, isDone };
-};
+  return { runningTime, handleStartStop, handleReset, isDone }
+}
 
 function Timer({ initialTime }) {
   const { runningTime, handleStartStop, handleReset, isDone } =
-    useTimer(initialTime);
+    useTimer(initialTime)
 
   return (
     <>
@@ -467,7 +467,7 @@ function Timer({ initialTime }) {
         <button onClick={handleReset}>Reset</button>
       </div>
     </>
-  );
+  )
 }
 ```
 
@@ -483,18 +483,18 @@ After moving things into their own modules, and adding some style oriented compo
 
 ```js
 function Stopwatch() {
-  const { runningTime, ...other } = useStopwatch();
+  const { runningTime, ...other } = useStopwatch()
 
   return (
     <Clock>
       <TimeDisplay time={runningTime} />
       <Buttons {...other} />
     </Clock>
-  );
+  )
 }
 
 function Timer({ initialTime }) {
-  const { runningTime, isDone, ...other } = useTimer(initialTime);
+  const { runningTime, isDone, ...other } = useTimer(initialTime)
 
   return (
     <Clock>
@@ -502,7 +502,7 @@ function Timer({ initialTime }) {
       {isDone && <TimeContainer>Time's Up!</TimeContainer>}
       <Buttons {...other} />
     </Clock>
-  );
+  )
 }
 ```
 

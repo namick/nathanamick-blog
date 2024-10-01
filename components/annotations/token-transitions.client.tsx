@@ -1,12 +1,12 @@
-"use client"
+'use client'
 
-import { CustomPreProps, InnerPre, getPreRef } from "codehike/code"
+import { CustomPreProps, InnerPre, getPreRef } from 'codehike/code'
 import {
   TokenTransitionsSnapshot,
   calculateTransitions,
   getStartingSnapshot,
-} from "codehike/utils/token-transitions"
-import React from "react"
+} from 'codehike/utils/token-transitions'
+import React from 'react'
 
 const MAX_TRANSITION_DURATION = 900 // milliseconds
 
@@ -18,7 +18,7 @@ export class SmoothPre extends React.Component<CustomPreProps> {
   }
 
   render() {
-    return <InnerPre merge={this.props} style={{ position: "relative" }} />
+    return <InnerPre merge={this.props} style={{ position: 'relative' }} />
   }
 
   getSnapshotBeforeUpdate() {
@@ -43,7 +43,7 @@ export class SmoothPre extends React.Component<CustomPreProps> {
         duration: options.duration * MAX_TRANSITION_DURATION,
         delay: options.delay * MAX_TRANSITION_DURATION,
         easing: options.easing,
-        fill: "both",
+        fill: 'both',
       })
     })
   }

@@ -13,6 +13,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-inter)'],
+        serif: ['var(--font-roboto-serif)'],
+        mono: ['var(--font-roboto-mono)'],
+        fredoka: ['var(--font-fredoka)'],
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

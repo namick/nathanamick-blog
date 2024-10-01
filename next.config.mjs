@@ -1,16 +1,17 @@
-import { remarkCodeHike, recmaCodeHike } from "codehike/mdx"
-import createMDX from "fumadocs-mdx/config"
+import { remarkCodeHike, recmaCodeHike } from 'codehike/mdx'
+import { createMDX } from 'fumadocs-mdx/next'
+import { remarkImage } from 'fumadocs-core/mdx-plugins'
 
 /** @type {import('codehike/mdx').CodeHikeConfig} */
 const chConfig = {
   components: {
-    code: "Code",
+    code: 'Code',
   },
 }
 
 const withMDX = createMDX({
   mdxOptions: {
-    remarkPlugins: [[remarkCodeHike, chConfig]],
+    remarkPlugins: [remarkImage, [remarkCodeHike, chConfig]],
     recmaPlugins: [[recmaCodeHike, chConfig]],
     jsx: true,
   },

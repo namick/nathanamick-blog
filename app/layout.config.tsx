@@ -1,16 +1,16 @@
-import { type BaseLayoutProps, type DocsLayoutProps } from 'fumadocs-ui/layout'
-import { pageTree } from '@/app/source'
+import { type HomeLayoutProps } from 'fumadocs-ui/home-layout'
 
-// shared configuration
-export const baseOptions: BaseLayoutProps = {
+export const baseOptions: HomeLayoutProps = {
   githubUrl: 'https://github.com/namick',
   nav: {
     title: 'Nathan Amick',
+    transparentMode: 'always',
   },
-}
-
-// docs layout configuration
-export const docsOptions: DocsLayoutProps = {
-  ...baseOptions,
-  tree: pageTree,
+  links: [
+    {
+      text: 'Blog',
+      url: '/blog',
+      active: 'nested-url',
+    },
+  ],
 }

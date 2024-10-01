@@ -1,0 +1,320 @@
+---
+title: Writing Your Own React Hooks - a TDD Example
+summary: Writing your own hooks can encapsulate imperative code in useful and reusable objects, leaving your components simple and completely declarative.
+publishedOn: 2019-12-9
+heroImage:
+---
+
+import Image from 'next/image'
+import { ClickableFonts } from './components/clickable-fonts'
+
+import clickableFonts from './images/clickable-fonts.gif'
+import testRed from './images/test-red.png'
+import testGreen from './images/test-green.png'
+import testRed2 from './images/test-red-2.png'
+
+In [my last post](https://dev.to/namick/why-you-should-be-writing-your-own-react-hooks-23an) I discussed how writing your own hooks can encapsulate imperative code in useful and reusable objects, leaving your components simple and completely declarative.
+
+In this post I explain the same concept with a simpler example and less code. And perhaps, more importantly, this will give us room to test-drive it and experience the benefits of TDD. Here we go...
+
+---
+
+Imagine we want to be able to try out various fonts right in the app we are building. It's hard to get a sense of what a font will look like until it's viewed in place, so easily cycling through a few fonts in context would be handy, like this:
+
+{/* ![Clickable Fonts](https://thepracticaldev.s3.amazonaws.com/i/l3sn3qn5fpohfuawwk4h.gif) */}
+
+<Image src={clickableFonts} alt="Clickable Fonts" />
+
+---
+
+## Writing a Test
+
+Let's pretend this wasn't a (somewhat) contrived example but an actual feature in our app. We start off by writing a test using the [React Testing Library](https://github.com/testing-library/react-testing-library).
+
+```js
+// Title.spec.js
+
+import Title from './Title'
+
+test('Cycles through a list of fonts when clicked', () => {
+  const text = 'Clickable Fonts'
+  const { getByText } = render(<Title>{text}</Title>)
+
+  const fontBefore = window.getComputedStyle(getByText(text)).fontFamily
+
+  fireEvent.click(getByText(text))
+
+  const fontAfter = window.getComputedStyle(getByText(text)).fontFamily
+
+  expect(fontBefore).not.toEqual(fontAfter)
+})
+```
+
+There are some problems with this test, not the least of which is that testing CSS is not a great idea, but we don't yet know how our component is going to work, except from the user perspective. And changing the style when it is clicked _is_ the feature, so this will get us going.
+
+As expected, our test is failing. (Red, green, refactor, right?)
+
+{/* ![Failing test](https://thepracticaldev.s3.amazonaws.com/i/jxcik5d698uke9hcqdrn.png) */}
+
+<Image src={testRed} alt="Failing test" />
+
+---
+
+## Making the Test Pass
+
+To make the test pass, we create a `Title` component, add some Google Fonts, a bit of style via [Styled-Components](https://github.com/styled-components/styled-components), a `useState` hook to keep track of which font is currently being displayed and an `onClick` handler to change the font. We end up with this:
+
+```js
+// Title.js
+
+function Title({ children }) {
+  const [fontIndex, setFontIndex] = React.useState(0)
+
+  const handleChangeFont = () =>
+    setFontIndex(fontIndex >= fontList.length - 1 ? 0 : fontIndex + 1)
+
+  const fontList = [
+    'Indie Flower',
+    'Sacramento',
+    'Mansalva',
+    'Emilys Candy',
+    'Merienda One',
+    'Pompiere',
+  ]
+
+  const fontFamily = fontList[fontIndex]
+
+  const StyledTitle = styled.h1`
+    font-size: 3rem;
+    cursor: pointer;
+    user-select: none;
+    font-family: ${fontFamily};
+  `
+
+  return <StyledTitle onClick={handleChangeFont}>{children}</StyledTitle>
+}
+```
+
+That makes our test pass, yay.
+
+{/* ![Passing test](https://thepracticaldev.s3.amazonaws.com/i/odketi0n5dn3on38xh16.png) */}
+
+<Image src={testGreen} alt="Passing test" />
+
+---
+
+And the component works as seen in this CodeSandbox demo.
+
+{/* {% codesandbox h5ycx module=/src/Title.js %} */}
+
+<ClickableFonts />
+
+---
+
+## We Can Make this Better
+
+We have some problems with this. We'd like our component to be more declarative. It's currently showing all the nitty-gritty details about _how_ the font gets changed when a user clicks on it.
+
+There is also the problem that something just doesn't feel right about testing the CSS in the component. But let's solve the first problem first since that is easy enough.
+
+---
+
+We'll just push all the logic into our own custom hook.
+
+Our new hook looks like this:
+
+```js
+// useClickableFonts.js
+
+const useClickableFonts = (fontList) => {
+  const [fontIndex, setFontIndex] = React.useState(0)
+
+  const handleChangeFont = () =>
+    setFontIndex(fontIndex >= fontList.length - 1 ? 0 : fontIndex + 1)
+
+  const fontFamily = fontList[fontIndex]
+
+  return { fontFamily, handleChangeFont }
+}
+```
+
+---
+
+Our component looks like this:
+
+```js
+// Title.js
+
+function Title({ children }) {
+  const { fontFamily, handleChangeFont } = useClickableFonts([
+    'Indie Flower',
+    'Sacramento',
+    'Mansalva',
+    'Emilys Candy',
+    'Merienda One',
+    'Pompiere',
+  ])
+
+  const StyledTitle = styled.h1`
+    font-size: 3rem;
+    cursor: pointer;
+    user-select: none;
+    font-family: ${fontFamily};
+  `
+
+  return <StyledTitle onClick={handleChangeFont}>{children}</StyledTitle>
+}
+```
+
+Notice we left the declaration of the fonts in the component, passing them into the hook. This is important because it is part of what we want components to do, declare all of their possible states. We just don't want them to know _how_ they get into those states.
+
+The Styled-Components API is also completely declarative and is part of the implementation of the component. It stays.
+
+---
+
+Our tests still pass so we know we haven't broken anything. Refactoring is fun with the security of tests.
+
+{/* ![Passing test](https://thepracticaldev.s3.amazonaws.com/i/odketi0n5dn3on38xh16.png) */}
+
+<Image src={testGreen} alt="Passing test" />
+
+---
+
+And our component still works: ([CodeSandbox demo](https://codesandbox.io/s/writing-hooks-simplified-2-jcklh)).
+
+{/* {% codesandbox jcklh module=/src/useClickableFonts.js %} */}
+
+---
+
+## Adding the Font Name to the Footer
+
+As we are clicking endlessly on it, we realize it would be nice to know which font is currently being displayed. However, we want that info far away from the `Title` component, so that it doesn't interfere with the UX design testing we are doing. Let's display it subtle-like in the footer for now.
+
+But how do we get that font information out of the `Title` component and on to the page in a different location?
+
+The answer, of course, is to [lift state up](https://reactjs.org/docs/lifting-state-up.html). Luckily, pushing logic and state into our own hook has made this task as simple as moving the `useClickableFonts` line up and passing down the props.
+
+```js
+// App.js
+
+function App() {
+  const { fontFamily, handleChangeFont } = useClickableFonts([
+    'Indie Flower',
+    'Sacramento',
+    'Mansalva',
+    'Emilys Candy',
+    'Merienda One',
+    'Pompiere',
+  ])
+
+  return (
+    <>
+      <Title fontFamily={fontFamily} handleChangeFont={handleChangeFont}>
+        Clickable Fonts
+      </Title>
+      <Footer>{fontFamily}</Footer>
+    </>
+  )
+}
+```
+
+Great, we moved the hook up to the closest common ancestor (in this simple example it is `App`) and we passed the props into the `Title` component and displayed the name of the font in the `Footer`.
+
+---
+
+The `Title` component becomes a pure, deterministic component:
+
+```js
+// Title.js
+
+function Title({ fontFamily, handleChangeFont, children }) {
+  const StyledTitle = styled.h1`
+    font-size: 3rem;
+    cursor: pointer;
+    user-select: none;
+    font-family: ${fontFamily};
+  `
+
+  return <StyledTitle onClick={handleChangeFont}>{children}</StyledTitle>
+}
+```
+
+---
+
+Now we can see the name of the font down at the footer. Go ahead, click it:
+
+{/* {% codesandbox 4gm5g module=/src/Title.js %} */}
+
+---
+
+However, our test is now broken. (See the [CodeSandbox demo](https://codesandbox.io/s/writing-hooks-simplified-3-4gm5g) with the broken test.)
+
+{/* ![Broken test](https://thepracticaldev.s3.amazonaws.com/i/tc6rt5nck3g5mgfu7zce.png) */}
+
+<Image src={testRed2} alt="Broken test" />
+
+---
+
+## Fixing the test
+
+This gives us some insight into why we had that gnawing feeling something was wrong with our test. When we update the component to take props instead of using the `useClickableFont` hook directly, that requires us to update the test as well. However, it was slightly unexpected because we didn't change or refactor any of the logic.
+
+Our test was brittle because we were testing the wrong thing. We need to test that the imperative gears of changing the font work, not the (now) simple and declarative React component. The nuts and bolts of React and Styled-Components are already well tested. We can just use them with confidence if we are not adding our own logic.
+
+This doesn't mean we should be testing implementation details. When writing our own hooks, we are adding to the API that our React component will use. We need to test that new API, but from the outside.
+
+---
+
+What we really want to be testing is our `useClickableFont` hook. We can do that with the [react-hooks-testing-library](https://github.com/testing-library/react-hooks-testing-library)
+
+Our new test looks like this:
+
+```js
+// useClickableFonts.spec.js
+
+import useClickableFonts from './useClickableFonts'
+
+test('Cycles through a list of fonts', () => {
+  const { result } = renderHook(() =>
+    useClickableFonts(['Indie Flower', 'Sacramento', 'Mansalva'])
+  )
+
+  expect(result.current.fontFamily).toBe('Indie Flower')
+
+  act(() => result.current.handleChangeFont())
+
+  expect(result.current.fontFamily).toBe('Sacramento')
+
+  act(() => result.current.handleChangeFont())
+
+  expect(result.current.fontFamily).toBe('Mansalva')
+
+  act(() => result.current.handleChangeFont())
+
+  expect(result.current.fontFamily).toBe('Indie Flower')
+})
+```
+
+Notice we are testing it from the outside, just like the user would use it. The test should resemble the way the hook is used. In this case the user is a React component. We can have confidence in this new test because the test uses it just like a component would.
+
+We test that the hook returns the first, second and third font in order, each time the handler is called. We also test that it loops around to the first one again.
+
+---
+
+Here is the final component on CodeSandbox:
+
+{/* {% codesandbox wk4hk %} */}
+
+<ClickableFonts withCode />
+
+---
+
+## Conclusion
+
+It's not always easy to know the right design or the correct abstraction at first. That's why the refactor part of the `red, green, refactor` cycle is so important and ignoring this step is often the cause of code deterioration and growing technical debt.
+
+Often, separating the tasks of making the code work and making the code right creates freedom. Freedom to get started, and then freedom to discover a better implementation.
+
+We test-drove a new component, discovering an initial implementation. Extracting the logic into a hook made our code easier to change. Changing it helped us discover a better way to test it.
+
+We ended up with clean, declarative components and the hook gives us a convenient interface to test and reuse imperative code.

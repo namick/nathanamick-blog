@@ -1,0 +1,189 @@
+---
+title: The Missing Guide to Twitter OAuth User Authorization
+summary: A simple guide to Twitter user authorization
+publishedOn: 2019-11-07
+---
+
+import Image from 'next/image'
+import gif from './images/twitter-api-docs.gif'
+
+There are a number of prebuilt solutions to do authentication using Twitter as an identity provider (Sign-in with Twitter). This is OAuth _user authentication_. But if your application needs to do tasks like post a tweet on behalf of a user, you need to use Twitter OAuth _user authorization_ to allow your users to authorize your app.
+
+In this guide, I'll explain how to do Twitter authorization as simply as possible.
+
+---
+
+In a recent app I built, I needed to enable the users to authorize the app to use Twitter on their behalf. I found Twitter documentation to be confusing and inaccurate to say the least.
+
+After spending way too much time pouring over [the API documentation](https://developer.twitter.com/en/docs), I got the feeling that Twitter is intentionally trying to make it difficult for developers to use. I doubt this is actually true, but a quick search shows Twitter has been struggling with developer relations for nearly 10 years.
+
+Check out [this section](https://developer.twitter.com/en/docs/basics/authentication/overview/3-legged-oauth) from the developer docs.
+
+{/* ![](https://thepracticaldev.s3.amazonaws.com/i/u0n33mbu30l1gwtojt40.gif) */}
+
+<Image src={gif} alt="Twitter's OAuth documentation" />
+
+Rather than standardizing on terminology and updating their documentation, they put in a clarification section that includes what appears to be a copy-paste typo.
+
+In any case, I didn't find much help elsewhere on the web either, so in this article I'll share how to do Twitter authorization in a simple and clear way.
+
+## An overview of the steps needed to get an authorization token
+
+1. Your app requests a key from Twitter and tells Twitter where you want the user redirected to after authorization.
+
+2. Your app uses this key to construct a twitter.com URL and redirects the user to it.
+
+3. The user authorizes your app on the Twitter website and is then redirected back to your app.
+
+4. Your app collects verifier information from this redirect.
+
+5. Your app uses all this information to request the actual authorization token from Twitter.
+
+Your app can now use this token with the Twitter API to make posts and other "user context" tasks on behalf of your users.
+
+## A closer look at each of these five steps
+
+1. Your app first requests an `oath_token` and `oauth_token_secret` from Twitter. Your app does this by making a POST request to Twitter's `oauth/request_token` endpoint. While doing this, your app also provides Twitter with a `callback` URL pointing back to your app.
+
+2. Your app temporarily stores both the `oauth_token` and `oauth_token_secret` and then uses the `oauth_token` to construct a twitter.com url that looks like this:
+   `https://api.twitter.com/oauth/authorize?oauth_token=NPcudxy0yU5T3tBzho7iCotZ3cnetKwcTIRlX0iwRl0`
+
+3. Your app redirects the user to this twitter.com url and the user is given the opportunity to authorize your app. As soon as the user authorizes your app, Twitter redirects the user back to your app using the `callback` URL you provided in step 1.
+
+4. Your app's `callback` URL expects two pieces of information from Twitter in the form of url encoded parameters, `oauth_token` and `oauth_verifier`. The `oauth_token` is the same token your app received in step 1 and can be used to look up the previously stored `oauth_token_secret`.
+
+5. Your app now has `oauth_token`, `oauth_token_secret`, and `oauth_verifier`. It uses these three pieces of information to make another POST request to Twitter. This time it uses the `oauth/access_token` endpoint. The response to this request contains the final `oauth_token` and `oauth_token_secret`.
+
+This final `oauth_token` and `oauth_token_secret` are stored securely associated with the user. Your app can now use the Twitter API on behalf of the user.
+
+> Note: It is important to understand that there are two each of `oauth_token` and `oauth_token_secret`. The first is temporary and is requested in step 1 and used in step 2 and step 5. The second is requested in step 5 and is the final token needed to use the Twitter API.
+
+## Twitter libraries
+
+Let's look at how this can be implemented. We'll be using Node on the server and a library that will take care of some of the HTTP work for us.
+
+There are quite a few dead Twitter libraries out there. Twitter itself currently links to unmaintained libraries like this:
+[twitter-node-client](https://thepracticaldev.s3.amazonaws.com/i/iboglgsbjpioslw4fop1.png)
+
+The [node-twitter](https://github.com/desmondmorris/node-twitter) library is not linked from Twitter but _is_ maintained and works for most of the Twitter API. However, it does not work to request keys from Twitter on behalf of your users. It prepends an API version string to the request path, which isn't wanted for the OAuth URLs. Additionally, despite the documentation, Twitter's `auth/request_token` endpoint doesn't return JSON, it returns url-encoded form data. Node-twitter assumes response bodies are always JSON and it crashes with a parse error.
+
+So we'll go slightly less specialized and use the excellent [request](https://github.com/request/request) HTTP client. Actually, we'll use the [request-promise-native](https://github.com/request/request-promise-native) version of the same thing.
+
+## The same five steps explained in code
+
+This should be viewed as pseudo-code in that it is just the important bits pulled out of async functions. It represents only the happy path with all error checking, refactoring and testing removed.
+
+### Step One
+
+The first (and every) request you'll make to Twitter requires your app's "Consumer API keys." You can get these from the "Keys and tokens" tab in your app page of the Twitter developer dashboard. Provide the url-encoded `callback` URL that will receive `oauth_token` and `oauth_verifier` in step four. This URL needs to be whitelisted in the "App details" tab of the Twitter dashboard.
+
+```js
+const request = require('request-promise-native')
+const encodeUrl = require('encodeurl')
+
+const options = {
+  headers: {
+    Accept: '*/*',
+    Connection: 'close',
+    'User-Agent': 'node-twitter/1',
+  },
+  oauth: {
+    consumer_key: process.env.TWITTER_CONSUMER_KEY,
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+    callback: encodeUrl('https://your-app.com/twitter-callback'),
+  },
+  url: `https://api.twitter.com/oauth/request_token`,
+}
+
+const result = await request.post(options)
+```
+
+### Step Two
+
+Parsing the result will give us `oauth_token` and `oauth_token_secret`. Store these in your database associated with the user for later retrieval after the user has authorized your app.
+
+```javascript
+const responseData = queryString.parse(result)
+
+console.log(responseData)
+//=> { oauth_token: 'NPcudxy0yU5T3tBzho7iCotZ3cnetKwcTIRlX0iwRl0', oauth_token_secret: 'veNRnAWe6inFuo8o2u8SLLZLjolYDmDP7SzL0YfYI' }
+
+const tmpOauthToken = responseData.oauth_token
+const tmpOauthTokenSecret = responseData.oauth_token_secret
+```
+
+### Step Three
+
+Create a twitter.com URL and redirect the user to it. They are given
+the opportunity to authorize your app. As soon as your app is authorized, Twitter redirects the user back to your app using the `callback` URL you provided in step one.
+
+```javascript
+const redirectUrl = `https://api.twitter.com/oauth/authorize?oauth_token=${tmpOauthToken}`
+```
+
+### Step Four
+
+Your app's `callback` URL expects two pieces of information from Twitter in the form of url encoded parameters, `oauth_token` and `oauth_verifier`. The `oauth_token` is the same token your app received in step 1 and can be used to look up the previously stored `oauth_token_secret`. The URL will look something like this: `https://your-app.com/twitter-callback?oauth_token=NPcudxy0yU5T3tBzho7iCotZ3cnetKwcTIRlX0iwRl0&oauth_verifier=uw7NjWHT6OJ1MpJOXsHfNxoAhPKpgI8BlYDhxEjIBY`
+
+```javascript
+const queryString = require('query-string')
+
+console.log(location.search)
+//=> 'oauth_token=NPcudxy0yU5T3tBzho7iCotZ3cnetKwcTIRlX0iwRl0&oauth_verifier=uw7NjWHT6OJ1MpJOXsHfNxoAhPKpgI8BlYDhxEjIBY'
+
+const tokens = queryString.parse(location.search)
+
+const tmpOauthToken = tokens.oauth_token
+const oauthVerifier = tokens.oauth_verifier
+```
+
+Fetch the `tmpOauthTokenSecret` value that you received in step one and stored in the database in step two. Use the `tmpOauthToken` value from above to do this.
+
+### Step Five
+
+Your app now has `oauth_token`, `oauth_token_secret`, and `oauth_verifier`. Use these three pieces of information to make another POST request to Twitter. This time it uses the `oauth/access_token` endpoint. The response to this request contains the final `oauth_token` and `oauth_token_secret`. Store this final `oauth_token` and `oauth_token_secret` in the database securely associated with the user.
+
+```javascript
+const options = {
+  headers: {
+    Accept: '*/*',
+    Connection: 'close',
+    'User-Agent': 'node-twitter/1',
+  },
+  oauth: {
+    consumer_key: process.env.TWITTER_CONSUMER_KEY,
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+    token: tmpOauthToken,
+    token_secret: tmpOauthTokenSecret,
+    verifier: oauthVerifier,
+  },
+  url: `https://api.twitter.com/oauth/access_token`,
+}
+
+const result = await request.post(options)
+
+const responseData = queryString.parse(result)
+
+// Final token to be stored with the user
+const userOauthToken = responseData.oauth_token
+const userOauthTokenSecret = responseData.oauth_token_secret
+```
+
+## Using the results
+
+Your app can now use the Twitter API on behalf of the user. This can be done with a [Node Twitter](https://github.com/desmondmorris/node-twitter) client like this:
+
+```javascript
+const Twitter = require('twitter')
+
+const client = new Twitter({
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  access_token_key: userOauthToken,
+  access_token_secret: userOauthTokenSecret,
+})
+
+const result = await client.post('statuses/update', {
+  status: 'All your Twitter are belong to us! (you did give us permission)',
+})
+```
