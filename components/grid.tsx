@@ -31,5 +31,5 @@ export async function GridItem({ children }: { children: React.ReactNode }) {
     return null
   }
 
-  return <div className="">{children}</div>
+  return <div className="p-4 outline">{children}</div>
 }

@@ -4,6 +4,7 @@ date: 2019-12-19
 publishedAt: 2019-12-19
 ---
 
+import { Code } from '@/components/code'
 import { Grid } from '@/components/grid'
 
 This is a test post. It's a test of the emergency broadcast system. If this were a real emergency, you would be instructed to panic.
@@ -19,19 +20,21 @@ This is a regular paragraph. It has some information.
 ## !!blocks
 
 This is the first block. It has some information.
+This is the first block. It has some information.
+This is the first block. It has some information.
+This is the first block. It has some information.
 
 ## !!blocks
 
-This is the second block. It has some more information.
-
-## !!blocks
-
-This is the second block. It has some more information
-
-## !!blocks
-
-This is the second block. It has some more information.
+This is the end
 
 </Grid>
 
-This is the end
+```js
+function OnlineUsers() {
+  const userCount = useOnlineUserCount()
+
+// !callout[/userCount/] This userCount is!
+  return <Users count={userCount} />
+}
+```

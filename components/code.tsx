@@ -8,7 +8,7 @@ export async function Code({ codeblock }: { codeblock: RawCode }) {
     <Pre
       code={highlighted}
       handlers={[callout]}
-      className="not-prose rounded-3xl border bg-black p-6 font-mono text-base"
+      className="not-prose overflow-x-auto rounded-lg border bg-black p-2 font-mono text-xs md:rounded-3xl md:p-4 md:text-sm lg:p-6 lg:text-base"
     />
   )
 }
