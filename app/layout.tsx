@@ -31,11 +31,18 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${fredoka.variable} ${inter.variable} ${roboto_mono.variable} ${roboto_serif.variable}`}
+      className={`dark ${fredoka.variable} ${inter.variable} ${roboto_mono.variable} ${roboto_serif.variable}`}
       suppressHydrationWarning
+      style={{ colorScheme: 'dark' }}
     >
-      <body>
-        <RootProvider>{children}</RootProvider>
+      <body className="dark">
+        <RootProvider
+          theme={{
+            enabled: false,
+          }}
+        >
+          {children}
+        </RootProvider>
       </body>
     </html>
   )
