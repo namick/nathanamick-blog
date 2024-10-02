@@ -1,0 +1,78 @@
+---
+title: Especially Concerning the Separation of Concerns
+publishedOn: 2023-05-8
+summary:
+heroImage: separation-of-concerns.png
+---
+
+import Image from 'next/image'
+
+import internetLayers from './images/internet-layers.png'
+
+UI/UX development on the web is undergoing another small paradigm shift.
+
+Instead of a _Separation of Concern_ by technology (HTML, CSS, JavaScript) the industry is shifting to a _Separation of Concern_ by UI objects (button, nav, card).
+
+Instead of writing raw CSS in stylesheets that target specific HTML, we are now styling UI elements with design tokens that live in that targeted HTML.
+
+### I used to write code like this:
+
+```css
+.primary-button {
+  border-radius: 1rem;
+  color: white;
+  background-color: blue;
+}
+```
+
+```html
+<button class="primary-button">Submit</button>
+```
+
+### But now I write code like this:
+
+```jsx
+const PrimaryButton = ({ children }) => (
+  <button class="bg-blue rounded text-white">{children}</button>
+)
+```
+
+```html
+<PrimaryButton>Submit</PrimaryButton>
+```
+
+Notice how classes are now design tokens, not identifiers for blocks of CSS code. Also notice how each application has the opportunity to build up a modular, reusable library of UI objects.
+
+---
+
+## The Rise of Component-Based Architecture
+
+The shift towards components is not just a trend; it's a reflection of how software development evolves. Components encapsulate style, behavior, and structure into one reusable piece. This encapsulation wasn't just about reducing redundancy; it was about creating a system where each piece of the UI could be developed, tested, and maintained independently. This modularity allows teams to work on different parts of the application simultaneously, speeding up development and reducing conflicts.
+
+## Why didn't we do this before?
+
+Isn't it obvious that we want the styling information right next to the thing being styled?
+
+Unfortunately, there wasn't a better way to keep things DRY. We didn't have tools to build components. Instead we had pages of text. We added HTML tags to format it, and we wanted to give those tags more style. Rather than repeat the same inline style code throughout the HTML, we separated the "style" concern from the "format" concern.
+
+This is slightly better than the nightmare of trying to maintain inline CSS throughout all of the HTML. Yet it still results in an unmaintainable mess more often than not. And now that we have some better solutions, it's giving the idea of "Separation of Concerns" a bad rap.
+
+However, Separation of Concerns is still an important design principle in software engineering and it is not going anywhere. The Model, View, Controller separation is likely the most well known strategy for organizing application code.
+
+And the Internet itself is crucially designed in layers, separated by concerns.
+
+<Image src={internetLayers} alt="Internet layers" />
+
+## Design Tokens and Theming
+
+Design tokens are another leap forward. They are the atoms of the system design, representing the smallest pieces like colors, fonts, and spacings, which can be managed centrally but applied universally. This approach ensures consistency across an entire application or even multiple applications. It's design system thinking applied at the code level, allowing for theming, branding adjustments, or even dark mode with minimal changes.
+
+## A New Understanding of Separation of Concerns
+
+This new separation doesn't abandon the principle; instead, it refines it. We're now separating concerns by functionality and user interaction rather than by the type of code. A button component, for example, encapsulates all its concerns—appearance, behavior, accessibility—within itself. This is separation of concerns taken to its logical, user-centric conclusion, where the concern is the user's interaction with an element, not the technology used to create it.
+
+This evolution in UI/UX development reflects a broader trend in software: the continuous quest for more intuitive, maintainable, and scalable systems. By aligning our separation of concerns with how users interact with applications, rather than how developers write code, we're not just writing software; we're crafting experiences. This shift is about making technology work more naturally with human expectations, which is, after all, the ultimate concern.
+
+So we embrace reusable design tokens and a component based architecture. The principles of modern software engineering have not changed — we are still breaking down complex systems into manageable parts.
+
+This is just a more appropriate concern for the problem at hand.

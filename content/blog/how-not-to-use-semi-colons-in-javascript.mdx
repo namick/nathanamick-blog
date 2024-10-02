@@ -1,0 +1,76 @@
+---
+title: How to Not Use Semi-colons in JavaScript
+publishedOn: 2019-05-8
+summary: One of the more nuanced debates in JavaScript revolves around the humble semi-colon. Here's your guide to navigating a semi-colon free life in JavaScript, why you might choose this path, and how to do it effectively.
+heroImage: semi-colon-free.png
+---
+
+In the vast ecosystem of JavaScript development, one of the more nuanced debates revolves around the humble semi-colon. Here's your guide to navigating a semi-colon free life in JavaScript, why you might choose this path, and how to do it effectively.
+
+## The Importance of Team Consistency
+
+Before diving into the "how," let's underscore an essential point:
+
+**It's crucial to follow your team's style guidelines.** Uniformity in code style is paramount for readability and maintenance. If your team eschews semi-colons, you should too. This point is so vital it deserves emphasis.
+
+### On Personal Projects
+
+However, on your own projects, feel free to adopt whatever style suits you. Experimentation can lead to personal preference and understanding.
+
+## Why Skip Semi-colons?
+
+1. **Minimalism**: Without semi-colons, code can appear less cluttered, offering a cleaner look that some developers (including myself) find more appealing.
+
+2. **Cross-Language Consistency**: Developers accustomed to Python or Ruby (me!) might naturally lean towards a semi-colon-less style.
+
+3. **JavaScript's Automatic Semicolon Insertion (ASI)**: Understanding ASI can make semi-colons feel redundant. ASI is designed to correct certain syntax errors by automatically inserting semi-colons, and it is now widly considered a feature that can be relied on.
+
+4. **Focus on Code**: Fewer distractions mean more focus on the logic and functionality of the code.
+
+## When Semi-colons Are Necessary
+
+Despite a no-semi-colon preference, there are edge cases where they are either required or advisable:
+
+- **Start of Line Edge Cases**: When a line starts with a bracket `()` or `[]`, a preceding semi-colon can prevent errors.
+
+  ```javascript
+  // !callout[/;/] Required semi-colon
+  ;(function () {
+    // code
+  })()
+
+  var a = b
+  // !callout[/;/] Required semi-colon
+  ;[1, 2, 3].forEach(function (i) {
+    console.log(i)
+  })
+  ```
+
+- **In for loops**: To avoid confusion in for loop header syntax.
+
+  ```javascript
+  for (let i = 0; i < 5; i++) {
+    // Without semi-colons, this loop might behave
+    // unexpectedly if followed by another statement
+  }
+  ```
+
+- **To separate statements on the same line**: If you need to have ultra-compact code, semi-colons let you put multiple statements on one line. (But be careful, this can make your code harder to read.)
+
+  {/* prettier-ignore */}
+  ```javascript
+  // Not recommended
+  let a = 1; let b = 2; let c = 3
+  ```
+
+## Tools of the Trade
+
+**Prettier**: I've moved away from "JavaScript Standard Style" to using Prettier, which automatically handles semi-colon insertion where necessary. Prettier focuses on code formatting to ensure that your code looks good without manual styling efforts. It applies semi-colons in those edge cases where ASI might lead to errors.
+
+**ESLint**: While not directly related to semi-colon use, ESLint with the right plugins can warn you about potential issues where a semi-colon might be beneficial or where its absence could lead to errors.
+
+## Conclusion
+
+Whether or not to use semi-colons in JavaScript can be a personal or team-based decision. The key is consistency and understanding the environments where semi-colons are beneficial or required. If you're working on your own projects, feel free to experiment with both styles. However, in a team environment, adhering to the established style guide is paramount. Remember, tools like Prettier can handle the nuances for you, allowing you to focus more on the logic of your code rather than its punctuation.
+
+Happy coding!
