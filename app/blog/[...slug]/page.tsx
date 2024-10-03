@@ -20,7 +20,7 @@ export default async function Page({
       <Image
         src={`/images/hero/${page.data.heroImage}`}
         alt="hero image"
-        className="rounded-2xl"
+        className="rounded-2xl border"
       />
     )
   }

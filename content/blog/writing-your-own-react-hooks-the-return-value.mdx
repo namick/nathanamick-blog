@@ -2,6 +2,7 @@
 title: Writing Your Own React Hooks, the Return Value
 summary: A look at when to return an array or an object from a custom React hook
 publishedAt: 2019-12-19
+heroImage: hooks-return-value.webp
 ---
 
 JavaScript can only return one value from a function. However, destructuring in modern JavaScript makes this largely irrelevant.
@@ -29,8 +30,6 @@ function OnlineUsers() {
 }
 ```
 
----
-
 ## Returning an Array
 
 A hook that has a very general use case benefits from exporting return values as an array. A great example of this is actually the built-in `React.useState` hook. Exporting an array makes it easy to customize the names of the state variables and their setters. Unique names enable us to use the hook repeatedly.
@@ -47,13 +46,11 @@ const [leftStyle, setLeftTheme] = useStyleBuilder('dank-kitty')
 const [rightStyle, setRightTheme] = useStyleBuilder('no-drama-llama')
 ```
 
-### When to Return an Array
+#### When to Return an Array
 
 - _**The number of values that need to be returned is low.**_ Order is significant and remembering the order of a bunch of values takes extra brain cycles.
 
 - _**The hook is expected to be used more than once in the same component.**_ Although we can rename properties when destructuring an object, the simpler syntax for custom-named values returned from an array makes more sense.
-
----
 
 ## Returning an Object
 
@@ -66,67 +63,11 @@ const { color, count, isValid, handleChangeColor, handleChangeCount } =
   useItemOptions()
 ```
 
-### When to Return an Object
+#### When to Return an Object
 
 - _**The number of values that need to be returned is high.**_ We don't have to remember the order or even use all the values when returning an object.
 
 - _**The hook is not expected to be used more than once in the same component.**_ We can use the original property names when destructuring an object returned from a hook that will only be used once in a component.
-
----
-
-## Not destructuring
-
-If a hook needs to return a larger number of values _AND_ is expected to be used more than once, we don't have to destructure at all. This can occasionally be useful.
-
-```js
-const leftOptions = useItemOptions()
-const rightOptions = useItemOptions()
-
-return (
-  <>
-    <Column
-      side="left"
-      color={leftOptions.color}
-      count={leftOptions.count}
-      isValid={leftOptions.isValid}
-      handleChangeColor={leftOptions.handleChangeColor}
-      handleChangeCount={leftOptions.handleChangeCount}
-    />
-    <Column
-      side="right"
-      color={rightOptions.color}
-      count={rightOptions.count}
-      isValid={rightOptions.isValid}
-      handleChangeColor={rightOptions.handleChangeColor}
-      handleChangeCount={rightOptions.handleChangeCount}
-    />
-  </>
-)
-```
-
----
-
-## Not Destructuring with Spread
-
-If we are careful with the naming of the properties in the object that our hook returns, we can use the [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) to dump props directly into our components.
-
-The above component could be rewritten using the spread syntax like this:
-
-```js
-const leftOptions = useItemOptions()
-const rightOptions = useItemOptions()
-
-return (
-  <>
-    <Column side="left" {...leftOptions} />
-    <Column side="right" {...rightOptions} />
-  </>
-)
-```
-
-_(Apparently, Dev.to syntax highlighting for the spread operator in JSX is not yet supported, but this works.)_
-
----
 
 ## Conclusion
 

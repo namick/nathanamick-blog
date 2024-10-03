@@ -2,10 +2,13 @@
 title: The Missing Guide to Twitter OAuth User Authorization
 summary: A simple guide to Twitter user authorization
 publishedOn: 2019-11-07
+heroImage: twitter-oauth-api.png
 ---
 
-import Image from 'next/image'
+import { Image } from '@/components/import-image'
 import gif from './images/twitter-api-docs.gif'
+
+**_Note: This was written in 2019 and I'm pretty sure the ~~Twitter~~ X API has changed since then. I'm leaving this up until I have time to go through it again._**
 
 There are a number of prebuilt solutions to do authentication using Twitter as an identity provider (Sign-in with Twitter). This is OAuth _user authentication_. But if your application needs to do tasks like post a tweet on behalf of a user, you need to use Twitter OAuth _user authorization_ to allow your users to authorize your app.
 
