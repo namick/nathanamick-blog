@@ -48,6 +48,6 @@ export function generateMetadata({ params }: { params: { slug?: string[] } }) {
 
   return {
     title: page.data.title,
-    description: page.data.description,
+    description: page.data.summary,
   } satisfies Metadata
 }

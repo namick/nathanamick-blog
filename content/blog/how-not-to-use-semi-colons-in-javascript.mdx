@@ -1,6 +1,6 @@
 ---
 title: How to Not Use Semi-colons in JavaScript
-publishedOn: 2019-05-8
+publishedOn: 2019-05-08
 summary: One of the more nuanced debates in JavaScript revolves around the humble semi-colon. Here's your guide to navigating a semi-colon free life in JavaScript, why you might choose this path, and how to do it effectively.
 heroImage: semi-colon-free.png
 ---
@@ -39,7 +39,7 @@ Despite a no-semi-colon preference, there are edge cases where they are either r
     // code
   })()
 
-  var a = b
+  let a = b
   // !callout[/;/] Required semi-colon
   ;[1, 2, 3].forEach(function (i) {
     console.log(i)
@@ -59,7 +59,7 @@ Despite a no-semi-colon preference, there are edge cases where they are either r
 
   {/* prettier-ignore */}
   ```javascript
-  // Not recommended
+  // Semi-colons separate statements on the same line, but this style of code is not recommended
   let a = 1; let b = 2; let c = 3
   ```
 
