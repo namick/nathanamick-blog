@@ -34,8 +34,8 @@ export default function BlogIndex() {
   const restOfPosts = sortedPosts.slice(3)
 
   return (
-    <Link href={firstPost.url}>
-      <div className="container my-16 flex flex-col gap-16">
+    <div className="container my-16 flex flex-col gap-16">
+      <Link href={firstPost.url}>
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-16">
           <div className="col-span-2">
             <Image
@@ -54,22 +54,22 @@ export default function BlogIndex() {
             <PublishedOn date={firstPost.data.publishedOn} />
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
-          {secondAndThirdPosts.map((post, i) => (
-            <div key={i} className="">
-              <Post key={i} post={post} />
-            </div>
-          ))}
-        </div>
-        <div className="grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-3">
-          {restOfPosts.map((post, i) => (
-            <div key={i} className="">
-              <Post key={i} post={post} />
-            </div>
-          ))}
-        </div>
+      </Link>
+      <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
+        {secondAndThirdPosts.map((post, i) => (
+          <div key={i} className="">
+            <Post key={i} post={post} />
+          </div>
+        ))}
       </div>
-    </Link>
+      <div className="grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-3">
+        {restOfPosts.map((post, i) => (
+          <div key={i} className="">
+            <Post key={i} post={post} />
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }
 
