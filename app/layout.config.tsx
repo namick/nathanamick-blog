@@ -4,7 +4,7 @@ export const baseOptions: HomeLayoutProps = {
   githubUrl: 'https://github.com/namick',
   nav: {
     title: 'Nathan Amick',
-    transparentMode: 'always',
+    transparentMode: 'top',
   },
   links: [
     {

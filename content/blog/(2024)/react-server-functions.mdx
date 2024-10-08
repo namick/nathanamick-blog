@@ -1,0 +1,79 @@
+---
+title: React Server Actions
+summary: React Server Actions allow you to run functions on the server directly from your React components. Think of them as a bridge between client-side interactions and server-side logic. Instead of setting up an API endpoint for every little server interaction, you can define actions that execute server-side with a simple function call from the client.
+publishedOn: 2024-01-06
+heroImage: react-server-actions.png
+---
+
+I really like the idea of the UI being a shared responsibility between the client and server. Just as JSX blurred the lines between HTML, CSS and JavaSCript, newer React, with the help of a server-first framework like Next.js, is blurring the lines between the client and server.
+
+## What Are Server Actions in React?
+
+<Callout>
+Update: In the new React documentation, it appears that "Server Actions" have been renamed or made into a larger group of features called Server Functions.
+
+> Until September 2024, we referred to all Server Functions as “Server Actions”. If a Server Function is passed to an action prop or called from inside an action then it is a Server Action, but not all Server Functions are Server Actions.
+
+Maybe this means they are adding GET based Server Queries or something. I'm going to keep calling them Server Actions for the moment.
+
+</Callout>
+
+Server Actions allow you to run functions on the server directly from your React components. Think of them as a bridge between client-side interactions and server-side logic. Instead of setting up an API endpoint for every little server interaction, you can define actions that execute server-side with a simple function call from the client.
+
+### Practical Benefits
+
+- **Co-Location**: Server logic lives alongside or within components, reducing context switching.
+
+- **Simplified Flow**: For small operations, you might not need to design a full-fledged API. A 'use server' function can handle basic data mutations or queries directly.
+
+- **Execution Context**: When a Server Action is called, whether from a form submission or a client component, the execution happens server-side. This means all server environment variables, database connections, and file system access are directly available
+
+### How It Works
+
+```jsx actions.ts
+'use server'
+
+export async function createPostAction(formData: FormData) {
+  const title = formData.get('title')
+  const content = formData.get('content')
+
+  const post = await db.posts.create({ title, content })
+
+  return post
+}
+```
+
+```jsx post-form.tsx
+'use client'
+
+import { createPostAction } from './actions'
+
+function PostForm() {
+  const createPost = async (formData: FormData) => {
+
+    const newPost = await createPostAction(formData)
+
+    redirect(`/posts/${newPost.id}`)
+  }
+
+  return (
+    <form action={createPost}>
+      <input name="title" type="text" />
+      <textarea name="content"></textarea>
+      <button type="submit">Create Post</button>
+    </form>
+  )
+}
+```
+
+## Things to Consider
+
+**Not a Silver Bullet**: Complex interactions like streaming will still require traditional API endpoints.
+
+**Performance**: Be cautious about the potential for increased server load. If every small action triggers a server function, it could scale poorly.
+
+**Security**: Ensure that Server Actions are properly authenticated and authorized. Understand that "use server" at the top of a file exposes every exported function as an endpoint.
+
+## Conclusion
+
+React Server Actions provide a convenient method for handling certain types of server interactions directly from React components. They're particularly useful for straightforward, secure operations that benefit from being closely tied to the component's logic.
