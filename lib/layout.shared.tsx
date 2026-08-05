@@ -3,8 +3,9 @@ import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared'
 export function baseOptions(): BaseLayoutProps {
   return {
     githubUrl: 'https://github.com/namick',
+    themeSwitch: { enabled: false },
     nav: {
-      title: 'Nathan Amick',
+      title: <span className="font-serif text-lg">Nathan Amick</span>,
       transparentMode: 'top',
     },
     links: [

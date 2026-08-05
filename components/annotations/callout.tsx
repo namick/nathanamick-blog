@@ -19,11 +19,11 @@ export const callout: AnnotationHandler = {
         {children}
         <div
           style={{ minWidth: `${column + 4}ch` }}
-          className="bg-fd-background relative mt-1 -ml-[1ch] w-fit rounded border border-current px-2 whitespace-break-spaces"
+          className="relative mt-1 -ml-[1ch] w-fit rounded border border-current bg-fd-background px-2 whitespace-break-spaces"
         >
           <div
             style={{ left: `${column}ch` }}
-            className="bg-fd-background absolute -top-[1px] h-2 w-2 -translate-y-1/2 rotate-45 border-t border-l border-current"
+            className="absolute -top-[1px] h-2 w-2 -translate-y-1/2 rotate-45 border-t border-l border-current bg-fd-background"
           />
           {annotation.query}
         </div>

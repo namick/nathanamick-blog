@@ -1,9 +1,9 @@
-import { ComponentPropsWithoutRef } from 'react'
-import NextImage, { ImageProps } from 'next/image'
+import NextImage, { type ImageProps } from 'next/image'
 import path from 'path'
 import sharp from 'sharp'
 
-interface Props extends ComponentPropsWithoutRef<'img'> {
+/** `src` is a path under `public/`, which is also where the blur is read from. */
+interface Props extends Omit<ImageProps, 'src' | 'alt'> {
   src: string
   alt?: string
 }
@@ -24,7 +24,7 @@ export async function Image({ alt = '', ...props }: Props) {
       blurDataURL={blurDataURL}
       width={1024}
       height={575}
-      {...(props as ImageProps)}
+      {...props}
       alt={alt}
     />
   )

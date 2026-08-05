@@ -1,16 +1,187 @@
 import Link from 'next/link'
+import { formatPublished, postsNewestFirst } from '@/lib/blog'
+import { Flock } from '@/components/flock'
+
+const now = [
+  {
+    title: 'Mentoring engineers into AI-native practice',
+    body: 'One-to-one, end to end. Currently two very different students: a seasoned site reliability engineer who had never touched AI, now using it daily in production work — and an absolute beginner, now independently building full-stack web applications.',
+  },
+  {
+    title: 'Running agentic systems that do real work',
+    body: 'Multi-agent research and data-maintenance systems, including agents that keep officeholder information current for a live civic platform — thousands of state, congressional, and federal leaders. Sustained operation with real accuracy consequences, not demos.',
+  },
+  {
+    title: 'Designing coursework',
+    body: 'Instructional material in Python, built and tested for classrooms of working engineers and first-time programmers alike. Plus conference-style, multi-session curriculum for full-program events.',
+  },
+  {
+    title: 'Refactoring Consciousness',
+    body: 'A video series: philosophy of mind and consciousness science, structured for software engineers. A genuinely hard domain, taught with the tools engineers already trust.',
+    href: 'https://youtube.com/@refactoringconsciousness',
+    linkText: 'youtube.com/@refactoringconsciousness',
+  },
+]
+
+const timeline = [
+  ['2024 –', 'Independent AI engineer & technical mentor'],
+  [
+    '2023',
+    'AI document tools, WCAG accessibility work that landed a State of California contract — Intoo',
+  ],
+  ['2020', 'HIPAA-compliant genomics platform, 100GB per patient — LifeOmic'],
+  [
+    '2018',
+    'Coursework and learning software for new programmers — Home Code Makers',
+  ],
+  ['2016', 'Peer-to-peer music platform on Electron and IPFS — All The Music'],
+  [
+    '2013',
+    'Supply-chain transparency used by Fortune 100 companies — GoodGuide',
+  ],
+  [
+    '2007',
+    'Co-founded a VPS hosting company, data centers on two continents — Seedbox',
+  ],
+  ['2001', 'Customer portals for VOIP services, PHP on Linux — Future Phone'],
+] as const
+
+const links = [
+  ['GitHub', 'https://github.com/namick'],
+  ['LinkedIn', 'https://linkedin.com/in/namick'],
+  ['YouTube', 'https://youtube.com/@refactoringconsciousness'],
+  ['Email', 'mailto:contact@nathanamick.com'],
+] as const
 
 export default function HomePage() {
+  const posts = postsNewestFirst().slice(0, 3)
+
   return (
-    <main className="flex h-screen flex-col justify-center gap-8 text-center font-fredoka">
-      <h1 className="mb-4 text-4xl font-bold tracking-wide">
-        Hi, I&apos;m Nathan
-      </h1>
-      <p className="transform text-3xl text-fd-muted-foreground transition-transform hover:scale-105">
-        <Link href="/blog" className="text-fd-foreground">
-          I have a /blog where I write about code.
+    <main className="flex flex-col">
+      {/* Hero */}
+      <section className="relative flex h-svh flex-col overflow-hidden">
+        <Flock />
+        <header className="z-10 flex items-baseline justify-between px-6 py-6 font-mono text-sm sm:px-10">
+          <span className="text-fd-foreground">nathanamick.com</span>
+          <nav className="flex gap-6">
+            <Link
+              href="/blog"
+              className="text-fd-muted-foreground transition-colors hover:text-fd-foreground"
+            >
+              blog
+            </Link>
+            <a
+              href="https://github.com/namick"
+              className="text-fd-muted-foreground transition-colors hover:text-fd-foreground"
+            >
+              github
+            </a>
+          </nav>
+        </header>
+        {/* Bottom padding keeps the centered copy clear of the flock controls. */}
+        <div className="z-10 flex flex-1 flex-col justify-center px-6 pb-44 sm:px-10 sm:pb-32 lg:px-24">
+          <p className="mb-6 font-mono text-sm text-fd-muted-foreground">
+            Nathan Amick — Indianapolis, IN
+          </p>
+          <h1 className="max-w-3xl font-serif text-4xl leading-tight text-fd-foreground sm:text-6xl lg:text-7xl">
+            Building software with AI{' '}
+            <em className="text-fd-primary">and teaching engineers</em> to do
+            the same.
+          </h1>
+          <p className="mt-8 max-w-xl leading-relaxed text-fd-muted-foreground sm:text-lg">
+            Twenty-five years of production engineering, now pointed at
+            teaching: mentoring, coursework, and agentic systems that do real
+            work.
+          </p>
+        </div>
+      </section>
+
+      {/* Now */}
+      <section className="mx-auto w-full max-w-3xl px-6 py-24 sm:px-10">
+        <h2 className="mb-12 font-mono text-sm tracking-widest text-fd-primary uppercase">
+          What I&apos;m doing now
+        </h2>
+        <div className="flex flex-col gap-12">
+          {now.map((item) => (
+            <div key={item.title}>
+              <h3 className="mb-3 font-serif text-2xl text-fd-foreground">
+                {item.title}
+              </h3>
+              <p className="leading-relaxed text-fd-muted-foreground">
+                {item.body}
+              </p>
+              {item.href && (
+                <a
+                  href={item.href}
+                  className="mt-3 inline-block font-mono text-sm text-fd-primary hover:underline"
+                >
+                  {item.linkText}
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Timeline */}
+      <section className="mx-auto w-full max-w-3xl px-6 py-24 sm:px-10">
+        <h2 className="mb-12 font-mono text-sm tracking-widest text-fd-primary uppercase">
+          Before that
+        </h2>
+        <ul className="flex flex-col gap-4 border-l border-fd-border pl-6">
+          {timeline.map(([year, entry]) => (
+            <li key={year} className="flex gap-6 leading-relaxed">
+              <span className="w-14 shrink-0 font-mono text-sm text-fd-muted-foreground">
+                {year}
+              </span>
+              <span className="text-fd-foreground/80">{entry}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Writing */}
+      <section className="mx-auto w-full max-w-3xl px-6 py-24 sm:px-10">
+        <h2 className="mb-12 font-mono text-sm tracking-widest text-fd-primary uppercase">
+          Writing
+        </h2>
+        <div className="flex flex-col gap-8">
+          {posts.map((post) => (
+            <Link key={post.url} href={post.url} className="group">
+              <h3 className="font-serif text-2xl text-fd-foreground transition-colors group-hover:text-fd-primary">
+                {post.data.title}
+              </h3>
+              <p className="mt-2 line-clamp-2 leading-relaxed text-fd-muted-foreground">
+                {post.data.summary}
+              </p>
+              <p className="mt-2 font-mono text-sm text-fd-muted-foreground">
+                {formatPublished(post, 'MMM yyyy')}
+              </p>
+            </Link>
+          ))}
+        </div>
+        <Link
+          href="/blog"
+          className="mt-12 inline-block font-mono text-sm text-fd-primary hover:underline"
+        >
+          all posts →
         </Link>
-      </p>
+      </section>
+
+      {/* Footer */}
+      <footer className="mx-auto w-full max-w-3xl px-6 pt-12 pb-16 sm:px-10">
+        <div className="flex flex-wrap gap-x-8 gap-y-3 border-t border-fd-border pt-8 font-mono text-sm">
+          {links.map(([label, href]) => (
+            <a
+              key={label}
+              href={href}
+              className="text-fd-muted-foreground transition-colors hover:text-fd-foreground"
+            >
+              {label}
+            </a>
+          ))}
+        </div>
+      </footer>
     </main>
   )
 }

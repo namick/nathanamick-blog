@@ -1,92 +1,87 @@
-import { blogSource, type BlogPost as Post } from '@/lib/source'
 import Link from 'next/link'
 import { Image } from '@/components/image'
-import { format } from 'date-fns'
+import { HeroWrap } from '@/components/hero-wrap'
+import {
+  coverFor,
+  formatPublished,
+  minutesToReadEverything,
+  postsNewestFirst,
+  publishedYear,
+} from '@/lib/blog'
+import type { BlogPost } from '@/lib/source'
 
-export default function BlogIndex() {
-  const posts = blogSource.getPages()
+export const metadata = {
+  title: 'Writing',
+  description:
+    'Essays on components, hooks, boundaries, and the habits underneath them.',
+}
 
-  const sortedPosts = posts.sort((a, b) => {
-    const { publishedOn: dateA } = a.data
-    const { publishedOn: dateB } = b.data
-    if (!dateA || !dateB) return 0
-
-    return new Date(dateB).getTime() - new Date(dateA).getTime()
-  })
-
-  const firstPost = sortedPosts[0]
-  const secondAndThirdPosts = sortedPosts.slice(1, 3)
-  const restOfPosts = sortedPosts.slice(3)
+export default async function BlogIndex() {
+  const posts = postsNewestFirst()
+  const years = posts.map(publishedYear)
+  const minutes = await minutesToReadEverything()
 
   return (
-    <div className="container my-16 flex flex-col gap-16">
-      <Link href={firstPost.url}>
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-16">
-          <div className="col-span-2">
-            <Image
-              src={`/images/hero/${firstPost.data.heroImage}`}
-              alt="hero image"
-              className="rounded-2xl border"
-            />
-          </div>
-          <div className="flex flex-col gap-4">
-            <h1 className="font-fredoka text-4xl font-semibold md:text-5xl xl:text-6xl">
-              {firstPost.data.title}
-            </h1>
-            <div className="line-clamp-3 text-lg leading-normal">
-              {firstPost.data.summary}
-            </div>
-            <PublishedOn date={firstPost.data.publishedOn} />
-          </div>
-        </div>
-      </Link>
-      <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
-        {secondAndThirdPosts.map((post, i) => (
-          <div key={i} className="">
-            <Post key={i} post={post} />
-          </div>
-        ))}
-      </div>
-      <div className="grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-3">
-        {restOfPosts.map((post, i) => (
-          <div key={i} className="">
-            <Post key={i} post={post} />
-          </div>
+    <div className="mx-auto w-full max-w-5xl px-6 py-20 sm:px-10 sm:py-28">
+      <header className="max-w-2xl">
+        <p className="font-mono text-sm tracking-widest text-fd-primary uppercase">
+          Writing
+        </p>
+        <h1 className="mt-6 font-serif text-4xl leading-tight text-fd-foreground sm:text-5xl">
+          Teaching notes.
+        </h1>
+        <p className="mt-6 leading-relaxed text-fd-muted-foreground sm:text-lg">
+          Most of these started as an explanation for one person — components,
+          hooks, boundaries, and how to hold an opinion loosely. A few are old
+          enough that the framework has moved on. The ideas mostly haven&apos;t.
+        </p>
+        <p className="mt-8 font-mono text-xs text-fd-muted-foreground">
+          {posts.length} notes · {Math.min(...years)}–{Math.max(...years)} ·
+          about {minutes} minutes end to end
+        </p>
+      </header>
+
+      <div className="mt-20 grid gap-x-10 gap-y-16 sm:grid-cols-2">
+        {posts.map((post) => (
+          <Entry key={post.url} post={post} />
         ))}
       </div>
     </div>
   )
 }
 
-function Post({ post }: { post: Post }) {
+function Entry({ post }: { post: BlogPost }) {
   return (
-    <Link href={post.url}>
-      <div className="grid gap-8">
-        <div>
+    <Link href={post.url} className="group flex flex-col gap-5">
+      <HeroWrap
+        className="aspect-[16/9] rounded-sm border border-fd-border transition-colors group-hover:border-fd-primary/40"
+        cover={
           <Image
-            src={`/images/hero/${post.data.heroImage}`}
-            alt="hero image"
-            className="rounded-2xl border"
+            src={coverFor(post)}
+            alt=""
+            sizes="(min-width: 640px) 45vw, 92vw"
+            className="h-full w-full object-cover"
           />
-        </div>
-        <div className="flex flex-col gap-4">
-          <h2 className="font-fredoka text-4xl font-semibold">
-            {post.data.title}
-          </h2>
-          <div className="line-clamp-3 text-lg leading-normal">
-            {post.data.summary}
-          </div>
-          <PublishedOn date={post.data.publishedOn} />
-        </div>
+        }
+      >
+        <Image
+          src={`/images/hero/${post.data.heroImage}`}
+          alt={post.data.title}
+          sizes="(min-width: 640px) 45vw, 92vw"
+          className="h-full w-full object-cover"
+        />
+      </HeroWrap>
+      <div>
+        <p className="font-mono text-xs tracking-wider text-fd-muted-foreground">
+          {formatPublished(post, 'MMM d, yyyy')}
+        </p>
+        <h2 className="mt-3 font-serif text-2xl leading-snug text-fd-foreground transition-colors group-hover:text-fd-primary">
+          {post.data.title}
+        </h2>
+        <p className="mt-3 line-clamp-3 leading-relaxed text-fd-muted-foreground">
+          {post.data.summary}
+        </p>
       </div>
     </Link>
-  )
-}
-
-function PublishedOn({ date }: { date: Date }) {
-  return (
-    <div className="text-sm text-fd-muted-foreground">
-      {format(new Date(date), 'MMM dd, yyyy')}
-    </div>
   )
 }

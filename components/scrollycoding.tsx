@@ -24,14 +24,14 @@ export function Scrollycoding(props: unknown) {
             key={i}
             index={i}
             selectOn={['click', 'scroll']}
-            className="bg-fd-card mb-24 rounded border-l-4 px-5 py-2 data-[selected=true]:border-blue-400"
+            className="mb-24 rounded border-l-4 bg-fd-card px-5 py-2 data-[selected=true]:border-blue-400"
           >
             <h2 className="mt-4 text-xl">{step.title}</h2>
             <div>{step.children}</div>
           </Selectable>
         ))}
       </div>
-      <div className="bg-fd-card w-[300px]">
+      <div className="w-[300px] bg-fd-card">
         <div className="sticky top-16 overflow-auto">
           <Selection
             from={steps.map((step, i) => (

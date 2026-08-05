@@ -1,6 +1,7 @@
 import './global.css'
 import { RootProvider } from 'fumadocs-ui/provider/next'
-import { Inter, Fredoka, Roboto_Mono, Roboto_Serif } from 'next/font/google'
+import type { Metadata } from 'next'
+import { Inter, Newsreader, IBM_Plex_Mono } from 'next/font/google'
 import type { ReactNode } from 'react'
 
 const inter = Inter({
@@ -9,29 +10,34 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
-const fredoka = Fredoka({
+const newsreader = Newsreader({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-fredoka',
+  style: ['normal', 'italic'],
+  variable: '--font-newsreader',
 })
 
-const roboto_mono = Roboto_Mono({
+const plexMono = IBM_Plex_Mono({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-roboto-mono',
+  weight: ['400', '500'],
+  variable: '--font-plex-mono',
 })
 
-const roboto_serif = Roboto_Serif({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-roboto-serif',
-})
+export const metadata: Metadata = {
+  title: {
+    default: 'Nathan Amick',
+    template: '%s | Nathan Amick',
+  },
+  description:
+    'Software engineer, 25 years in. Building with AI and teaching engineers to do the same.',
+}
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={`dark ${fredoka.variable} ${inter.variable} ${roboto_mono.variable} ${roboto_serif.variable}`}
+      className={`dark ${newsreader.variable} ${inter.variable} ${plexMono.variable}`}
       suppressHydrationWarning
       style={{ colorScheme: 'dark' }}
     >
