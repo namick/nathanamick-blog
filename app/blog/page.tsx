@@ -1,22 +1,7 @@
-import { blogSource } from '@/app/source'
+import { blogSource, type BlogPost as Post } from '@/lib/source'
 import Link from 'next/link'
 import { Image } from '@/components/image'
 import { format } from 'date-fns'
-import { Page } from 'fumadocs-core/source'
-import { CollectionEntry } from 'fumadocs-mdx/config'
-
-// TODO: Get this type from source.config.ts
-type Post = Page<
-  CollectionEntry<
-    'doc',
-    {
-      title: string
-      publishedOn: Date
-      summary: string
-      heroImage: string
-    }
-  >
->
 
 export default function BlogIndex() {
   const posts = blogSource.getPages()

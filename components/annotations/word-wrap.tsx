@@ -3,10 +3,10 @@ import {
   InnerLine,
   InnerPre,
   InnerToken,
-} from "codehike/code"
+} from 'codehike/code'
 
 export const wordWrap: AnnotationHandler = {
-  name: "word-wrap",
+  name: 'word-wrap',
   Pre: (props) => <InnerPre merge={props} className="whitespace-pre-wrap" />,
   Line: (props) => (
     <InnerLine

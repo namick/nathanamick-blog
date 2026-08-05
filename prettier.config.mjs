@@ -7,7 +7,8 @@ const config = {
   semi: false,
   singleQuote: true,
   plugins: ['prettier-plugin-tailwindcss'],
-  arrayName: ['prettier-plugin-tailwindcss'],
+  // Tailwind v4 is configured in CSS, so the plugin needs the stylesheet
+  tailwindStylesheet: './app/global.css',
   tailwindFunctions: ['clsx', 'cva'],
 }
 

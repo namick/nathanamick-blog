@@ -1,3 +1,22 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/catppuccin.css';
+@import 'fumadocs-ui/css/preset.css';
+
+@source '../node_modules/fumadocs-ui/dist/**/*.js';
+
+@theme {
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-roboto-serif);
+  --font-mono: var(--font-roboto-mono);
+  --font-fredoka: var(--font-fredoka);
+}
+
+/* Fumadocs' typography plugin only ships `prose` and `prose-sm`; both scale off
+   `--tw-prose-size`, so larger steps are just a bigger multiplier. */
+@utility prose-lg {
+  --tw-prose-size: 1.125;
+}
+
+@utility prose-xl {
+  --tw-prose-size: 1.25;
+}

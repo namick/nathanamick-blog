@@ -1,4 +1,4 @@
-import { blogSource as source } from '@/app/source'
+import { blogSource as source } from '@/lib/source'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import defaultMdxComponents from 'fumadocs-ui/mdx'
@@ -6,11 +6,10 @@ import { Image } from '@/components/image'
 
 import { Code } from '@/components/code'
 
-export default async function Page({
-  params,
-}: {
-  params: { slug?: string[] }
+export default async function Page(props: {
+  params: Promise<{ slug?: string[] }>
 }) {
+  const params = await props.params
   const page = source.getPage(params.slug)
   if (!page) notFound()
 
@@ -19,7 +18,7 @@ export default async function Page({
     HeroImage = (
       <Image
         src={`/images/hero/${page.data.heroImage}`}
-        alt="hero image"
+        alt={page.data.title}
         className="rounded-2xl border"
       />
     )
@@ -29,7 +28,7 @@ export default async function Page({
 
   return (
     <div className="my-20 flex min-w-0 flex-1 flex-col sm:mx-auto sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
-      <div className="prose px-4 md:prose-lg lg:prose-xl sm:px-8 md:px-16 lg:px-32">
+      <div className="prose px-4 sm:px-8 md:px-16 md:prose-lg lg:px-32 lg:prose-xl">
         {HeroImage}
         <h1 className="font-fredoka font-semibold">{page.data.title}</h1>
         <MDX components={{ ...defaultMdxComponents, Code }} />
@@ -42,12 +41,15 @@ export async function generateStaticParams() {
   return source.generateParams()
 }
 
-export function generateMetadata({ params }: { params: { slug?: string[] } }) {
+export async function generateMetadata(props: {
+  params: Promise<{ slug?: string[] }>
+}): Promise<Metadata> {
+  const params = await props.params
   const page = source.getPage(params.slug)
   if (!page) notFound()
 
   return {
     title: page.data.title,
     description: page.data.summary,
-  } satisfies Metadata
+  }
 }

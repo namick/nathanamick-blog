@@ -1,7 +1,7 @@
-import { InlineAnnotation, AnnotationHandler } from "codehike/code"
+import { InlineAnnotation, AnnotationHandler } from 'codehike/code'
 
 export const callout: AnnotationHandler = {
-  name: "callout",
+  name: 'callout',
   transform: (annotation: InlineAnnotation) => {
     const { name, query, lineNumber, fromColumn, toColumn, data } = annotation
     return {
@@ -19,11 +19,11 @@ export const callout: AnnotationHandler = {
         {children}
         <div
           style={{ minWidth: `${column + 4}ch` }}
-          className="w-fit border bg-background border-current rounded px-2 relative -ml-[1ch] mt-1 whitespace-break-spaces"
+          className="bg-fd-background relative mt-1 -ml-[1ch] w-fit rounded border border-current px-2 whitespace-break-spaces"
         >
           <div
             style={{ left: `${column}ch` }}
-            className="absolute border-l border-t border-current w-2 h-2 rotate-45 -translate-y-1/2 -top-[1px] bg-background"
+            className="bg-fd-background absolute -top-[1px] h-2 w-2 -translate-y-1/2 rotate-45 border-t border-l border-current"
           />
           {annotation.query}
         </div>

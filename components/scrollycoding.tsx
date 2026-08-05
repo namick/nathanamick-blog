@@ -18,20 +18,20 @@ export function Scrollycoding(props: unknown) {
   const { steps } = parseProps(props, Schema)
   return (
     <SelectionProvider className="flex gap-4">
-      <div className="prose mb-[90vh] ml-2 mt-32 flex-1">
+      <div className="prose mt-32 mb-[90vh] ml-2 flex-1">
         {steps.map((step, i) => (
           <Selectable
             key={i}
             index={i}
             selectOn={['click', 'scroll']}
-            className="mb-24 rounded border-l-4 bg-card px-5 py-2 data-[selected=true]:border-blue-400"
+            className="bg-fd-card mb-24 rounded border-l-4 px-5 py-2 data-[selected=true]:border-blue-400"
           >
             <h2 className="mt-4 text-xl">{step.title}</h2>
             <div>{step.children}</div>
           </Selectable>
         ))}
       </div>
-      <div className="w-[300px]  bg-card">
+      <div className="bg-fd-card w-[300px]">
         <div className="sticky top-16 overflow-auto">
           <Selection
             from={steps.map((step, i) => (

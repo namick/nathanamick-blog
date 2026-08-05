@@ -5,11 +5,11 @@ import sharp from 'sharp'
 
 interface Props extends ComponentPropsWithoutRef<'img'> {
   src: string
+  alt?: string
 }
 
-export async function Image(props: Props) {
+export async function Image({ alt = '', ...props }: Props) {
   const imagePath = path.join(process.cwd(), 'public', props.src)
-  console.log({ imagePath })
   const sharpImage = sharp(imagePath)
 
   const placeholder = await sharpImage.resize(10).toBuffer()
@@ -25,7 +25,7 @@ export async function Image(props: Props) {
       width={1024}
       height={575}
       {...(props as ImageProps)}
-      alt="alt text"
+      alt={alt}
     />
   )
 }

@@ -3,7 +3,12 @@ import {
   defineConfig,
   defineCollections,
 } from 'fumadocs-mdx/config'
-import { remarkCodeHike, recmaCodeHike, CodeHikeConfig } from 'codehike/mdx'
+import { metaSchema, pageSchema } from 'fumadocs-core/source/schema'
+import {
+  remarkCodeHike,
+  recmaCodeHike,
+  type CodeHikeConfig,
+} from 'codehike/mdx'
 import { z } from 'zod'
 
 const chConfig: CodeHikeConfig = {
@@ -12,24 +17,31 @@ const chConfig: CodeHikeConfig = {
   },
 }
 
-export const { docs, meta } = defineDocs()
+export const docs = defineDocs({
+  dir: 'content/docs',
+  docs: { schema: pageSchema },
+  meta: { schema: metaSchema },
+})
 
 export const blog = defineCollections({
-  type: 'doc', // 'doc' or 'meta': https://fumadocs.vercel.app/docs/mdx/configuration#type
-  dir: './content/blog',
+  type: 'doc',
+  dir: 'content/blog',
   schema: z.object({
     title: z.string(),
-    publishedOn: z.date(),
+    // Frontmatter dates arrive as strings now, so coerce rather than require a Date
+    publishedOn: z.coerce.date(),
     summary: z.string(),
     heroImage: z.string(),
   }),
 })
 
 // Shared options of Fumadocs MDX
-// https://fumadocs.vercel.app/docs/mdx/configuration#global-options
+// https://fumadocs.dev/docs/mdx/global-options
 export default defineConfig({
   mdxOptions: {
-    remarkPlugins: [[remarkCodeHike, chConfig]],
+    // Code Hike's remark plugin must run before remark-rehype, so prepend it to
+    // Fumadocs' preset instead of replacing the list.
+    remarkPlugins: (v) => [[remarkCodeHike, chConfig], ...v],
     recmaPlugins: [[recmaCodeHike, chConfig]],
     jsx: true,
   },

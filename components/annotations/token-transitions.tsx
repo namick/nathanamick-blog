@@ -1,10 +1,10 @@
-import { AnnotationHandler, InnerToken } from "codehike/code"
-import { SmoothPre } from "./token-transitions.client"
+import { AnnotationHandler, InnerToken } from 'codehike/code'
+import { SmoothPre } from './token-transitions.client'
 
 export const tokenTransitions: AnnotationHandler = {
-  name: "token-transitions",
+  name: 'token-transitions',
   PreWithRef: SmoothPre,
   Token: (props) => (
-    <InnerToken merge={props} style={{ display: "inline-block" }} />
+    <InnerToken merge={props} style={{ display: 'inline-block' }} />
   ),
 }
