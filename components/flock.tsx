@@ -239,6 +239,13 @@ export function Flock() {
     setRules(next)
   }
 
+  function clearHint(rule: keyof Rules) {
+    // Sliding from one switch to the next fires leave before enter; only clear
+    // if the rule being left is still the one on screen, so the copy
+    // cross-fades instead of blinking through empty.
+    setHint((current) => (current === rule ? null : current))
+  }
+
   return (
     <>
       <canvas
@@ -248,16 +255,29 @@ export function Flock() {
       />
       {!reducedMotion && (
         <div className="absolute right-4 bottom-4 z-20 flex flex-col items-end gap-3 sm:right-8 sm:bottom-8">
-          <p className="max-w-60 text-right font-mono text-xs leading-relaxed text-fd-muted-foreground">
-            {hint ? (
-              <>
-                <span className="text-fd-primary">{hint}</span> —{' '}
-                {RULE_COPY[hint]}
-              </>
-            ) : (
-              'every bird follows three local rules. no leader, no plan. switch one off:'
-            )}
-          </p>
+          {/* All three hints occupy one grid cell, so the block never resizes.
+              The width is set wide enough that every hint wraps to two lines,
+              which is what actually keeps the copy still — a grid cell only
+              pins the block, not where a shorter hint starts. The buttons
+              carry the same copy as their labels, so this is decor. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none grid w-72 items-end justify-items-end"
+          >
+            {RULE_ORDER.map((rule) => (
+              <p
+                key={rule}
+                className={`col-start-1 row-start-1 text-right font-mono text-xs leading-relaxed text-fd-muted-foreground transition-opacity ease-out ${
+                  hint === rule
+                    ? 'opacity-100 duration-600'
+                    : 'opacity-0 duration-300'
+                }`}
+              >
+                <span className="text-fd-primary">{rule}</span> —{' '}
+                {RULE_COPY[rule]}
+              </p>
+            ))}
+          </div>
           <div className="flex gap-2">
             {RULE_ORDER.map((rule) => (
               <RuleSwitch
@@ -265,7 +285,8 @@ export function Flock() {
                 rule={rule}
                 on={rules[rule]}
                 onToggle={() => toggle(rule)}
-                onHint={setHint}
+                onShowHint={() => setHint(rule)}
+                onClearHint={() => clearHint(rule)}
               />
             ))}
           </div>
@@ -283,22 +304,24 @@ function RuleSwitch({
   rule,
   on,
   onToggle,
-  onHint,
+  onShowHint,
+  onClearHint,
 }: {
   rule: keyof Rules
   on: boolean
   onToggle: () => void
-  onHint: (rule: keyof Rules | null) => void
+  onShowHint: () => void
+  onClearHint: () => void
 }) {
   return (
     <button
       type="button"
       data-rule={on ? 'on' : 'off'}
       onClick={onToggle}
-      onPointerEnter={() => onHint(rule)}
-      onPointerLeave={() => onHint(null)}
-      onFocus={() => onHint(rule)}
-      onBlur={() => onHint(null)}
+      onPointerEnter={onShowHint}
+      onPointerLeave={onClearHint}
+      onFocus={onShowHint}
+      onBlur={onClearHint}
       aria-pressed={on}
       aria-label={`${rule}: ${RULE_COPY[rule]}`}
       className={`group flex w-[4.75rem] cursor-pointer flex-col items-center gap-1.5 rounded-sm border border-dashed bg-fd-background/60 px-1.5 pt-2 pb-1.5 backdrop-blur-sm transition-colors focus-visible:ring-2 focus-visible:ring-fd-primary focus-visible:outline-none ${

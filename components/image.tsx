@@ -19,7 +19,7 @@ export async function Image({ alt = '', ...props }: Props) {
   return (
     <NextImage
       sizes="100%"
-      quality={100}
+      quality={90}
       placeholder="blur"
       blurDataURL={blurDataURL}
       width={1024}
