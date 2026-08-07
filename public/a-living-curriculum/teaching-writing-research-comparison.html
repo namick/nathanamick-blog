@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A cross-check of two independently produced writing-research documents: where they conflict, what each covers alone, and a fact-check of both against the primary sources.">
+<title>Cross-Check: The Two Writing-Research Documents</title>
+<style>
+  :root{
+    --ink:#1c2733; --soft:#4c5a68; --faint:#8494a3;
+    --paper:#fdfcf8; --card:#ffffff; --line:#e3ddd0;
+    --teal:#0e6b62; --teal-soft:#e5f1ef;
+    --amber:#9a6a1f; --amber-soft:#faf3e2;
+    --red:#a33b2e; --red-soft:#f9ebe8;
+    --green:#3e6b35; --green-soft:#eaf1e7;
+    --blue:#2b5d8a;
+  }
+  *{box-sizing:border-box}
+  html{font-size:17px}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Charter","Iowan Old Style",Palatino,Georgia,serif;
+    line-height:1.55;
+  }
+  .wrap{max-width:58rem; margin:0 auto; padding:2.5rem 1.5rem 5rem}
+  .sans{font-family:ui-sans-serif,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+
+  header.doc{border-bottom:3px double var(--line); padding-bottom:1.4rem; margin-bottom:1.8rem}
+  .kicker{font-family:ui-sans-serif,-apple-system,sans-serif; font-size:.72rem; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--teal); font-weight:700; margin:0 0 .6rem}
+  h1{font-size:2.05rem; line-height:1.15; margin:.1rem 0 .5rem; letter-spacing:-.01em}
+  .subtitle{color:var(--soft); font-size:1.06rem; margin:0 0 .9rem; font-style:italic}
+  .meta{font-family:ui-sans-serif,-apple-system,sans-serif; font-size:.8rem; color:var(--faint)}
+
+  h2{font-size:1.42rem; margin:2.6rem 0 .8rem; letter-spacing:-.01em; scroll-margin-top:1rem}
+  h2 .no{display:inline-block; min-width:1.9rem; color:var(--teal); font-variant-numeric:tabular-nums}
+  h3{font-size:1.06rem; margin:1.6rem 0 .45rem}
+  p{margin:.55rem 0 .9rem}
+  ul,ol{margin:.4rem 0 1rem; padding-left:1.5rem}
+  li{margin:.3rem 0}
+  a{color:var(--blue); text-decoration-color:#b9cbdc; text-underline-offset:2px}
+  a:hover{text-decoration-color:var(--blue)}
+  strong{color:#101820}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em;
+    background:#f2efe6; padding:.08em .32em; border-radius:.25rem}
+  .small{font-size:.85rem; color:var(--soft)}
+
+  /* badges */
+  .b{display:inline-block; font-family:ui-sans-serif,-apple-system,sans-serif; font-size:.62rem; font-weight:700;
+     letter-spacing:.08em; padding:.13rem .42rem; border-radius:.6rem; vertical-align:.12em; white-space:nowrap}
+  .b-v1{background:#eef1f3; color:#55636f}
+  .b-v2{background:var(--teal-soft); color:var(--teal)}
+  .b-fix{background:var(--red-soft); color:var(--red)}
+  .b-tighten{background:var(--amber-soft); color:var(--amber)}
+  .b-ok{background:var(--green-soft); color:var(--green)}
+  .b-house{background:#e8eef7; color:var(--blue)}
+
+  /* callout boxes */
+  .box{border:1px solid var(--line); border-left:4px solid var(--teal); background:var(--card);
+       border-radius:.45rem; padding:.9rem 1.1rem; margin:1.1rem 0}
+  .box.warn{border-left-color:var(--red); background:linear-gradient(0deg,var(--red-soft) 0,var(--card) 70%)}
+  .box.note{border-left-color:var(--amber); background:linear-gradient(0deg,var(--amber-soft) 0,var(--card) 70%)}
+  .box.good{border-left-color:var(--green); background:linear-gradient(0deg,var(--green-soft) 0,var(--card) 70%)}
+  .box .tag{font-family:ui-sans-serif,-apple-system,sans-serif; font-weight:700; font-size:.72rem;
+     letter-spacing:.1em; text-transform:uppercase; margin:0 0 .35rem; color:var(--teal)}
+  .box.warn .tag{color:var(--red)} .box.note .tag{color:var(--amber)} .box.good .tag{color:var(--green)}
+  .box p:last-child, .box ul:last-child{margin-bottom:.2rem}
+
+  /* verdict */
+  .tldr{border:2px solid var(--teal); border-radius:.6rem; background:var(--card); padding:1.2rem 1.4rem; margin:1.6rem 0}
+  .tldr h2{margin:.1rem 0 .7rem; font-size:1.25rem; color:var(--teal)}
+  .tldr ol{margin:.2rem 0 .4rem; padding-left:1.4rem}
+  .tldr li{margin:.5rem 0}
+
+  /* scoreboard */
+  .score{display:flex; gap:.6rem; flex-wrap:wrap; margin:1.1rem 0}
+  .card{flex:1 1 9.5rem; border:1px solid var(--line); border-top:4px solid var(--teal); background:var(--card);
+     border-radius:.45rem; padding:.7rem .9rem}
+  .card .n{font-size:1.75rem; font-weight:700; line-height:1.1; font-variant-numeric:tabular-nums}
+  .card .lbl{font-family:ui-sans-serif,-apple-system,sans-serif; font-size:.7rem; letter-spacing:.06em;
+     text-transform:uppercase; color:var(--faint); margin-top:.2rem}
+  .card.red{border-top-color:var(--red)} .card.red .n{color:var(--red)}
+  .card.amber{border-top-color:var(--amber)} .card.amber .n{color:var(--amber)}
+  .card.green{border-top-color:var(--green)} .card.green .n{color:var(--green)}
+
+  /* TOC */
+  nav.toc{margin:1.4rem 0 0; font-family:ui-sans-serif,-apple-system,sans-serif; font-size:.86rem}
+  nav.toc ol{columns:2; column-gap:2.5rem; padding-left:1.3rem; margin:.4rem 0}
+  nav.toc li{margin:.22rem 0; break-inside:avoid}
+  nav.toc a{text-decoration:none; color:var(--blue)}
+  nav.toc a:hover{text-decoration:underline}
+
+  /* tables */
+  table{border-collapse:collapse; width:100%; margin:1rem 0 .4rem; font-size:.92rem}
+  th{font-family:ui-sans-serif,-apple-system,sans-serif; font-size:.68rem; letter-spacing:.09em; text-transform:uppercase;
+     color:var(--soft); text-align:left; padding:.45rem .6rem; border-bottom:2px solid var(--ink)}
+  th code{text-transform:none; letter-spacing:0; font-size:.95em}
+  td{padding:.5rem .6rem; border-bottom:1px solid var(--line); vertical-align:top}
+  tr.band td{background:#f4f1e9; font-family:ui-sans-serif,-apple-system,sans-serif; font-weight:700;
+     font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--soft)}
+  td.who{white-space:nowrap; width:5.5rem}
+  .tablewrap{overflow-x:auto}
+  table.split td{width:50%}
+
+  footer.doc{margin-top:3rem; padding-top:1rem; border-top:3px double var(--line); font-size:.85rem; color:var(--soft)}
+
+  @media (max-width:640px){
+    html{font-size:16px}
+    nav.toc ol{columns:1}
+    h1{font-size:1.65rem}
+    table.split td{width:auto; display:block}
+  }
+  @media print{
+    html{font-size:10.5pt}
+    body{background:#fff; print-color-adjust:exact; -webkit-print-color-adjust:exact}
+    .wrap{max-width:none; padding:0}
+    a{color:inherit; text-decoration:none}
+    .tablewrap{overflow:visible !important}
+    *{max-height:none !important}
+    p,li{orphans:3; widows:3}
+    h1,h2,h3{break-after:avoid; page-break-after:avoid}
+    tr,li,.box,.tldr,.card{break-inside:avoid; page-break-inside:avoid}
+    thead{display:table-header-group}
+    nav.toc{display:none}
+    .b{border:1px solid #999; background:#fff !important; color:#333 !important}
+  }
+
+  /* Site bar — links this document back to the post it supports. Deliberately in the
+     site's palette, not the document's, so it reads as chrome rather than content. */
+  .nb-bar { background: hsl(150 9% 5%); border-bottom: 1px solid hsl(43 60% 62% / .55); }
+  .nb-bar-in { max-width: 58rem; margin: 0 auto; padding: .6rem 1.5rem;
+    display: flex; align-items: center; gap: 1rem; }
+  .nb-bar a { display: inline-flex; align-items: center; gap: .5rem; text-decoration: none;
+    font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .775rem; line-height: 1.45; color: hsl(50 15% 88%); }
+  .nb-bar svg { flex: none; color: hsl(43 60% 62%); transition: transform .18s ease; }
+  .nb-bar .nb-bar-back:hover svg { transform: translateX(-3px); }
+  .nb-bar .nb-bar-kicker { color: hsl(80 4% 62%); }
+  .nb-bar .nb-bar-title { border-bottom: 1px solid hsl(43 60% 62% / .45); padding-bottom: 1px; }
+  .nb-bar .nb-bar-back:hover .nb-bar-title { color: hsl(43 60% 62%); border-bottom-color: hsl(43 60% 62%); }
+  .nb-bar .nb-bar-host { margin-left: auto; color: hsl(80 4% 62%);
+    font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; }
+  .nb-bar .nb-bar-host:hover { color: hsl(50 15% 88%); }
+  @media (max-width: 560px) { .nb-bar .nb-bar-host { display: none; } }
+  @media print { .nb-bar { display: none !important; } }
+</style>
+</head>
+<body>
+<div class="nb-bar">
+  <div class="nb-bar-in">
+    <a class="nb-bar-back" href="https://nathanamick.com/blog/a-living-curriculum">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/>
+      </svg>
+      <span class="nb-bar-kicker">Back to</span>
+      <span class="nb-bar-title">A Living Curriculum</span>
+    </a>
+    <a class="nb-bar-host" href="https://nathanamick.com/">nathanamick.com</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="doc">
+  <p class="kicker">Cross-check · Internal review</p>
+  <h1>The Two Writing-Research Documents, Compared</h1>
+  <p class="subtitle">Conflicts, coverage gaps, and a fact-check of both against the primary sources</p>
+  <p class="meta">Compiled August 7, 2026 · Covers <em>teaching-writing-research.html</em> (v1, Aug 1) and <em>teaching-writing-research-2.html</em> (v2, Aug 3) only</p>
+</header>
+
+<p>Throughout, <span class="b b-v1">V1</span> means <code>teaching-writing-research.html</code> (Aug 1) and
+<span class="b b-v2">V2</span> means <code>teaching-writing-research-2.html</code> (Aug 3). Findings are marked
+<span class="b b-fix">FIX</span> for a factual error, <span class="b b-tighten">TIGHTEN</span> for something
+defensible but overstated or mis-sourced, <span class="b b-house">HOUSEKEEPING</span> for a mechanical
+defect, and <span class="b b-ok">VERIFIED</span> for a claim checked against the original and confirmed.</p>
+
+<div class="tldr">
+  <h2>The verdict in six lines</h2>
+  <ol>
+    <li><strong>Neither document supersedes the other.</strong> V2 is far more reliable on evidence; V1 holds three things V2 dropped entirely — the curriculum-market verdict, the grade-level scope table, and the read on the student's own writing.</li>
+    <li><strong>The one conflict that matters is daily dosage.</strong> V1 prescribes roughly 15–20 minutes a day; V2 prescribes 45–60. That is a 3&times; difference in the core instruction and the two cannot both be implemented.</li>
+    <li><strong>V2 has one genuine fabrication and one garbled statistic</strong> — a quotation that isn't in its source, and a study count off by an order of magnitude. Both are fixable in a line each.</li>
+    <li><strong>V1's errors are errors of attribution and overstatement</strong>, not invention: it credits a recommendation to the wrong federal guide, oversells one method's evidence base, and links to the wrong standards strand.</li>
+    <li><strong>Everything else held.</strong> Roughly 35 individual figures were checked against the original reports; all but the ones listed in §4 matched exactly — including several that read like AI overstatement and turned out to be verbatim.</li>
+    <li><strong>No dead or invented links in either document.</strong> All 37 external URLs in V2 and all 8 source entries in V1 resolve.</li>
+  </ol>
+</div>
+
+<div class="score">
+  <div class="card red"><div class="n">2</div><div class="lbl">Outright errors (both in V2)</div></div>
+  <div class="card amber"><div class="n">7</div><div class="lbl">Overstated or mis-sourced</div></div>
+  <div class="card"><div class="n">6</div><div class="lbl">Conflicts between the two</div></div>
+  <div class="card green"><div class="n">~35</div><div class="lbl">Figures verified correct</div></div>
+</div>
+
+<nav class="toc" aria-label="Contents">
+  <strong class="sans">Contents</strong>
+  <ol>
+    <li><a href="#s1">What each document is</a></li>
+    <li><a href="#s2">Where they conflict</a></li>
+    <li><a href="#s3">Coverage gaps: what only one has</a></li>
+    <li><a href="#s4">What doesn't check out</a></li>
+    <li><a href="#s5">What was verified and holds</a></li>
+    <li><a href="#s6">Housekeeping</a></li>
+    <li><a href="#s7">How this was checked</a></li>
+  </ol>
+</nav>
+
+<h2 id="s1"><span class="no">1.</span> What each document is</h2>
+
+<div class="tablewrap">
+<table>
+  <thead><tr><th style="width:9rem"></th><th>V1 — <code>teaching-writing-research.html</code></th><th>V2 — <code>teaching-writing-research-2.html</code></th></tr></thead>
+  <tbody>
+    <tr><td><strong>Date / size</strong></td><td>Aug 1, 2026 · ~16 KB</td><td>Aug 3, 2026 · ~73 KB</td></tr>
+    <tr><td><strong>Purpose</strong></td><td>A practical brief: what the research says, what to buy, what the student's first pieces show, and a year map.</td><td>A rigorous evidence review: effect sizes, evidence tiering, and a ~45-source shelf.</td></tr>
+    <tr><td><strong>Evidence handling</strong></td><td>Narrative. Names findings, no numbers, no tiering.</td><td>Every claim carries a citation and an evidence-type badge (META / STUDY / GUIDE / SURVEY / THEORY / WISDOM).</td></tr>
+    <tr><td><strong>Specific to the student</strong></td><td>Yes — a full read of the first two assignments.</td><td>No. Entirely generic; never refers to her work.</td></tr>
+    <tr><td><strong>Covers what to teach</strong></td><td>Yes — the modes an eighth grader must cover, plus a quarterly map.</td><td>No. Method only; no scope or sequence.</td></tr>
+    <tr><td><strong>Self-description</strong></td><td>—</td><td>Calls itself a "Companion to <em>teaching-writing-research.html</em>." That is accurate, and it is the right way to read the pair.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="s2"><span class="no">2.</span> Where they conflict</h2>
+
+<p>Six real disagreements. Only the first two change what happens day to day.</p>
+
+<div class="tablewrap">
+<table>
+  <thead><tr><th style="width:10rem">Question</th><th>V1 says</th><th>V2 says</th><th style="width:13rem">Which is better supported</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Daily dosage</strong></td>
+      <td>10 min freewrite + 5 min sentence work, plus 2–3 lessons a week. Roughly <strong>15–20 min/day</strong>.</td>
+      <td>3–5 min quickwrite + 25–40 min sustained composing on the current piece. Roughly <strong>45–60 min/day</strong>.</td>
+      <td><strong>V2</strong>, but with a caveat: its hour-a-day floor comes from a federal recommendation the panel itself rates <em>minimal evidence</em> (see §4). The deliberate-practice argument behind it is stronger than the citation is.</td>
+    </tr>
+    <tr>
+      <td><strong>Ship cadence</strong></td>
+      <td>A piece goes through the full process and gets shared <strong>every 1–2 weeks</strong>.</td>
+      <td>Ship <strong>every 2–4 weeks</strong> — and specifically to a reader <em>beyond the mentor</em>.</td>
+      <td><strong>V2</strong> on both counts. The audience research measured real readers <em>against</em> writing-for-a-grade, so the "beyond the mentor" constraint is doing real work. V1's examples (read aloud at dinner, mailed to a grandparent) already satisfy it.</td>
+    </tr>
+    <tr>
+      <td><strong>The Writing Revolution's standing</strong></td>
+      <td>Its core claim is "backed by strong results"; the book is "the one purchase worth considering."</td>
+      <td>Whole-method trials are thin; tagged as practitioner wisdom resting on well-evidenced components — "a reasonable bet, honestly labeled."</td>
+      <td><strong>V2.</strong> The components (sentence combining, expansion) are well evidenced; the packaged method is not independently trialed. V1 overstates.</td>
+    </tr>
+    <tr>
+      <td><strong>What the federal guides recommend</strong></td>
+      <td>"The What Works Clearinghouse echoes this: sentence construction … is one of its formal recommendations."</td>
+      <td>The secondary guide has three recommendations: explicit strategies (strong), integrate reading and writing (moderate), use assessment to inform instruction (minimal).</td>
+      <td><strong>V2.</strong> V1's claim is true of the <em>elementary</em> guide (grades 1–6) and false of the secondary one — see §4.</td>
+    </tr>
+    <tr>
+      <td><strong>Shape of sentence work</strong></td>
+      <td>5 minutes, daily.</td>
+      <td>10 minutes, 3&times;/week.</td>
+      <td><strong>Either.</strong> Same weekly volume, different rhythm — but a handout can only implement one, so pick deliberately rather than by accident.</td>
+    </tr>
+    <tr>
+      <td><strong>How hard to push on grades</strong></td>
+      <td>"Feedback beats grades" — stated as a preference.</td>
+      <td>Don't grade drafts; ideally don't grade much at all. Grade only finished work, against criteria she has already self-assessed against.</td>
+      <td><strong>V2.</strong> Same direction, much firmer, and grounded in a specific finding: comments alone outperformed grades <em>and</em> grades-with-comments.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="s3"><span class="no">3.</span> Coverage gaps: what only one has</h2>
+
+<p>This is the main reason to keep both files. The gaps run in both directions and barely overlap.</p>
+
+<div class="tablewrap">
+<table class="split">
+  <thead><tr><th>Only in V1 — and V2 offers no substitute</th><th>Only in V2 — and V1 offers no substitute</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>
+        <ul>
+          <li><strong>The curriculum-market survey.</strong> IEW, Brave Writer, The Writing Revolution, and the free options, each with a verdict — including the conclusion that nothing free rises to "excellent." This is the answer to "should I buy anything?", and V2 dropped it entirely.</li>
+          <li><strong>The grade-level scope.</strong> The narrative / informative / argument / foundations table — what the year has to cover. V2 is <em>all</em> method and contains no account of content whatsoever. For a curriculum document this is the largest single hole.</li>
+          <li><strong>The read on the student's actual writing.</strong> Five named strengths and five growth areas drawn from her first two pieces. V2 never touches her work.</li>
+          <li><strong>The quarterly map</strong> and the interest-driven project ideas attached to each quarter.</li>
+          <li><strong>Named free tools</strong> for mechanics reference and convention practice.</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><strong>Every number</strong>, plus the evidence tiering that distinguishes a meta-analysis from a master teacher's opinion. V1 asserts; V2 shows its work.</li>
+          <li><strong>The cognitive model</strong> — knowledge telling vs. transforming, the working-memory bottleneck, deliberate practice. This is the part that lets a teacher improvise correctly mid-lesson instead of following a script.</li>
+          <li><strong>Motivation as a cause of skill</strong>, not a nicety — including the governing rule that any practice visibly costing enthusiasm yields to the writer.</li>
+          <li><strong>The one-on-one adaptation.</strong> How to translate classroom-validated practices to a mentorship: the mentor becomes the collaborator; peer feedback becomes outside readers.</li>
+          <li><strong>What actively backfires:</strong> packaged trait rubrics, the five-paragraph formula as a destination, workshop ritual without instruction, grading everything, marking every error.</li>
+          <li><strong>AI guidance.</strong> Second reader between conferences, fine; ghostwriting, fatal. Nothing in V1.</li>
+          <li><strong>The mechanics of feedback:</strong> the conference protocol, co-built rubrics, the portfolio, the "moves I own" list, quarterly review.</li>
+          <li><strong>The source shelf</strong> — ~45 entries with working links.</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="s4"><span class="no">4.</span> What doesn't check out</h2>
+
+<div class="box good">
+  <p class="tag">Status: corrected in the source documents, retained here as the record</p>
+  <p>Every finding in this section has since been fixed in V1 and V2 themselves. The findings are deliberately left in place, stated as they were found, so there is a permanent record of what was wrong and what the correction was — do not expect to see these errors in the current files. The one exception is the dosage conflict in <a href="#s2">§2</a>, which is a disagreement between the two documents rather than an error in either, and remains open.</p>
+</div>
+
+<h3>V2 — two errors, three imprecisions</h3>
+
+<div class="box warn">
+  <p class="tag">Fix these two</p>
+  <ul>
+    <li><span class="b b-fix">FIX</span> <strong>The Hillocks study count is wrong by an order of magnitude.</strong> §1 describes it as "the first great meta-analysis, covering ~500 experimental studies from 1963–1982," and §6 repeats "the least effective thing measured across 500 studies." Per Hillocks' own published synthesis — the PDF V2 already links — several hundred studies were screened and the meta-analysis rested on <strong>60 well-designed studies with 72 experimental treatments</strong>, sitting inside a broader review of about 2,000 studies. The number 500 appears nowhere. <em>Correct to:</em> 60 studies / 72 treatments, drawn from a review of ~2,000.</li>
+    <li><span class="b b-fix">FIX</span> <strong>The National Commission on Writing quotation is not in the report.</strong> §5.8 puts "if students are to learn, they must write" inside quotation marks. The actual passage runs: students must struggle with the details, wrestle with the facts, and rework raw information into language they can communicate — "In short, they must write." <em>Correct to:</em> quote the real sentence, or drop the quotation marks and paraphrase openly.</li>
+  </ul>
+</div>
+
+<div class="box note">
+  <p class="tag">Tighten these three</p>
+  <ul>
+    <li><span class="b b-tighten">TIGHTEN</span> <strong>Two figures are attributed to the wrong version of the same study.</strong> "123 studies, 154 effect sizes" and the −0.32 for grammar are the numbers from the <em>peer-reviewed journal article</em>. The Carnegie report reports <strong>142 studies / 176 effect sizes</strong> and gives grammar <em>no</em> number at all — there it is a sidebar note, not one of the eleven elements. The document's own method note claims these figures "were read directly from the Carnegie reports," which is not where they came from. <em>Fix:</em> cite the journal version for those two figures, or switch to 142/176.</li>
+    <li><span class="b b-tighten">TIGHTEN</span> <strong>The league table's first band is labelled "eleven elements" but has twelve rows.</strong> Same root cause: the journal's eleven <em>include</em> grammar and <em>exclude</em> writing-for-content-learning; the Carnegie eleven are the reverse. The table merges both lists. <em>Fix:</em> relabel the band, or split grammar into its own row-group with its own source line.</li>
+    <li><span class="b b-tighten">TIGHTEN</span> <strong>The hour-a-day dosage floor is presented more firmly than its source supports.</strong> It rests on the elementary guide's "provide daily time for students to write," which the panel rates <strong>minimal evidence</strong>. V2 is scrupulous about this elsewhere — it explicitly flags the secondary guide's third recommendation as minimal — so the omission reads as inconsistent rather than dishonest. Since this is the source of the biggest conflict in §2, the caveat matters.</li>
+  </ul>
+</div>
+
+<h3>V1 — one attribution error, three overstatements</h3>
+
+<div class="box note">
+  <p class="tag">Corrections</p>
+  <ul>
+    <li><span class="b b-fix">FIX</span> <strong>The federal recommendation is credited to the wrong guide.</strong> "The What Works Clearinghouse echoes this: sentence construction (combining and expansion) is one of its formal recommendations." That is Recommendation 3 of the <em>elementary</em> guide (grades 1–6, moderate evidence). The <em>secondary</em> guide (grades 6–12) has three recommendations and sentence construction is not among them. In a document about an eighth grader, this is misleading as written.</li>
+    <li><span class="b b-tighten">TIGHTEN</span> <strong>"A meta-analysis of hundreds of studies."</strong> It is 123 documents yielding 154 effect sizes (journal version), or 142 studies yielding 176 effect sizes (Carnegie report). "Hundreds" overstates it.</li>
+    <li><span class="b b-tighten">TIGHTEN</span> <strong>The Writing Revolution's evidence base.</strong> "Backed by strong results" is true of the method's <em>components</em> and not of the packaged method, which lacks independent trials. See §2.</li>
+    <li><span class="b b-tighten">TIGHTEN</span> <strong>The standards link points to the wrong strand.</strong> It targets the History/Social Studies/Science &amp; Technical writing standards, which contain <em>no narrative standard</em> — while the table directly above it describes narrative, informative, and argument. The general grade-8 writing standards are the right target.</li>
+  </ul>
+</div>
+
+<h2 id="s5"><span class="no">5.</span> What was verified and holds</h2>
+
+<p>Roughly 35 individual figures were checked against the original documents. Everything not listed in §4 matched — including several claims that read like AI overstatement and turned out to be verbatim accurate.</p>
+
+<div class="box good">
+  <p class="tag">Confirmed against the primary sources</p>
+  <ul>
+    <li><span class="b b-ok">VERIFIED</span> <strong>All eleven headline effect sizes in V2's league table</strong> — 0.82, 0.82, 0.75, 0.70, 0.55, 0.50, 0.32, 0.32, 0.32, 0.25, 0.23 — are exact matches to the Carnegie report, in the right order.</li>
+    <li><span class="b b-ok">VERIFIED</span> <strong>The strategy-instruction breakdown:</strong> 1.14 for the self-regulated variant vs. 0.62 for other strategy teaching; 1.02 for struggling writers vs. 0.70 across the full range; 0.70 for word processing with low-achieving writers; 0.46 for weaker writers in the paired sentence-combining study. All exact.</li>
+    <li><span class="b b-ok">VERIFIED</span> <strong>"The process approach is near zero without trained teachers"</strong> — this reads like an exaggeration and is the report's own finding: 0.46 with training, "negligible" without, except 0.27 in grades 4–6.</li>
+    <li><span class="b b-ok">VERIFIED</span> <strong>The grammar numbers:</strong> −0.32 in the journal version, −0.29 in Hillocks. Also Hillocks' inquiry 0.56, evaluation scales 0.36, sentence combining 0.35, free writing 0.16 — all consistent with the source.</li>
+    <li><span class="b b-ok">VERIFIED</span> <strong>The classroom-exposure statistics,</strong> every one: 260 classrooms, 20 schools, five states, 1,520 teachers surveyed, 7.7% of observed class time spent writing a paragraph or more, 1.6 pages a week in English and 2.1 across the other three subjects combined. One thing V2 <em>understates</em> — those 20 schools were selected for reputations of excellence in teaching writing, which makes 7.7% worse than it sounds, not better.</li>
+    <li><span class="b b-ok">VERIFIED</span> <strong>The secondary practice guide's three recommendations and their evidence levels,</strong> exactly as V2 states them.</li>
+    <li><span class="b b-ok">VERIFIED</span> <strong>The national assessment figures:</strong> about 27% of eighth graders at or above Proficient, 20% below Basic.</li>
+    <li><span class="b b-ok">VERIFIED</span> <strong>V1's ranking is internally sound.</strong> Its top-seven list, though it carries no numbers, orders the practices consistently with the actual effect sizes — including placing word processing above sentence combining, which is correct (0.55 vs. 0.50).</li>
+    <li><span class="b b-ok">VERIFIED</span> <strong>Link integrity.</strong> All 37 external URLs in V2 and every source entry in V1 resolve, including the homeschool-blog links that looked invented. The handful of 403 responses are publisher bot-blocking on DOI and journal hosts, not dead links.</li>
+  </ul>
+</div>
+
+<h2 id="s6"><span class="no">6.</span> Housekeeping</h2>
+
+<p class="small">As with §4, all three items below have since been fixed; they are recorded here as found.</p>
+
+<ul>
+  <li><span class="b b-house">HOUSEKEEPING</span> <span class="b b-v2">V2</span> <strong>One broken internal link.</strong> The "how to read this document" paragraph links to the source shelf as <code>#sources</code>, but the section's actual id is <code>s10</code>. There is no <code>sources</code> anchor in the file, so the link does nothing. The table of contents links correctly; only this one is wrong.</li>
+  <li><span class="b b-house">HOUSEKEEPING</span> <span class="b b-v1">V1</span> <strong>No print stylesheet.</strong> V1 has no <code>@media print</code> block at all, so it prints with screen margins, live link colors, and tables sliced across page breaks. V2 has one.</li>
+  <li><span class="b b-house">HOUSEKEEPING</span> <span class="b b-v1">V1</span> <strong>Naming.</strong> Two references to the student by relationship have been changed to "the student." Neither document ever contained her given name.</li>
+</ul>
+
+<h2 id="s7"><span class="no">7.</span> How this was checked</h2>
+
+<p>Both documents were read in full. Every effect size, survey statistic, study count, and recommendation was then checked against the primary source rather than from memory — the original reports were downloaded and searched directly:</p>
+
+<ul>
+  <li>The Carnegie meta-analysis report (full PDF) — for the eleven effect sizes, the strategy-instruction breakdown, the training/no-training split, the study and effect-size counts, and the grammar sidebar.</li>
+  <li>The journal abstract of the same meta-analysis — which resolved where the 123/154 counts and the −0.32 grammar figure actually come from.</li>
+  <li>Hillocks' own published synthesis (PDF) — for the study count, which is where V2's largest error surfaced.</li>
+  <li>The classroom-exposure study (full PDF) — for all seven of its statistics.</li>
+  <li>Both federal practice guide pages — for the recommendation wording and evidence levels.</li>
+  <li>A source search for the disputed quotation, which returned the report's actual sentence.</li>
+  <li>An automated status check of all 45 external links across the two documents.</li>
+</ul>
+
+<div class="box">
+  <p class="tag">Bottom line</p>
+  <p>V2 is the more trustworthy document on evidence and should be treated as the authority wherever the two disagree. But it is genuinely a companion, not a replacement: the curriculum-market verdict, the grade-level scope table, and the read on the student's own writing exist only in V1, and nothing in V2 covers them. The corrections in §4 and §6 have been applied to both files; what remains open is the dosage conflict in §2, which is a choice to be made rather than an error to be fixed.</p>
+</div>
+
+<footer class="doc">
+  <p><strong>Scope note.</strong> This cross-check covers only <em>teaching-writing-research.html</em> and <em>teaching-writing-research-2.html</em>. It assesses factual accuracy, internal consistency, and coverage; it does not re-argue the underlying pedagogy. Where the two documents disagree and neither is clearly better supported, that is said plainly rather than resolved by preference.</p>
+</footer>
+
+</div>
+</body>
+</html>

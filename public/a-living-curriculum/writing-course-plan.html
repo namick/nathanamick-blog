@@ -1,0 +1,560 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The course plan and operating manual for a year of 8th grade creative writing: year goals, the quarter-by-quarter map, and the protocols that generate each day's lesson.">
+<title>Writing Course 2026–2027 · Course Plan &amp; Operating Manual</title>
+<style>
+  :root {
+    --ink: #26251f;
+    --muted: #6b675c;
+    --navy: #1f3a5f;
+    --green: #3e6b4f;
+    --due: #a04e22;
+    --paper: #fbfaf6;
+    --panel: #f1efe7;
+    --panel2: #e9efe9;
+    --rule: #ddd8cc;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink:#e8e5df; --muted:#a39e91; --navy:#9fbde4; --green:#8fc0a0; --due:#e8926a; --paper:#1c1b19; --panel:#292824; --panel2:#252b26; --rule:#44413c; }
+  }
+  :root[data-theme="dark"] { --ink:#e8e5df; --muted:#a39e91; --navy:#9fbde4; --green:#8fc0a0; --due:#e8926a; --paper:#1c1b19; --panel:#292824; --panel2:#252b26; --rule:#44413c; }
+  :root[data-theme="light"] { --ink:#26251f; --muted:#6b675c; --navy:#1f3a5f; --green:#3e6b4f; --due:#a04e22; --paper:#fbfaf6; --panel:#f1efe7; --panel2:#e9efe9; --rule:#ddd8cc; }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.65;
+    font-size: 17px;
+  }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+
+  header { border-bottom: 3px double var(--rule); margin-bottom: 2.2rem; padding-bottom: 1.4rem; }
+  .doctype {
+    font-family: 'Helvetica Neue', Arial, sans-serif; font-size: .72rem; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--green); margin: 0 0 .6rem;
+  }
+  h1 { font-size: 2.05rem; line-height: 1.15; color: var(--navy); margin: 0 0 .5rem; text-wrap: balance; }
+  .subtitle { font-style: italic; color: var(--muted); margin: 0; }
+  .meta { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: .8rem; color: var(--muted); margin-top: .8rem; }
+
+  h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.3rem; color: var(--navy);
+    margin: 3rem 0 .9rem; padding-top: 1.3rem;
+    border-top: 1px solid var(--rule);
+    text-wrap: balance;
+  }
+  h2 .secno { color: var(--green); margin-right: .5rem; }
+  h3 { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 1.03rem; margin: 1.7rem 0 .45rem; }
+  p { margin: 0 0 1rem; }
+  ul, ol { margin: 0 0 1rem; padding-left: 1.4rem; }
+  li { margin-bottom: .45rem; }
+  strong { color: var(--navy); }
+  em.gloss { color: var(--muted); }
+
+  .panel {
+    background: var(--panel); border-left: 4px solid var(--navy);
+    padding: 1rem 1.2rem; margin: 1.4rem 0; border-radius: 0 6px 6px 0;
+  }
+  .panel.green { border-left-color: var(--green); background: var(--panel2); }
+  .panel p:last-child, .panel ul:last-child, .panel ol:last-child { margin-bottom: 0; }
+
+  .tablewrap { overflow-x: auto; margin: 1.2rem 0; }
+  table { border-collapse: collapse; width: 100%; font-size: .92em; }
+  th, td { border: 1px solid var(--rule); padding: .55rem .7rem; text-align: left; vertical-align: top; }
+  th { background: var(--panel); font-family: 'Helvetica Neue', Arial, sans-serif; font-size: .84em; letter-spacing: .02em; }
+  td.date, th.date { white-space: nowrap; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: .92em; font-variant-numeric: tabular-nums; }
+  td.due { color: var(--due); font-weight: 700; }
+
+  .qcard {
+    border: 1px solid var(--rule); border-radius: 8px; margin: 1.6rem 0; overflow: hidden;
+  }
+  .qhead {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: .3rem .8rem;
+    background: var(--panel); padding: .8rem 1.1rem; border-bottom: 1px solid var(--rule);
+  }
+  .qtag {
+    font-family: 'Helvetica Neue', Arial, sans-serif; font-size: .72rem; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase; background: var(--green); color: var(--paper);
+    border-radius: 4px; padding: .18em .6em;
+  }
+  .qtitle { font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--navy); }
+  .qdates { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: .82rem; color: var(--muted); margin-left: auto; font-variant-numeric: tabular-nums; }
+  .qbody { padding: 1rem 1.1rem .2rem; }
+
+  .prompt {
+    background: var(--panel); border: 1px dashed var(--rule); border-radius: 6px;
+    padding: .9rem 1.1rem; margin: 1rem 0 1.2rem;
+    font-family: 'Helvetica Neue', Arial, sans-serif; font-size: .88em; line-height: 1.55;
+  }
+  .prompt .plabel {
+    display: block; font-size: .72rem; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--green); margin-bottom: .4rem;
+  }
+
+  .checklist li { list-style: none; position: relative; padding-left: .4em; }
+  .checklist li::before { content: "☐"; position: absolute; left: -1.2em; color: var(--green); }
+
+  footer { margin-top: 3.5rem; padding-top: 1.2rem; border-top: 3px double var(--rule); font-size: .85em; color: var(--muted); font-style: italic; }
+
+  /* ==================== PRINT — per dev/how-to-print.html ==================== */
+  @page { size: letter; margin: 0.8in 0.75in; }
+
+  @media print {
+    :root { --ink:#26251f; --muted:#6b675c; --navy:#1f3a5f; --green:#3e6b4f; --due:#a04e22; --paper:#fff; --panel:#f1efe7; --panel2:#e9efe9; --rule:#ddd8cc; }
+    body { background: #fff; font-size: 10pt; line-height: 1.45;
+           print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .wrap { max-width: none; margin: 0; padding: 0; }
+
+    /* 1. Un-monolith everything — stops mid-line slicing */
+    .tablewrap, .qcard, .prompt, .panel { overflow: visible !important; }
+    * { max-height: none !important; }
+    pre { white-space: pre-wrap; word-wrap: break-word; }
+
+    /* 2. No stranded single lines */
+    p, li, blockquote { orphans: 3; widows: 3; }
+
+    /* 3. Headings stay with their content */
+    h1 { font-size: 20pt; }
+    h2 { font-size: 12.5pt; margin: 1.5rem 0 .55rem; padding-top: .7rem; break-after: avoid; page-break-after: avoid; }
+    h3, h4 { break-after: avoid; page-break-after: avoid; }
+
+    /* 4. Unit-breaking */
+    tr, li, .panel, .prompt, figure { break-inside: avoid; page-break-inside: avoid; }
+    thead { display: table-header-group; }
+    tfoot { display: table-footer-group; }
+
+    /* 5. Flex and grid fragment badly — collapse them */
+    .qhead { display: block; }
+
+    /* 6. Opt-in controls */
+    .pagebreak { break-before: page; page-break-before: always; }
+    .keep-together { break-inside: avoid; page-break-inside: avoid; }
+    .no-print { display: none !important; }
+
+    a { color: inherit; text-decoration: none; }
+    footer { margin-top: 1.8rem; }
+  }
+
+  /* Site bar — links this document back to the post it supports. Deliberately in the
+     site's palette, not the document's, so it reads as chrome rather than content. */
+  .nb-bar { background: hsl(150 9% 5%); border-bottom: 1px solid hsl(43 60% 62% / .55); }
+  .nb-bar-in { max-width: 820px; margin: 0 auto; padding: .6rem 1.5rem;
+    display: flex; align-items: center; gap: 1rem; }
+  .nb-bar a { display: inline-flex; align-items: center; gap: .5rem; text-decoration: none;
+    font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .775rem; line-height: 1.45; color: hsl(50 15% 88%); }
+  .nb-bar svg { flex: none; color: hsl(43 60% 62%); transition: transform .18s ease; }
+  .nb-bar .nb-bar-back:hover svg { transform: translateX(-3px); }
+  .nb-bar .nb-bar-kicker { color: hsl(80 4% 62%); }
+  .nb-bar .nb-bar-title { border-bottom: 1px solid hsl(43 60% 62% / .45); padding-bottom: 1px; }
+  .nb-bar .nb-bar-back:hover .nb-bar-title { color: hsl(43 60% 62%); border-bottom-color: hsl(43 60% 62%); }
+  .nb-bar .nb-bar-host { margin-left: auto; color: hsl(80 4% 62%);
+    font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; }
+  .nb-bar .nb-bar-host:hover { color: hsl(50 15% 88%); }
+  @media (max-width: 560px) { .nb-bar .nb-bar-host { display: none; } }
+  @media print { .nb-bar { display: none !important; } }
+</style>
+
+<div class="nb-bar">
+  <div class="nb-bar-in">
+    <a class="nb-bar-back" href="https://nathanamick.com/blog/a-living-curriculum">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/>
+      </svg>
+      <span class="nb-bar-kicker">Back to</span>
+      <span class="nb-bar-title">A Living Curriculum</span>
+    </a>
+    <a class="nb-bar-host" href="https://nathanamick.com/">nathanamick.com</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header>
+  <p class="doctype">Course Plan &amp; Operating Manual · Living Document</p>
+  <h1>The Writing Course<br>2026–2027</h1>
+  <p class="subtitle">An interest-driven 8th grade writing curriculum, built at home, taught one nameable technique at a time.</p>
+  <p class="meta">Version 1.2 · August 6, 2026 · Companion to <em>Teaching Writing at Home: Research Notes</em> · Calendar matched to the local school district (first day Aug 3, last day May 28, 180 days)</p>
+</header>
+
+<p>This document is the course. It defines the year's goals, the quarter-by-quarter map with
+due dates, and — most importantly — the <strong>protocols</strong> used to run it day to day:
+how each daily handout gets generated, how completed work gets evaluated, and how the course
+gets steered as we learn what's working. Individual lessons are <em>not</em> pre-written;
+they are created each morning from the recipe in §6, aimed at whatever the skills tracker
+(§5) says matters right now. That is by design: the research says responsive teaching beats
+a fixed script, and it keeps the course steerable all year.</p>
+
+<h2 id="how-to-use"><span class="secno">§1</span>How to use this document</h2>
+
+<ul>
+  <li><strong>Daily:</strong> open a session with the AI, reference this plan, and generate the handout(s) for today (and tomorrow, if printing ahead) using the protocol in §6. Customize on the spot — swap the topic, shrink the assignment, lean into whatever she's currently obsessed with.</li>
+  <li><strong>After each assignment:</strong> her finished work goes in <code>writing/completed/</code>. Run the evaluation protocol in §7 to produce her feedback note and update the skills tracker.</li>
+  <li><strong>At each milestone date:</strong> check the quarter map (§4). Milestones are the fixed points; everything between them flexes.</li>
+  <li><strong>Whenever the course needs to change:</strong> use §8. Edit this document, bump the version, note the change in §9. The plan serves the writer, not the other way around.</li>
+</ul>
+
+<div class="panel">
+<p><strong>Standing rule for every lesson, all year:</strong> each lesson teaches <em>one
+nameable technique</em>, shows it working in a mentor text, then has her use it immediately
+with a specific product goal. Assigning writing is not teaching writing. If a handout doesn't
+have a technique you can name in five words, it isn't ready to print.</p>
+</div>
+
+<h2 id="goals"><span class="secno">§2</span>Course goals — what June looks like</h2>
+
+<p>By the end of May 2027, the student will have:</p>
+
+<ol>
+  <li><strong>Written and published in all three modes.</strong> At least one polished narrative, one informative/research piece, and one full argument essay, each taken through the complete process (plan → draft → feedback → revise → edit → share with a real audience). This covers the full 8th grade standard.</li>
+  <li><strong>A repeatable writing process she can describe.</strong> She can say how she plans, what she does when a draft stalls, and what she looks for when revising — the explicit-strategy outcome the research ranks first.</li>
+  <li><strong>Sentence-level command.</strong> Comma splices gone from final drafts; varied sentence openers; comfortable use of subordinate clauses and <em>because/but/so</em> reasoning. Built through daily five-minute drills, never worksheets.</li>
+  <li><strong>Clean dialogue and paragraphing.</strong> Correct dialogue punctuation and deliberate multi-sentence paragraphs — her two most mechanical growth areas from the August baseline.</li>
+  <li><strong>Show-don't-tell as a habit, not a trick.</strong> Emotions dramatized through action, dialogue, and sensory detail rather than named.</li>
+  <li><strong>A capstone she's proud of</strong> — a sustained Q4 project of her choosing (illustrated storybook, animation script + storyboard, or collected works), printed or produced for a real audience.</li>
+  <li><strong>An intact love of writing.</strong> The non-negotiable. She started this year voluntarily writing 1,100-word stories with subverted endings; the course must end with that enthusiasm larger, not smaller. Every protocol below (limited feedback, choice of topics, real audiences) exists partly to protect this.</li>
+</ol>
+
+<h2 id="rhythm"><span class="secno">§3</span>The weekly rhythm</h2>
+
+<p>The same shape every school week, all four quarters. Content changes; the rhythm doesn't.</p>
+
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Cadence</th><th>Activity</th><th>Notes</th></tr></thead>
+  <tr><td class="date">Daily · 10 min minimum</td><td><strong>Freewrite / journal</strong></td><td>Low stakes, never graded, never corrected. Stream-of-consciousness, any topic, no rules; turned in with the day's work. Prompt optional — her choice always wins. On every handout.</td></tr>
+  <tr><td class="date">Daily · 10 min minimum</td><td><strong>Sentence drill</strong></td><td>One Hochman-style exercise — combine, expand, <em>because/but/so</em>, subordinate opener — built from whatever she's currently reading or writing. This is where comma splices actually get fixed. Included as the warm-up on every handout.</td></tr>
+  <tr><td class="date">2–3×/week</td><td><strong>Lesson + assignment</strong></td><td>A printed handout (§6): one technique, one mentor text, one assignment with specific product goals. Numbered continuously — next up is Lesson 4.</td></tr>
+  <tr><td class="date">Daily · 40–60 min</td><td><strong>Drafting</strong></td><td><em>The non-negotiable heart of the day.</em> Significant writing toward the current piece, every school day — the Challenge dial in STATUS.md sets the floor (currently 400+ words). Volume with enjoyment is the whole game; skill follows volume.</td></tr>
+  <tr><td class="date">Most Fridays</td><td><strong>Ship</strong></td><td>A week of daily writing usually leaves something worth finishing and <em>sharing</em> — read aloud at dinner, printed, mailed. Scale flexes: a complete short piece (500–1,000 words), an installment of a cumulative project, or a capstone stage delivered as a real thing. A celebration, not a deadline: if the piece needs another week, it takes it. What never slides is the daily writing.</td></tr>
+  <tr><td class="date">Quarterly</td><td><strong>Review + steer</strong></td><td>Re-read the quarter's work together, write the growth memo (§7), adjust the next quarter's plan (§8).</td></tr>
+</table>
+</div>
+
+<h2 id="year"><span class="secno">§4</span>The year at a glance — and each quarter in detail</h2>
+
+<p>Four quarters, each anchored in one mode, sequenced to start where her enthusiasm already
+is. Dates follow the school calendar; <span style="color:var(--due); font-weight:700;">due
+dates</span> are the fixed milestones. Weekly technique order within a quarter is a menu,
+not a schedule — pick based on the tracker and what her current piece needs. The Friday
+ship rhythm (§3) runs all year: the Q1 table below maps every ship — targets, not tests;
+only capstone dates are fixed. Q2–Q4 tables name the anchor milestones only, and what the
+in-between Fridays ship gets decided at each quarterly review.</p>
+
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Quarter</th><th class="date">Dates</th><th>Anchor mode</th><th>Capstone deliverable</th><th class="date">Capstone due</th></tr></thead>
+  <tr><td>Q1</td><td class="date">Aug 3 – Oct 2</td><td>Narrative &amp; description</td><td>Original short story, published</td><td class="date due">Fri Oct 2</td></tr>
+  <tr><td>Q2</td><td class="date">Oct 19 – Dec 22</td><td>Informative / explanatory</td><td>Research report, formatted &amp; published</td><td class="date due">Fri Dec 18</td></tr>
+  <tr><td>Q3</td><td class="date">Jan 5 – Mar 12</td><td>Argument</td><td>Full argument essay with counterclaim</td><td class="date due">Fri Mar 12</td></tr>
+  <tr><td>Q4</td><td class="date">Mar 29 – May 28</td><td>Capstone / multi-genre</td><td>Her chosen capstone + year portfolio</td><td class="date due">Fri May 21</td></tr>
+</table>
+</div>
+
+<p><em class="gloss">Breaks: Labor Day Sep 7 · Fall Break Oct 5–16 · Thanksgiving Nov 25–27 ·
+Winter Break Dec 23–Jan 4 · MLK Jan 18 and Presidents' Day Feb 15 (unless used for make-up) ·
+Spring Break Mar 15–26. No milestones land adjacent to a break re-entry; first week back is
+always a soft week.</em></p>
+
+<!-- ============================== Q1 ============================== -->
+<div class="qcard">
+  <div class="qhead">
+    <span class="qtag">Q1</span>
+    <span class="qtitle">Narrative &amp; Description — Story Craft</span>
+    <span class="qdates">Mon Aug 3 – Fri Oct 2 · 44 days</span>
+  </div>
+  <div class="qbody">
+    <p><strong>The point of this quarter:</strong> she already writes complete stories with real
+    arcs and revises voluntarily. Q1 sharpens the craft inside that enthusiasm: dramatizing
+    instead of naming emotion, varying sentences, handling dialogue mechanics, and building
+    real paragraphs — while establishing the daily rhythm and the feedback culture.</p>
+
+    <h3>Technique menu (each becomes one or more lessons)</h3>
+    <ul>
+      <li>Show-don't-tell: actions, body, and dialogue instead of named emotions <em class="gloss">(Lesson 3, already prepared — her #1 growth area)</em></li>
+      <li>Dialogue mechanics: punctuation, capitalization, tags, new-speaker-new-paragraph</li>
+      <li>Sentence openers: subordinate-clause and participial starts to break the "She… She… The dragon…" pattern</li>
+      <li>Sentence combining to kill comma splices <em class="gloss">(taught in her own sentences, e.g. "She really wanted to go forward but she couldn't, she was frozen with fear")</em></li>
+      <li>Paragraphing on purpose: what goes together and why; the one-sentence-paragraph as a deliberate effect, not a default</li>
+      <li>Pacing: stretching the important moment, compressing travel</li>
+      <li>Endings: earned reflection vs. summary; how her subverted-ending instinct works and when to deploy it</li>
+      <li>Reading like a writer: pull apart a paragraph from a book she loves (HTTYD novels, current reads) — one move per session</li>
+    </ul>
+
+    <h3>The Q1 ship map — something ships most Fridays</h3>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th>Ships</th><th>Scale</th><th class="date">Friday</th></tr></thead>
+      <tr><td>Lessons 1–4 (snapshot, dragon story, creature study, dialogue scene) — <em>done, evaluated</em></td><td>—</td><td class="date">✓</td></tr>
+      <tr><td><strong>Piece 2:</strong> HTTYD scene rewritten from another character's POV, <em>or</em> "The Dragon in the Mist" revisited applying show-don't-tell + dialogue mechanics</td><td>Full piece — shared at home</td><td class="date due">Fri Aug 14</td></tr>
+      <tr><td><strong>Field guide entry #1</strong> — one illustrated creature entry (description muscle: precise nouns, sensory detail)</td><td>Installment</td><td class="date due">Fri Aug 21</td></tr>
+      <tr><td><strong>Field guide entry #2</strong></td><td>Installment</td><td class="date due">Fri Aug 28</td></tr>
+      <tr><td><strong>Piece 3:</strong> Creature field guide assembled — 3+ illustrated entries, titled and bound/printed</td><td>Full piece — shared</td><td class="date due">Fri Sep 4</td></tr>
+      <tr><td><strong>Capstone stage 1:</strong> original short story in her own world (not a continuation) — planned, and the opening scene read aloud</td><td>Capstone stage</td><td class="date due">Fri Sep 11</td></tr>
+      <tr><td><strong>Capstone stage 2:</strong> full draft delivered</td><td>Capstone stage</td><td class="date due">Fri Sep 18</td></tr>
+      <tr><td><strong>Capstone stage 3:</strong> revised with feedback</td><td>Capstone stage</td><td class="date due">Fri Sep 25</td></tr>
+      <tr><td><strong>Q1 Capstone:</strong> the story <em>published</em> — printed and read aloud, or mailed</td><td>Full process + publication</td><td class="date due">Fri Oct 2</td></tr>
+    </table>
+    </div>
+    <p><em class="gloss">These Fridays are targets, not tests — only the capstone date is
+    fixed. If a week wobbles, shrink that Friday's ship (§8: shrink the piece, not the
+    process) or let it slide a week; what never slides is the daily writing. Labor Day
+    Sep 7 shortens the stage-1 week to four days — planning week, so it absorbs it. Fall
+    Break Oct 5–16 follows the capstone, so the quarter ends on a celebration, not a
+    scramble.</em></p>
+  </div>
+</div>
+
+<!-- ============================== Q2 ============================== -->
+<div class="qcard">
+  <div class="qhead">
+    <span class="qtag">Q2</span>
+    <span class="qtitle">Informative / Explanatory — Research &amp; Explanation</span>
+    <span class="qdates">Mon Oct 19 – Tue Dec 22 · 44 days</span>
+  </div>
+  <div class="qbody">
+    <p><strong>The point of this quarter:</strong> writing that teaches a reader something,
+    using more than one source. Summarization (the research's #2 practice) lives here.
+    The trick is keeping it interest-driven: ferrets, insects, Minecraft, and how animation
+    works are all legitimate research topics.</p>
+
+    <h3>Technique menu</h3>
+    <ul>
+      <li>Summarizing a source in her own words — taught explicitly, practiced weekly</li>
+      <li>Note-taking without copying; quoting vs. paraphrasing</li>
+      <li>Judging sources: who wrote this and how do they know?</li>
+      <li>Organizing structures: compare/contrast, cause/effect, sequence, problem/solution</li>
+      <li>Formatting for readers: headings, captions, intro/conclusion moves</li>
+      <li>Precise vocabulary and formal-but-alive tone</li>
+      <li>Sentence work continues: appositives ("the ferret, a member of the weasel family, …") are the Q2 drill star</li>
+    </ul>
+
+    <h3>Milestones</h3>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th>Deliverable</th><th>Full process?</th><th class="date">Due</th></tr></thead>
+      <tr><td>Research topic chosen + 3 candidate sources found</td><td>—</td><td class="date due">Fri Oct 23</td></tr>
+      <tr><td><strong>Piece 1:</strong> a short explainer or how-to in her wheelhouse (Minecraft guide, "how animation works," pet-care how-to) with headings and one diagram</td><td>Yes — shared</td><td class="date due">Fri Nov 13</td></tr>
+      <tr><td>Research report: notes + outline complete</td><td>—</td><td class="date due">Fri Nov 20</td></tr>
+      <tr><td>Research report: full draft <em class="gloss">(Thanksgiving Nov 25–27 falls after)</em></td><td>—</td><td class="date due">Fri Dec 4</td></tr>
+      <tr><td><strong>Q2 Capstone:</strong> research report revised, formatted, published (printed booklet or shared digitally with family)</td><td>Yes — full process + publication</td><td class="date due">Fri Dec 18</td></tr>
+      <tr><td>Dec 21–22: read-aloud, wrap-up, no new work</td><td>—</td><td class="date">Dec 22</td></tr>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== Q3 ============================== -->
+<div class="qcard">
+  <div class="qhead">
+    <span class="qtag">Q3</span>
+    <span class="qtitle">Argument — Claims, Evidence, Counterclaims</span>
+    <span class="qdates">Tue Jan 5 – Fri Mar 12 · 47 days</span>
+  </div>
+  <div class="qbody">
+    <p><strong>The point of this quarter:</strong> the 8th grade summit — state a claim,
+    support it with evidence, and take the other side seriously enough to answer it.
+    Start with arguments she has actual stakes in; formality comes last.</p>
+
+    <h3>Technique menu</h3>
+    <ul>
+      <li>Claim vs. opinion vs. fact; what counts as evidence</li>
+      <li><em>Because/but/so</em> at essay scale: reasons that actually support the claim</li>
+      <li>The counterclaim move: "someone might say… but…" — steelmanning, not strawmanning</li>
+      <li>Formal tone without going dead; cutting "I think" and "very"</li>
+      <li>Evidence from texts: citing the actual film/book/source, not vibes</li>
+      <li>Structure: hook, claim, reasons in strongest-last order, counterclaim, conclusion that doesn't just repeat</li>
+      <li>Sentence drills: subordinating concessives — <em>although, even though, while</em> — the counterclaim's grammar</li>
+    </ul>
+
+    <h3>Milestones</h3>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th>Deliverable</th><th>Full process?</th><th class="date">Due</th></tr></thead>
+      <tr><td><strong>Piece 1:</strong> a review with a defended ranking (e.g. "the best HTTYD film," best Minecraft update, best book this year) — evidence from the works themselves</td><td>Yes — shared</td><td class="date due">Fri Jan 29</td></tr>
+      <tr><td><strong>Piece 2:</strong> a real persuasive pitch — something she actually wants (a pet, a trip, a purchase, a privilege), delivered to its real audience (us), and answered seriously</td><td>Yes — delivered</td><td class="date due">Fri Feb 19</td></tr>
+      <tr><td>Argument essay: claim chosen + evidence gathered (e.g. "animals X should/shouldn't be kept as pets")</td><td>—</td><td class="date due">Fri Feb 26</td></tr>
+      <tr><td>Argument essay: full draft</td><td>—</td><td class="date due">Fri Mar 5</td></tr>
+      <tr><td><strong>Q3 Capstone:</strong> argument essay revised and finished — claim, evidence, counterclaim, formal style</td><td>Yes — full process</td><td class="date due">Fri Mar 12</td></tr>
+    </table>
+    </div>
+    <p><em class="gloss">Spring Break Mar 15–26 follows immediately. If MLK Day or Presidents'
+    Day become school make-up days, they're catch-up days here, not new-lesson days.</em></p>
+  </div>
+</div>
+
+<!-- ============================== Q4 ============================== -->
+<div class="qcard">
+  <div class="qhead">
+    <span class="qtag">Q4</span>
+    <span class="qtitle">Capstone — One Big Thing, Start to Finish</span>
+    <span class="qdates">Mon Mar 29 – Fri May 28 · 45 days</span>
+  </div>
+  <div class="qbody">
+    <p><strong>The point of this quarter:</strong> a sustained project of her choosing that
+    uses the whole year's toolkit and ends in real publication. Lessons in Q4 mostly serve
+    the project — mini-lessons on whatever the work needs that week — plus portfolio and
+    reflection at the end.</p>
+
+    <h3>Capstone options (she chooses; others welcome)</h3>
+    <ul>
+      <li><strong>An illustrated storybook</strong> — written, revised, illustrated, printed and bound</li>
+      <li><strong>A script + storyboard for a short animation</strong> — dialogue, scene direction, shot planning; feeds her animation goal directly, and could actually be animated over the summer</li>
+      <li><strong>"Collected Works 2026–27"</strong> — the year's best pieces, each given a final revision pass, with an introduction by the author, printed as a real book</li>
+    </ul>
+
+    <h3>Milestones</h3>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th>Deliverable</th><th class="date">Due</th></tr></thead>
+      <tr><td>Capstone chosen + one-page proposal (what, for whom, what finished looks like)</td><td class="date due">Fri Apr 2</td></tr>
+      <tr><td>Project plan: outline / chapter list / scene list</td><td class="date due">Fri Apr 9</td></tr>
+      <tr><td>Midpoint check-in: half the project drafted; scope adjusted honestly if needed</td><td class="date due">Fri Apr 30</td></tr>
+      <tr><td>Full draft complete</td><td class="date due">Fri May 7</td></tr>
+      <tr><td>Revision + production (illustrations, formatting, printing)</td><td class="date due">Fri May 14</td></tr>
+      <tr><td><strong>Capstone published</strong> — printed, bound, performed, or premiered for the family</td><td class="date due">Fri May 21</td></tr>
+      <tr><td>Final week: portfolio assembly, side-by-side August-vs-May comparison, her own written reflection on the year, celebration</td><td class="date">May 24–28</td></tr>
+    </table>
+    </div>
+  </div>
+</div>
+
+<h2 id="tracker"><span class="secno">§5</span>The skills tracker</h2>
+
+<p>The tracker is the course's steering signal: a short list of <em>current teaching
+points</em>, drawn from her actual work, that daily drills and lesson choices aim at. It
+lives here and gets updated by the evaluation protocol (§7). Keep it to <strong>3–5 active
+items</strong> — more than that and nothing gets focused attention. When an item stops
+appearing in her drafts for three consecutive pieces, retire it (move it to "Secured") and
+promote something new.</p>
+
+<h3>Active teaching points <em class="gloss">(baseline: August 2026, from Lessons 1–2)</em></h3>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Teaching point</th><th>Evidence from her work</th><th>How we're fixing it</th><th>Retire when…</th></tr></thead>
+  <tr><td><strong>Comma splices &amp; run-ons</strong></td><td>"She really wanted to go forward but she couldn't, she was frozen with fear."</td><td>Daily sentence-combining drills using her own sentences; never worksheets</td><td>Absent from three consecutive final drafts</td></tr>
+  <tr><td><strong>Telling instead of showing</strong></td><td>"with fear in his voice," "Clara was shocked," "he said emotionally"</td><td>Lesson 3 + ongoing; drill: rewrite one "told" emotion per day as action/dialogue</td><td>Named emotions rare in drafts, not just revisions</td></tr>
+  <tr><td><strong>Repetitive sentence openers</strong></td><td>Runs of "The dragon… / Clara… / She…"</td><td>Subordinate-clause opener drills; "no more than two sentences in a row start the same way" as a product goal</td><td>Varied openers appear in first drafts unprompted</td></tr>
+  <tr><td><strong>Dialogue conventions</strong></td><td>"can I try to help?", "The dragon said"</td><td>One dialogue-mechanics lesson + a pocket reference card; checked in edit passes</td><td>Clean dialogue in two consecutive pieces</td></tr>
+  <tr><td><strong>Paragraphing</strong></td><td>Draft was mostly one-sentence paragraphs; she began merging in revision — she's ready</td><td>Explicit paragraph lesson; "group these sentences" drill</td><td>Deliberate multi-sentence paragraphs in first drafts</td></tr>
+</table>
+</div>
+
+<h3>Secured skills <em class="gloss">(name them in feedback; keep them warm)</em></h3>
+<ul>
+  <li>Complete story architecture — plans before drafting, real arcs</li>
+  <li>Willing revision — genuinely improves drafts without being forced</li>
+  <li>Narrative risk-taking — subverted endings, emotional beats</li>
+  <li>Natural dialogue content (the words, if not yet the punctuation)</li>
+  <li>Voluntary volume — meets or exceeds word counts unprompted</li>
+</ul>
+
+<h2 id="lessons"><span class="secno">§6</span>Lesson generation protocol — how each handout gets made</h2>
+
+<p>Lessons are generated the morning of (or the night before), one or two at a time,
+by you + the AI, using this recipe. This is the section to reference when you sit down and
+say "make today's handout."</p>
+
+<h3>Every handout follows this template</h3>
+<ol>
+  <li><strong>Header:</strong> lesson number (continuous — next is Lesson 4), date, and the technique named in plain words as one plain sentence ("Making fear visible without saying 'afraid'").</li>
+  <li><strong>Warm-up (10 min minimum):</strong> one sentence drill targeting an <em>active tracker item</em> (§5), built from content she currently cares about — her own story, her current book, dragons, ferrets, Minecraft.</li>
+  <li><strong>Freewrite (10 min minimum):</strong> on every handout, every day. Never graded — stream-of-consciousness with no rules to follow — but turned in with the day's work; one prompt offered, her own choice always wins.</li>
+  <li><strong>Mini-lesson:</strong> the technique explained briefly, then shown working in a short mentor-text excerpt — ideally from a book she loves. One "how did the author do this?" question.</li>
+  <li><strong>Writing Assignment:</strong> one labeled section ("Writing Assignment: ‹name›") holding the whole task as complete sentences, with <em>specific, countable requirements</em>, never "write well." Good: "Write the scene so we know Clara is terrified without using afraid, scared, terrified, or fear. Include at least two sensory details. Aim for 400–600 words." Bad: "add more description."</li>
+  <li><strong>Checklist:</strong> 3–4 concrete success criteria she can self-check before handing it in. These same criteria drive the evaluation in §7.</li>
+  <li><strong>Stretch:</strong> one harder variation, printed as a normal part of the day — the handout never labels it optional ("optional", "only if", "if you want"). The parent decides on the day whether it's skippable and tells her directly.</li>
+</ol>
+
+<h3>Voice and format rules</h3>
+<ul>
+  <li>The handout talks to <em>the student</em>, directly and warmly, in a calm teacher's voice — playful at most once per page and never in a heading; never babyish, never corny. She's a smart 8th grader who reads.</li>
+  <li><strong>Sized to her, not to a generic 8th grader.</strong> Volume is the engine: writing itself is the best writing teacher, reading a close second. The assignment must genuinely fill the writing block for a writer of <em>her</em> demonstrated volume — the floor comes from the <strong>Challenge dial</strong> in STATUS.md "Parent notes" (authoritative, read every run). If she could finish in ten minutes, it was too small: raise the word floor, add a required technique, or deepen the revision demand — never pad with busywork.</li>
+  <li>One page when possible, two max. Printable: black-on-white friendly, room to write if the task is short.</li>
+  <li>Use her interests as material, not as decoration — a drill sentence about ferrets is good because it's a good drill, not because a ferret clipart is on the page.</li>
+  <li>On full-process-piece days, the "handout" may just be a planning sheet, a revision checklist, or a feedback-response sheet — the template flexes.</li>
+</ul>
+
+<div class="prompt">
+<span class="plabel">Daily generation — run the skill</span>
+Run <code>/lessons</code> in a project session. It reads this plan (current quarter card in §4,
+this template, the steering rules in §8), STATUS.md, and the log tail, picks the technique the
+tracker most needs, and writes the handout as a self-contained printable <strong>HTML</strong>
+file in <code>writing/lessons/</code> — HTML only, no PDFs are created or kept; print from the
+browser (Cmd-P) when needed. Variants: <code>/lessons 3</code> for a coherent mini-sequence ·
+<code>/lessons 2 she's obsessed with Wings of Fire, lean into it</code> for count + steering ·
+<code>/lessons redo N &lt;reason&gt;</code> to regenerate an existing handout in place.
+</div>
+
+<p><em class="gloss">Customization is expected at this step, every day — swap the mentor text,
+change the topic to this week's obsession, halve the assignment on a low-energy day, or
+abandon the plan entirely because she asked a great question yesterday. The technique-menu
+items are the checklist; the order and flavor are yours.</em></p>
+
+<h2 id="evaluation"><span class="secno">§7</span>Evaluation protocol — what happens to completed work</h2>
+
+<p>Completed assignments land in <code>writing/completed/</code> (established format: planning
+answers + rough draft + completed version in one file). Then, together with the AI:</p>
+
+<ol>
+  <li><strong>Evaluate against that lesson's checklist criteria</strong> (headed "Checklist"; lessons 4–7 used "You nailed it if…") — not against everything writing could ever be. Did she use the technique the lesson taught?</li>
+  <li><strong>Scan against the skills tracker.</strong> Which active items showed up? Which didn't? Any candidate for retirement, or a new pattern worth adding?</li>
+  <li><strong>Produce the feedback note for the student.</strong> The fixed format:
+    <ul>
+      <li><em>One genuine strength, named precisely, with her exact words quoted back.</em> ("'I suppose if you must,' said with fear — that line does characterization and plot at once.")</li>
+      <li><em>One teaching point.</em> One. Usually the next lesson's seed.</li>
+    </ul>
+  </li>
+  <li><strong>Log a one-line evaluation note</strong> (date, piece, criteria met, tracker observations, next-lesson seed) so the next generation session can read the trail.</li>
+</ol>
+
+<div class="panel">
+<p><strong>What we deliberately don't do:</strong> mark every error (teaches that writing is
+error-avoidance), grade individual pieces (feedback beats grades in the research), or fix her
+sentences for her (the comma splices fall to focused drills, not red ink). Freewrites and
+journals are never evaluated at all.</p>
+</div>
+
+<h3>Quarterly review</h3>
+<p>In the last week of each quarter: re-read the quarter's completed folder together, pick
+her best piece and her favorite piece (they may differ — good conversation), write a short
+<strong>growth memo</strong> (what improved, with before/after quotes; what's next), and
+update the tracker and next quarter's plan. If a grade is ever needed for records, it's
+assigned holistically from the quarter's body of work at this review — mastery of the
+quarter's techniques, completion of milestones — not averaged from pieces.</p>
+
+<h2 id="steering"><span class="secno">§8</span>Steering the course</h2>
+
+<p>This plan is a starting map, and the territory will disagree with it. Rules for changing it:</p>
+
+<ul>
+  <li><strong>Fixed:</strong> the weekly rhythm (§3), the one-technique-per-lesson rule, the feedback format, the three modes each getting a quarter, and the capstone due dates.</li>
+  <li><strong>Flexible by design:</strong> everything else — technique order, project topics, piece lengths, which mentor texts, intermediate milestone dates (slide up to a week without ceremony; note it in §9).</li>
+  <li><strong>If she's ahead:</strong> don't accelerate the calendar — deepen. Longer pieces, harder mentor texts, an extra genre inside the quarter's mode (poetry, comics script, letters).</li>
+  <li><strong>If a milestone is slipping:</strong> shrink the piece, not the process. A 400-word story that goes through plan-draft-feedback-revise-share teaches more than a 1,500-word draft that dies in a folder.</li>
+  <li><strong>If enthusiasm dips:</strong> that's a course emergency ahead of any milestone. Drop to freewrites + reading like a writer for a week, change the project topic to the current obsession, and add an audience (mail something to someone). Volume follows interest; skill follows volume.</li>
+  <li><strong>Mid-quarter check (calendar it, ~week 5 of each quarter):</strong> Is she writing more or less than in August? Which lesson did she talk about at dinner? What's she reading, and is it in the lessons yet?</li>
+</ul>
+
+<h2 id="log"><span class="secno">§9</span>Change log</h2>
+<div class="tablewrap">
+<table>
+  <thead><tr><th class="date">Date</th><th>Version</th><th>Change</th></tr></thead>
+  <tr><td class="date">Aug 5, 2026</td><td>1.0</td><td>Initial course plan, built from the August research notes, the 2026–27 school calendar, and the baseline assessment of Lessons 1–2.</td></tr>
+  <tr><td class="date">Aug 6, 2026</td><td>1.1</td><td>Brought up to the print standard (<code>dev/how-to-print.html</code>): standard print block added, tables given real header rows. §6 daily prompt replaced with the <code>/lessons</code> skill invocation — handouts are HTML-only, printed on demand, no stored PDFs. Day-to-day operation now runs via the <code>/lessons</code> and <code>/evaluate</code> skills with <code>STATUS.md</code> + <code>LOG.md</code> state (spec: <code>dev/skills-build-plan-for-writing.html</code>).</td></tr>
+  <tr><td class="date">Aug 6, 2026</td><td>1.2</td><td>Freewrite policy corrected (§3 table, §6 template): still never graded and rule-free — stream-of-consciousness, any topic — but turned in with the day's work, not kept private. Skeleton comment updated to match. §7 unchanged: freewrites are still never evaluated.</td></tr>
+</table>
+</div>
+
+<footer>
+<p>Built on: Graham &amp; Perin, <em>Writing Next</em> (2007) · Hochman, <em>The Writing
+Revolution</em> · SRSD · Brave Writer's mentorship culture · Common Core grade 8 writing
+standards. Full citations in the companion research notes. The plan serves the writer.</p>
+</footer>
+
+</div>

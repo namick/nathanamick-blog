@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Research notes on what works in teaching writing to adolescents, compiled to build an 8th grade writing curriculum at home: the evidence, the curriculum market, and a structure for the year.">
+<title>Teaching Writing at Home: Research Notes for an 8th Grade Curriculum</title>
+<style>
+  :root {
+    --ink: #232323;
+    --navy: #1f3a5f;
+    --accent: #b3572a;
+    --paper: #fdfcf9;
+    --panel: #f2f0ea;
+    --rule: #ddd8ce;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.65;
+    font-size: 17px;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+  header { border-bottom: 3px double var(--rule); margin-bottom: 2.5rem; padding-bottom: 1.5rem; }
+  h1 { font-size: 2rem; line-height: 1.2; color: var(--navy); margin: 0 0 .5rem; }
+  .subtitle { font-style: italic; color: #666; margin: 0; }
+  h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.25rem; color: var(--navy);
+    margin: 2.8rem 0 .8rem; padding-top: 1.2rem;
+    border-top: 1px solid var(--rule);
+  }
+  h3 { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 1.02rem; margin: 1.6rem 0 .4rem; }
+  p { margin: 0 0 1rem; }
+  ul, ol { margin: 0 0 1rem; padding-left: 1.4rem; }
+  li { margin-bottom: .45rem; }
+  a { color: var(--accent); }
+  .panel {
+    background: var(--panel); border-left: 4px solid var(--navy);
+    padding: 1rem 1.2rem; margin: 1.4rem 0; border-radius: 0 6px 6px 0;
+  }
+  .panel p:last-child, .panel ul:last-child { margin-bottom: 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1.2rem 0; font-size: .92em; }
+  th, td { border: 1px solid var(--rule); padding: .55rem .7rem; text-align: left; vertical-align: top; }
+  th { background: var(--panel); font-family: 'Helvetica Neue', Arial, sans-serif; font-size: .85em; }
+  .tag {
+    display: inline-block; font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: .72em; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    background: var(--navy); color: #fff; border-radius: 4px; padding: .15em .55em;
+    margin-right: .4em; vertical-align: middle;
+  }
+  .sources { font-size: .9em; }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink: #e8e5df; --navy: #9fbde4; --accent: #e8926a; --paper: #1c1b19; --panel: #2a2825; --rule: #44413c; }
+    .tag { background: #2f4a6e; }
+  }
+  @media print {
+    /* Force the light palette and real ink colors onto paper */
+    :root { --ink: #232323; --navy: #1f3a5f; --accent: #b3572a; --paper: #fff; --panel: #f2f0ea; --rule: #ddd8ce; }
+    body { background: #fff; font-size: 10pt; line-height: 1.45;
+           print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .wrap { max-width: none; margin: 0; padding: 0; }
+
+    /* 1. Un-monolith: nothing clipped or scrollable, or Chrome slices it */
+    .panel, table { overflow: visible !important; }
+    * { max-height: none !important; }
+
+    /* 2. No stranded single lines */
+    p, li { orphans: 3; widows: 3; }
+
+    /* 3. Headings stay with their content */
+    h1 { font-size: 20pt; }
+    h2 { font-size: 12.5pt; margin: 1.5rem 0 .55rem; padding-top: .7rem; break-after: avoid; page-break-after: avoid; }
+    h3 { break-after: avoid; page-break-after: avoid; }
+
+    /* 4. Unit-breaking */
+    tr, li, .panel { break-inside: avoid; page-break-inside: avoid; }
+    thead { display: table-header-group; }
+
+    /* 5. Opt-in */
+    .pagebreak { break-before: page; page-break-before: always; }
+    .keep-together { break-inside: avoid; page-break-inside: avoid; }
+
+    a { color: var(--navy); text-decoration: none; }
+    .no-print { display: none !important; }
+    .tag { background: #fff !important; color: #333 !important; border: 1px solid #999; }
+  }
+
+  /* Site bar — links this document back to the post it supports. Deliberately in the
+     site's palette, not the document's, so it reads as chrome rather than content. */
+  .nb-bar { background: hsl(150 9% 5%); border-bottom: 1px solid hsl(43 60% 62% / .55); }
+  .nb-bar-in { max-width: 780px; margin: 0 auto; padding: .6rem 1.5rem;
+    display: flex; align-items: center; gap: 1rem; }
+  .nb-bar a { display: inline-flex; align-items: center; gap: .5rem; text-decoration: none;
+    font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .775rem; line-height: 1.45; color: hsl(50 15% 88%); }
+  .nb-bar svg { flex: none; color: hsl(43 60% 62%); transition: transform .18s ease; }
+  .nb-bar .nb-bar-back:hover svg { transform: translateX(-3px); }
+  .nb-bar .nb-bar-kicker { color: hsl(80 4% 62%); }
+  .nb-bar .nb-bar-title { border-bottom: 1px solid hsl(43 60% 62% / .45); padding-bottom: 1px; }
+  .nb-bar .nb-bar-back:hover .nb-bar-title { color: hsl(43 60% 62%); border-bottom-color: hsl(43 60% 62%); }
+  .nb-bar .nb-bar-host { margin-left: auto; color: hsl(80 4% 62%);
+    font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; }
+  .nb-bar .nb-bar-host:hover { color: hsl(50 15% 88%); }
+  @media (max-width: 560px) { .nb-bar .nb-bar-host { display: none; } }
+  @media print { .nb-bar { display: none !important; } }
+</style>
+</head>
+<body>
+<div class="nb-bar">
+  <div class="nb-bar-in">
+    <a class="nb-bar-back" href="https://nathanamick.com/blog/a-living-curriculum">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/>
+      </svg>
+      <span class="nb-bar-kicker">Back to</span>
+      <span class="nb-bar-title">A Living Curriculum</span>
+    </a>
+    <a class="nb-bar-host" href="https://nathanamick.com/">nathanamick.com</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header>
+  <h1>Teaching Writing at Home</h1>
+  <p class="subtitle">Research notes for building an 8th grade writing curriculum &middot; August 1, 2026</p>
+</header>
+
+<p>These notes summarize what the research says about teaching adolescent writers, what existing
+curricula do well (and whether anything free is worth adopting), what the student's first two
+assignments reveal, and a sketch of how a year-long homemade curriculum could be structured.
+The short version: <strong>the research strongly supports the approach you're already taking</strong> —
+a homemade, interest-driven curriculum with frequent writing and a real reader — as long as it
+also includes explicit strategy instruction and deliberate sentence-level work.</p>
+
+<h2>1. What the research actually says</h2>
+
+<p>The most-cited evidence base for teaching writing to students in grades 4&ndash;12 is
+<em>Writing Next</em> (Graham &amp; Perin, 2007), a Carnegie-commissioned meta-analysis that
+screened 582 documents and drew on 123 of them, yielding 154 effect sizes for writing quality.
+It ranked eleven instructional practices by effect size. The top of the list, in order of impact:</p>
+
+<ol>
+  <li><strong>Explicit strategy instruction</strong> — directly teaching step-by-step strategies for planning, drafting, and revising (the single largest effect, especially the "Self-Regulated Strategy Development" (SRSD) approach, which teaches a strategy, models it aloud, then gradually hands it over to the student).</li>
+  <li><strong>Summarization</strong> — explicitly teaching how to condense a text.</li>
+  <li><strong>Collaborative writing</strong> — working with someone else through the process (in a homeschool: you, a sibling, or a co-op friend).</li>
+  <li><strong>Specific product goals</strong> — "add three sensory details to this scene" beats "make it better."</li>
+  <li><strong>Word processing</strong> — typing measurably helps adolescent writers revise more.</li>
+  <li><strong>Sentence combining</strong> — merging short, choppy sentences into varied, complex ones. Notably, this <em>replaces</em> traditional grammar drill, which had a <em>negative</em> effect in the studies. Grammar taught in the context of the student's own sentences works; isolated worksheet grammar doesn't.</li>
+  <li><strong>Prewriting, inquiry, process approach, model texts</strong> — brainstorm before drafting; study excellent examples of the kind of writing being attempted and imitate their moves.</li>
+</ol>
+
+<div class="panel">
+<p><strong>The headline finding:</strong> writing improves fastest when students are explicitly
+taught <em>how</em> to do each part of the process — not just given prompts and time. Assigning
+writing is not the same as teaching writing. Every lesson should teach one nameable technique,
+then have her use it.</p>
+</div>
+
+<h3>The sentence-level revolution</h3>
+<p>The second big idea in current writing pedagogy comes from Judith Hochman's
+<em>The Writing Revolution</em> (the "Hochman Method"). Its core claim: most struggling-to-average
+adolescent writers don't need more essay practice — they need deliberate practice
+<em>at the sentence level</em>: expanding kernel sentences, combining sentences, using
+conjunctions like <em>because / but / so</em> to force reasoning, and starting sentences with
+subordinating phrases. Read the evidence honestly: the <em>components</em> are well supported
+(sentence combining carries an effect size of 0.50 in <em>Writing Next</em>, and the What Works
+Clearinghouse names sentence construction in its <em>elementary</em> practice guide, grades 1&ndash;6,
+at moderate evidence). The packaged method itself has not been independently trialed, so treat it
+as a well-reasoned bet on well-evidenced parts. Sentence work takes five minutes a day and
+transfers directly into longer pieces.</p>
+
+<h3>Other well-supported principles</h3>
+<ul>
+  <li><strong>Write frequently, at varying lengths.</strong> Daily low-stakes writing (journals, freewrites) plus a longer piece taken through the full process every week or two.</li>
+  <li><strong>Feedback beats grades.</strong> Specific, limited feedback — one genuine strength named precisely, plus <em>one</em> teaching point — improves writing more than marking every error. Marking everything teaches students that writing is about avoiding mistakes.</li>
+  <li><strong>Authentic audience matters.</strong> Writing that will actually be read by someone (family read-alouds, a printed booklet, a blog, a letter that gets mailed) produces measurably more effort and revision than writing that goes into a folder.</li>
+  <li><strong>Choice and interest drive volume, and volume drives skill.</strong> This is the homeschool superpower — a class of 30 can't let everyone write about ferrets and dragons. You can.</li>
+  <li><strong>Read like a writer.</strong> Regularly pull apart a paragraph from a book she loves: "How did this author show fear without saying 'afraid'?" Mentor texts are among the cheapest, most effective tools available.</li>
+</ul>
+
+<h2>2. What 8th grade writing is supposed to cover</h2>
+<p>Standards (Common Core and most state equivalents) expect an 8th grader, by year's end, to write in three modes, plus foundations:</p>
+<table>
+  <tr><th>Mode</th><th>What it means at 8th grade level</th></tr>
+  <tr><td><strong>Narrative</strong></td><td>Real or imagined stories with dialogue, pacing, description, and reflection that feels earned; deliberate use of transitions and sensory detail.</td></tr>
+  <tr><td><strong>Informative / explanatory</strong></td><td>Examine a topic using organized facts, definitions, and details drawn from more than one source; formatting (headings), precise vocabulary, formal tone.</td></tr>
+  <tr><td><strong>Argument</strong></td><td>State a claim, support it with reasons and evidence from credible sources, acknowledge and respond to a counterclaim, maintain formal style.</td></tr>
+  <tr><td><strong>Foundations</strong></td><td>Multi-paragraph organization, revision with audience in mind, command of conventions (this is the year comma splices should get fixed), short research projects, and using a word processor fluently.</td></tr>
+</table>
+<p>A homemade curriculum that cycles through these three modes — with narrative and descriptive work first, since that's where her enthusiasm is — will cover everything a boxed curriculum would.</p>
+
+<h2>3. The existing-curriculum landscape</h2>
+<p>Since you asked whether anything excellent and free exists:</p>
+<table>
+  <tr><th>Program</th><th>Approach</th><th>Cost</th><th>Verdict for you</th></tr>
+  <tr><td><strong>IEW</strong> (Institute for Excellence in Writing)</td><td>Highly structured formula: outline from source texts, rewrite, add required stylistic "dress-ups." Great for reluctant writers who freeze up.</td><td>$$$</td><td>Skip. The student is not a reluctant writer — she voluntarily wrote 1,100 words and subverted the ending. A formula would likely bore her and flatten her voice.</td></tr>
+  <tr><td><strong>Brave Writer</strong></td><td>Voice-first, literature-rich lifestyle approach; low structure, strong on enthusiasm and mentorship.</td><td>$$</td><td>Its <em>philosophy</em> (freewrites, tea-and-poetry rhythm, parent as mentor not grader) is worth stealing; the paid product isn't necessary to do that.</td></tr>
+  <tr><td><strong>The Writing Revolution</strong> (Hochman)</td><td>Method book, not curriculum: sentence-level exercises embedded in whatever content you're studying.</td><td>~$25 book</td><td>The one purchase worth considering. Its exercise types (because/but/so, sentence expansion, subordinating openers) are easy to generate with AI once you know the patterns.</td></tr>
+  <tr><td><strong>Free options</strong> (Easy Peasy, Discovery K12, CK-12, Purdue OWL)</td><td>Complete free courses exist, but they're generic and workbook-flavored; Purdue OWL is an excellent free <em>reference</em> for mechanics and essay structure, not a curriculum.</td><td>Free</td><td>Nothing free rises to "excellent." Use Purdue OWL as your grammar/mechanics reference and NoRedInk (free tier) for targeted convention practice if wanted.</td></tr>
+</table>
+<div class="panel">
+<p><strong>Conclusion:</strong> your instinct is right. There is no free curriculum better than
+what you can build: an interest-driven, mentor-guided course that borrows explicit strategy
+instruction from SRSD, sentence-level drills from Hochman, and the enthusiasm-first culture of
+Brave Writer.</p>
+</div>
+
+<h2>4. What her first two assignments show</h2>
+<h3>Strengths to build on</h3>
+<ul>
+  <li><strong>Complete story architecture.</strong> Her dragon story has a real arc — inciting incident, rising tension, climax, aftermath — and she planned it before drafting.</li>
+  <li><strong>Willingness to take risks.</strong> She deliberately chose a tragic ending that subverts reader expectations ("she will fail to help the last dragon") — that's sophisticated narrative thinking for day two.</li>
+  <li><strong>She actually revises.</strong> The completed version genuinely improves on the rough draft: merged choppy lines, smoothed transitions, fixed "tore down" → "torn down." Revision is usually the hardest habit to instill, and she already has it.</li>
+  <li><strong>Natural dialogue and emotional beats.</strong> "I suppose if you must," said with fear, is a genuinely good line.</li>
+  <li><strong>Voluntary length.</strong> Both pieces meet or exceed the word counts without prodding.</li>
+</ul>
+<h3>Growth areas (this year's teaching points)</h3>
+<ul>
+  <li><strong>Comma splices and run-ons</strong> — "She really wanted to go forward but she couldn't, she was frozen with fear." Fix through sentence-combining work, not grammar worksheets.</li>
+  <li><strong>Telling instead of showing</strong> — emotions are frequently named ("with fear in his voice," "Clara was shocked," "he said emotionally") rather than dramatized. Lesson 3 targets this directly.</li>
+  <li><strong>Repetitive sentence openings</strong> — long runs of sentences starting "The dragon..." / "Clara..." / "She...". Subordinate-clause openers are the fix.</li>
+  <li><strong>Dialogue conventions</strong> — capitalization and punctuation around quotes ("can I try to help?", "The dragon said").</li>
+  <li><strong>Paragraphing</strong> — the draft is mostly one-sentence paragraphs; she began merging them in revision, which shows she's ready for explicit paragraph instruction.</li>
+</ul>
+
+<h2>5. A sketch for the year</h2>
+<p>A structure to react to — four quarters, each anchored in a mode, all customizable to her interests:</p>
+<table>
+  <tr><th>Quarter</th><th>Anchor mode</th><th>Possible interest-driven projects</th></tr>
+  <tr><td><span class="tag">Q1</span>Narrative &amp; description</td><td>Story craft: show-don't-tell, sentence variety, dialogue mechanics, paragraphing, revision habits</td><td>An original short story (her own world, not a continuation); a "creature field guide" with illustrated entries; rewrite a scene from HTTYD from another character's point of view</td></tr>
+  <tr><td><span class="tag">Q2</span>Informative</td><td>Research and explanation: summarizing sources, organizing by structure (compare/contrast, cause/effect), precise vocabulary, formatting</td><td>A real research report on ferrets or an insect; a Minecraft modpack review or how-to guide; "how animation works" explainer tied to her animation goal</td></tr>
+  <tr><td><span class="tag">Q3</span>Argument</td><td>Claims, evidence, counterclaims, formal tone</td><td>"Why animals X should/shouldn't be kept as pets"; a persuasive pitch for something she actually wants; a review arguing the best HTTYD film with evidence from the films</td></tr>
+  <tr><td><span class="tag">Q4</span>Capstone / multi-genre</td><td>Sustained project taken through the full process with publication</td><td>An illustrated storybook, a script + storyboard for a short animation (writing meets her animation goal), or a printed "collected works" of the year</td></tr>
+</table>
+
+<h3>A weekly rhythm the research supports</h3>
+<ul>
+  <li><strong>Daily (10 min):</strong> low-stakes freewrite or journal — never graded, occasionally shared.</li>
+  <li><strong>Daily (5 min):</strong> one sentence-level exercise (combine, expand, because/but/so, new opener) — Hochman-style, using content from whatever she's reading or writing.</li>
+  <li><strong>2&ndash;3&times;/week:</strong> a lesson + assignment like the three you have now, each teaching one nameable technique.</li>
+  <li><strong>Every 1&ndash;2 weeks:</strong> one piece goes through the full process — plan, draft, feedback, revise, edit, <em>share</em> (read aloud at dinner, print it, send to a grandparent).</li>
+  <li><strong>Feedback protocol:</strong> name one specific thing that worked and why, then one teaching point. Resist fixing everything; the comma splices will fall to focused instruction, not red ink.</li>
+</ul>
+
+<h2>Sources</h2>
+<ul class="sources">
+  <li><a href="https://carnegie.org/wp-content/uploads/2026/01/ccny_report_2007_writing.pdf">Writing Next: Effective Strategies to Improve Writing of Adolescents (Graham &amp; Perin, Carnegie, 2007)</a> — the full report</li>
+  <li><a href="https://srsdonline.org/science-of-writing/">The Science of Writing — SRSD Online</a> — self-regulated strategy development</li>
+  <li><a href="https://www.thewritingrevolution.org/method/">The Writing Revolution — the Hochman Method</a></li>
+  <li><a href="https://www.aft.org/ae/summer2017/hochman_wexler">"One Sentence at a Time" (Hochman &amp; Wexler, American Educator)</a> — best free overview of sentence-level instruction</li>
+  <li><a href="https://fordhaminstitute.org/national/commentary/six-principles-high-quality-effective-writing-instruction-all-students">Six principles for effective writing instruction (Fordham Institute)</a></li>
+  <li><a href="https://www.thecorestandards.org/ELA-Literacy/W/8/">Common Core writing standards, grade 8</a> (W.8.1&ndash;3 are the argument, informative, and narrative standards described above); the <a href="https://www.thecorestandards.org/ELA-Literacy/WHST/6-8/">WHST 6&ndash;8 strand</a> covers writing in history, science, and technical subjects and has no narrative standard</li>
+  <li><a href="https://homeschoolpicks.com/curriculum-reviews/language-arts/iew-vs-brave-writer/">IEW vs Brave Writer comparison</a> and <a href="https://homeschoolstartguide.com/blog/homeschool-writing-curriculum">Homeschool writing curriculum side-by-side</a></li>
+  <li><a href="https://freedomhomeschooling.com/composition/">Free homeschool composition options (Freedom Homeschooling)</a>; <a href="https://owl.purdue.edu/">Purdue OWL</a> as a free mechanics reference</li>
+</ul>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="An evidence review of what actually works in teaching writing to adolescents: practices ranked by effect size, findings tagged by strength of evidence, and about 45 primary sources.">
+<title>What Works in Teaching Writing to Adolescents — Evidence Review (v2)</title>
+<style>
+  :root{
+    --ink:#1c2733; --soft:#4c5a68; --faint:#8494a3;
+    --paper:#fdfcf8; --card:#ffffff; --line:#e3ddd0;
+    --teal:#0e6b62; --teal-soft:#e5f1ef;
+    --amber:#9a6a1f; --amber-soft:#faf3e2;
+    --red:#a33b2e; --red-soft:#f9ebe8;
+    --blue:#2b5d8a;
+  }
+  *{box-sizing:border-box}
+  html{font-size:17px}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Charter","Iowan Old Style",Palatino,Georgia,serif;
+    line-height:1.55;
+  }
+  .wrap{max-width:56rem; margin:0 auto; padding:2.5rem 1.5rem 5rem}
+  .sans{font-family:ui-sans-serif,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+
+  header.doc{border-bottom:3px double var(--line); padding-bottom:1.4rem; margin-bottom:1.8rem}
+  .kicker{font-family:ui-sans-serif,-apple-system,sans-serif; font-size:.72rem; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--teal); font-weight:700; margin:0 0 .6rem}
+  h1{font-size:2.1rem; line-height:1.15; margin:.1rem 0 .5rem; letter-spacing:-.01em}
+  .subtitle{color:var(--soft); font-size:1.06rem; margin:0 0 .9rem; font-style:italic}
+  .meta{font-family:ui-sans-serif,-apple-system,sans-serif; font-size:.8rem; color:var(--faint)}
+
+  h2{font-size:1.42rem; margin:2.6rem 0 .8rem; letter-spacing:-.01em; scroll-margin-top:1rem}
+  h2 .no{display:inline-block; min-width:1.9rem; color:var(--teal); font-variant-numeric:tabular-nums}
+  h3{font-size:1.08rem; margin:1.7rem 0 .45rem}
+  p{margin:.55rem 0 .9rem}
+  ul,ol{margin:.4rem 0 1rem; padding-left:1.5rem}
+  li{margin:.3rem 0}
+  a{color:var(--blue); text-decoration-color:#b9cbdc; text-underline-offset:2px}
+  a:hover{text-decoration-color:var(--blue)}
+  strong{color:#101820}
+  .small{font-size:.85rem; color:var(--soft)}
+
+  /* badges */
+  .b{display:inline-block; font-family:ui-sans-serif,-apple-system,sans-serif; font-size:.62rem; font-weight:700;
+     letter-spacing:.08em; padding:.13rem .42rem; border-radius:.6rem; vertical-align:.12em; white-space:nowrap}
+  .b-meta{background:var(--teal-soft); color:var(--teal)}
+  .b-study{background:#e8eef7; color:var(--blue)}
+  .b-guide{background:#ece7f6; color:#5b449c}
+  .b-survey{background:#eef1f3; color:#55636f}
+  .b-theory{background:#e9f0e6; color:#3e6b35}
+  .b-wisdom{background:var(--amber-soft); color:var(--amber)}
+
+  /* callout boxes */
+  .box{border:1px solid var(--line); border-left:4px solid var(--teal); background:var(--card);
+       border-radius:.45rem; padding: .9rem 1.1rem; margin:1.1rem 0}
+  .box.apply{border-left-color:var(--teal); background:linear-gradient(0deg,var(--teal-soft) 0,var(--card) 65%)}
+  .box.warn{border-left-color:var(--red); background:linear-gradient(0deg,var(--red-soft) 0,var(--card) 70%)}
+  .box.note{border-left-color:var(--amber); background:linear-gradient(0deg,var(--amber-soft) 0,var(--card) 70%)}
+  .box .tag{font-family:ui-sans-serif,-apple-system,sans-serif; font-weight:700; font-size:.72rem;
+     letter-spacing:.1em; text-transform:uppercase; margin:0 0 .35rem}
+  .box.apply .tag{color:var(--teal)} .box.warn .tag{color:var(--red)} .box.note .tag{color:var(--amber)}
+  .box p:last-child, .box ul:last-child{margin-bottom:.2rem}
+
+  /* TLDR */
+  .tldr{border:2px solid var(--teal); border-radius:.6rem; background:var(--card); padding:1.2rem 1.4rem; margin:1.6rem 0}
+  .tldr h2{margin:.1rem 0 .7rem; font-size:1.25rem; color:var(--teal)}
+  .tldr ol{margin:.2rem 0 .4rem; padding-left:1.4rem}
+  .tldr li{margin:.5rem 0}
+  .formula{margin-top:.9rem; padding: .7rem .9rem; background:var(--teal-soft); border-radius:.4rem;
+    font-size:.98rem}
+
+  /* TOC */
+  nav.toc{margin:1.4rem 0 0; font-family:ui-sans-serif,-apple-system,sans-serif; font-size:.86rem}
+  nav.toc ol{columns:2; column-gap:2.5rem; padding-left:1.3rem; margin:.4rem 0}
+  nav.toc li{margin:.22rem 0; break-inside:avoid}
+  nav.toc a{text-decoration:none; color:var(--blue)}
+  nav.toc a:hover{text-decoration:underline}
+
+  /* tables */
+  table{border-collapse:collapse; width:100%; margin:1rem 0 .4rem; font-size:.92rem}
+  th{font-family:ui-sans-serif,-apple-system,sans-serif; font-size:.68rem; letter-spacing:.09em; text-transform:uppercase;
+     color:var(--soft); text-align:left; padding:.45rem .6rem; border-bottom:2px solid var(--ink)}
+  td{padding:.5rem .6rem; border-bottom:1px solid var(--line); vertical-align:top}
+  tr.band td{background:#f4f1e9; font-family:ui-sans-serif,-apple-system,sans-serif; font-weight:700;
+     font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--soft)}
+  td.es{white-space:nowrap; font-variant-numeric:tabular-nums; font-weight:700; width:4.2rem}
+  .bar{height:.55rem; border-radius:.3rem; background:linear-gradient(90deg,#159286,#0e6b62); margin-top:.28rem; min-width:2px}
+  .bar.neg{background:linear-gradient(90deg,#c4523f,#a33b2e)}
+  td.barcell{width:11.5rem}
+  .tablewrap{overflow-x:auto}
+
+  /* schedule table */
+  table.sched td:first-child{white-space:nowrap; font-weight:700; width:11rem}
+
+  /* stage ladder */
+  .ladder{display:flex; gap:.6rem; flex-wrap:wrap; margin:1rem 0}
+  .rung{flex:1 1 14rem; border:1px solid var(--line); border-top:4px solid var(--teal); background:var(--card);
+     border-radius:.45rem; padding:.7rem .9rem; font-size:.9rem}
+  .rung b{display:block; margin-bottom:.25rem}
+  .rung .who{font-family:ui-sans-serif,-apple-system,sans-serif; font-size:.68rem; letter-spacing:.08em;
+     text-transform:uppercase; color:var(--faint); display:block; margin-bottom:.3rem}
+
+  /* sources */
+  .srcgroup{margin:1.1rem 0 1.5rem}
+  .srcgroup h3{margin:1.2rem 0 .4rem}
+  .src{margin:.45rem 0; padding-left:1.4rem; text-indent:-1.4rem; font-size:.9rem}
+  .src .ann{color:var(--soft); font-style:italic}
+
+  footer.doc{margin-top:3rem; padding-top:1rem; border-top:3px double var(--line); font-size:.85rem; color:var(--soft)}
+
+  @media (max-width:640px){
+    html{font-size:16px}
+    nav.toc ol{columns:1}
+    h1{font-size:1.7rem}
+  }
+  @media print{
+    html{font-size:11.5pt}
+    body{background:#fff}
+    .wrap{max-width:none; padding:0}
+    a{color:inherit; text-decoration:none}
+    .box,.tldr,.rung,tr,h2,h3{break-inside:avoid}
+    h2{break-after:avoid}
+    nav.toc{display:none}
+    .bar{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+    .b{border:1px solid #999; background:#fff !important; color:#333 !important}
+  }
+
+  /* Site bar — links this document back to the post it supports. Deliberately in the
+     site's palette, not the document's, so it reads as chrome rather than content. */
+  .nb-bar { background: hsl(150 9% 5%); border-bottom: 1px solid hsl(43 60% 62% / .55); }
+  .nb-bar-in { max-width: 56rem; margin: 0 auto; padding: .6rem 1.5rem;
+    display: flex; align-items: center; gap: 1rem; }
+  .nb-bar a { display: inline-flex; align-items: center; gap: .5rem; text-decoration: none;
+    font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .775rem; line-height: 1.45; color: hsl(50 15% 88%); }
+  .nb-bar svg { flex: none; color: hsl(43 60% 62%); transition: transform .18s ease; }
+  .nb-bar .nb-bar-back:hover svg { transform: translateX(-3px); }
+  .nb-bar .nb-bar-kicker { color: hsl(80 4% 62%); }
+  .nb-bar .nb-bar-title { border-bottom: 1px solid hsl(43 60% 62% / .45); padding-bottom: 1px; }
+  .nb-bar .nb-bar-back:hover .nb-bar-title { color: hsl(43 60% 62%); border-bottom-color: hsl(43 60% 62%); }
+  .nb-bar .nb-bar-host { margin-left: auto; color: hsl(80 4% 62%);
+    font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; }
+  .nb-bar .nb-bar-host:hover { color: hsl(50 15% 88%); }
+  @media (max-width: 560px) { .nb-bar .nb-bar-host { display: none; } }
+  @media print { .nb-bar { display: none !important; } }
+</style>
+</head>
+<body>
+<div class="nb-bar">
+  <div class="nb-bar-in">
+    <a class="nb-bar-back" href="https://nathanamick.com/blog/a-living-curriculum">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/>
+      </svg>
+      <span class="nb-bar-kicker">Back to</span>
+      <span class="nb-bar-title">A Living Curriculum</span>
+    </a>
+    <a class="nb-bar-host" href="https://nathanamick.com/">nathanamick.com</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="doc">
+  <p class="kicker">Research review · Writing instruction</p>
+  <h1>What Actually Works in Teaching Writing to Adolescents</h1>
+  <p class="subtitle">The research evidence and the learned wisdom, synthesized for a one-on-one eighth-grade writing mentorship</p>
+  <p class="meta">Compiled August 3, 2026 · ~45 primary sources, verified against the original reports · Companion to <em>teaching-writing-research.html</em></p>
+</header>
+
+<p><strong>How to read this document.</strong> Every claim carries a citation; the full source shelf with links is in <a href="#s10">§10</a>. Findings are tagged by the kind of evidence behind them:</p>
+<p>
+  <span class="b b-meta">META</span> meta-analysis of many experiments &nbsp;
+  <span class="b b-study">STUDY</span> individual experiment or RCT &nbsp;
+  <span class="b b-guide">GUIDE</span> federal practice guide (vetted panel + evidence review) &nbsp;
+  <span class="b b-survey">SURVEY</span> descriptive national data &nbsp;
+  <span class="b b-theory">THEORY</span> established cognitive model &nbsp;
+  <span class="b b-wisdom">WISDOM</span> practitioner consensus from master teachers — credible, but not experimental proof
+</p>
+
+<div class="tldr" id="tldr">
+  <h2>If you only read one section: the ten conclusions</h2>
+  <ol>
+    <li><strong>Explicitly teach writing strategies, with you modeling first.</strong> Strategy instruction is the most powerful practice ever measured in writing research (effect size 0.82; the Self-Regulated Strategy Development variant, 1.14). Think aloud while you plan, draft, and revise in front of her; then hand the strategy over gradually. (Graham &amp; Perin, 2007; IES, 2016)</li>
+    <li><strong>She must write a lot — daily, and mostly low-stakes.</strong> Skill tracks accumulated deliberate practice, and normal schooling supplies astonishingly little of it (about 7.7% of class time involves writing even a paragraph). An hour a day of combined instruction + real composing is the standing recommendation. (Kellogg &amp; Whiteford, 2009; Applebee &amp; Langer, 2011; IES, 2012)</li>
+    <li><strong>Work at the sentence level — through combining and expanding, never isolated grammar drills.</strong> Sentence combining improves writing quality (0.50); traditional stand-alone grammar instruction is the only practice with a reliably <em>negative</em> effect (−0.32). Teach grammar inside her own sentences. (Graham &amp; Perin, 2007; Myhill et al., 2012)</li>
+    <li><strong>Give every piece a specific, reachable goal.</strong> "Persuade the reader with three reasons and answer one objection" beats "write a good essay" — effect size 0.70, one of the cheapest wins in the literature. (Graham &amp; Perin, 2007; Page-Voth &amp; Graham, 1999)</li>
+    <li><strong>Feedback: comments, not grades — and only one or two teaching points at a time.</strong> Comments alone improved later performance and interest; grades — even grades <em>with</em> comments — erased the benefit. About a third of feedback interventions backfire, usually when they spotlight the person instead of the work. Adult feedback is the strongest single form measured (0.87), and one-on-one conferences are its ideal delivery. (Butler, 1988; Kluger &amp; DeNisi, 1996; Graham, Hebert &amp; Harris, 2015)</li>
+    <li><strong>Fuse reading and writing.</strong> Study mentor texts and emulate their moves; teach summarizing (0.82); have her write about what she reads — extended analytic responses to reading run ~0.77 for comprehension. It works in both directions: teaching reading improves writing (0.57). (Graham &amp; Perin, 2007; Graham &amp; Hebert, 2010; Graham et al., 2018; IES, 2016)</li>
+    <li><strong>Real audiences change everything.</strong> The same seventh graders wrote measurably better when writing to real distant readers than for a teacher's grade. Publish regularly — family readings, letters actually sent, contests, printed collections. And write alongside her: the mentor who writes too is the strongest consensus finding of the practitioner canon. (Cohen &amp; Riel, 1989; Atwell; Kittle; Gallagher)</li>
+    <li><strong>Teach self-assessment against co-built criteria.</strong> Reading a model, deriving the rubric together, and self-assessing drafts against it raised middle schoolers' scores on every criterion — and self-evaluation is exactly the capacity that separates maturing writers from "knowledge tellers." (Andrade, Du &amp; Mycek, 2010; Bereiter &amp; Scardamalia, 1987)</li>
+    <li><strong>Motivation is a cause of skill, not a nice-to-have.</strong> Writing self-efficacy independently predicts adolescent writing performance; apprehension suppresses it. Choice of topic, low-stakes volume, visible progress, and restrained correction are the protective factors. If a practice costs enthusiasm, it's a net loss. (Pajares, 2003; Camacho et al., 2021)</li>
+    <li><strong>Your one-on-one setup is the single biggest advantage available.</strong> Tutored students perform about two standard deviations above conventional classrooms — better than 98% of them. Every practice above was validated in classrooms of 30; a mentor can run the whole stack, tuned to one writer, every day. (Bloom, 1984)</li>
+  </ol>
+  <p class="formula"><strong>The formula, in one sentence:</strong> model strategies explicitly → she writes daily with real volume and choice → sentence-level workouts inside real drafts → every piece gets a specific goal → feedback arrives as focused comments in conversation, not grades → mentor texts and summarizing tie reading to writing → work ships to real readers → and motivation is guarded like the asset it is.</p>
+</div>
+
+<nav class="toc" aria-label="Contents">
+  <strong class="sans">Contents</strong>
+  <ol>
+    <li><a href="#s1">Where the evidence comes from</a></li>
+    <li><a href="#s2">The state of play: why deliberate teaching matters</a></li>
+    <li><a href="#s3">How adolescent writers develop (the mental model)</a></li>
+    <li><a href="#s4">The league table: practices ranked by effect</a></li>
+    <li><a href="#s5">The eight pillars, in depth</a></li>
+    <li><a href="#s6">What doesn't work (and what backfires)</a></li>
+    <li><a href="#s7">Motivation: the load-bearing wall</a></li>
+    <li><a href="#s8">The one-on-one advantage</a></li>
+    <li><a href="#s9">Putting it together: a week that matches the evidence</a></li>
+    <li><a href="#s10">The source shelf</a></li>
+  </ol>
+</nav>
+
+<h2 id="s1"><span class="no">1.</span> Where the evidence comes from</h2>
+
+<p>Writing instruction is unusually well served by rigorous synthesis. Four bodies of work anchor everything below, and they agree with each other to a striking degree:</p>
+
+<ul>
+  <li><strong>Hillocks (1986)</strong> <span class="b b-meta">META</span> — the first great meta-analysis. Hillocks reviewed some 2,000 studies, screened several hundred experimental ones against explicit design criteria, and built the meta-analysis on the 60 that survived, carrying 72 experimental treatments and their controls. Its headline: the <em>environmental</em> mode (structured tasks, concrete materials, high engagement with specific writing problems) was roughly four times as effective as lecture-style "presentational" teaching and three times as effective as pure free-writing "natural process" approaches. Inquiry (0.56), evaluation scales (0.36), and sentence combining (0.35) led; free writing alone was weak (0.16); grammar study was negative (−0.29).</li>
+  <li><strong>Graham &amp; Perin's <em>Writing Next</em> (2007)</strong> <span class="b b-meta">META</span> — the modern cornerstone for grades 4–12. The Carnegie report counts 142 studies yielding 176 effect sizes across both its analyses; the peer-reviewed journal version, which is the source of the ranked list in <a href="#s4">§4</a>, reports 123 documents yielding 154 effect sizes, all measuring <em>quality of writing</em>. The authors stress the elements are ingredients, not a curriculum, and are meant to be blended.</li>
+  <li><strong>The IES/What Works Clearinghouse practice guides</strong> <span class="b b-guide">GUIDE</span> — <em>Teaching Secondary Students to Write Effectively</em> (2016) distills the secondary evidence into three recommendations: (1) explicitly teach strategies using a <em>Model → Practice → Reflect</em> cycle (<strong>strong</strong> evidence); (2) integrate writing and reading (<strong>moderate</strong>); (3) use assessment of student writing to inform instruction and feedback (minimal-but-panel-endorsed). The elementary guide (2012) adds the dosage recommendation: at least an hour a day of writing and writing instruction from grade 1 on — a recommendation the panel itself rates <em>minimal evidence</em>, meaning expert judgment about a sensible floor rather than a measured optimum.</li>
+  <li><strong>The later Graham-lab meta-analyses</strong> <span class="b b-meta">META</span> — on formative assessment and feedback (2015), writing-to-read (2010), reading-to-write (2018), balanced reading/writing programs (2018), writing to learn in the content areas (2020), and word processing for weaker writers (2012). These fill in the feedback, reading-connection, and technology pieces.</li>
+</ul>
+
+<div class="box note">
+  <p class="tag">Reading effect sizes honestly</p>
+  <p>Rule of thumb: 0.20 is small, 0.50 moderate, 0.80 large. Two cautions from the report authors themselves. First, an effect size is always <em>relative to whatever the control group did</em>, so numbers from different meta-analyses aren't precisely comparable. Second, writing quality is genuinely hard to move — Graham and Perin note that <em>any</em> significant effect on adolescent writing is meaningful. Treat the numbers as a strength-of-signal ranking, not a precision instrument.</p>
+</div>
+
+<h2 id="s2"><span class="no">2.</span> The state of play: why deliberate teaching matters</h2>
+
+<p><strong>Most adolescents don't write well — and it's not mysterious why.</strong> On the most recent national writing assessment of eighth graders (NAEP 2011), only about 27% scored at or above Proficient; 20% were below Basic. The 2002 numbers were the same shape: 69% of eighth graders below proficiency. <span class="b b-survey">SURVEY</span></p>
+
+<p><strong>The proximate cause is exposure.</strong> Applebee and Langer's national study — 260 classrooms observed across five states, plus a survey of 1,520 teachers — found that only <strong>7.7% of class time</strong> across English, science, math, and social studies involved composing as much as a single paragraph. Students were assigned roughly 1.6 pages of extended prose per week in English and 2.1 pages across everything else combined. Most school "writing" is fill-in-the-blank and short answer: writing without composing. A parallel national survey of high-school teachers (Kiuhara, Graham &amp; Hawken, 2009) found the same pattern — the most common assignments required little or no actual composition, and multi-paragraph writing was rare for many teachers. <span class="b b-survey">SURVEY</span></p>
+
+<p><strong>Writing is the most cognitively demanding literacy skill, and it develops on a long clock.</strong> Kellogg and Whiteford argue from the expertise literature that advancing through the stages of writing skill takes on the order of a decade of appropriately structured practice per stage — and that the missing ingredient in schools is simply an adequate volume of practice with feedback. The barrier, they note, is that responding to writing is labor-intensive for the teacher. <span class="b b-theory">THEORY</span></p>
+
+<p><strong>Put together:</strong> an eighth grader who writes daily, with explicit instruction and a reader who responds — the arrangement a one-on-one mentorship makes trivially easy and schools find nearly impossible — is operating at a massive structural advantage. Graham's 2019 review of how writing is actually taught worldwide reaches the same conclusion from the other direction: the practices in this document are well established and <em>rarely implemented</em>; time and teacher preparation, not knowledge gaps, are the binding constraints. <span class="b b-survey">SURVEY</span></p>
+
+<h2 id="s3"><span class="no">3.</span> How adolescent writers develop (the mental model)</h2>
+
+<p>Three well-established cognitive findings explain <em>why</em> the practices in §4–§5 work. They're worth internalizing because they let you improvise correctly.</p>
+
+<h3>3.1 From "knowledge telling" to "knowledge transforming"</h3>
+<p>Bereiter and Scardamalia's classic account <span class="b b-theory">THEORY</span>: novice writers <em>tell</em> — they retrieve whatever they know about a topic and write it down in the order it comes, a strategy that feels like writing but involves no rethinking. Mature writers <em>transform</em> — they work back and forth between "what am I trying to say?" and "what does this reader need?", and the writing changes what they think. Eighth grade sits right at the developmental hinge. The transformation doesn't happen with age; it happens when a writer is taught to set goals, plan against them, and evaluate drafts against criteria — which is exactly what strategy instruction, product goals, and self-assessment (§5) install.</p>
+
+<h3>3.2 The working-memory bottleneck</h3>
+<p>Composing overloads working memory: idea generation, organization, word choice, syntax, spelling, and transcription all compete for the same limited capacity (Flower &amp; Hayes, 1981; Kellogg &amp; Whiteford, 2009; McCutchen, 1996) <span class="b b-theory">THEORY</span>. Anything not yet automatic — handwriting, typing, spelling, comma logic — is paid for out of the budget that should fund thinking. Two practical corollaries:</p>
+<ul>
+  <li><strong>Fluency work is thinking work.</strong> Sentence-level automaticity (§5.3) and comfortable typing directly free capacity for ideas. This is why sentence combining improves whole-composition quality, not just sentences.</li>
+  <li><strong>Separate the demands.</strong> Plan before drafting; draft without editing; edit last. Strategies that stage the process (POW, PLAN &amp; WRITE, outlines) are working-memory prosthetics, not bureaucracy.</li>
+</ul>
+
+<h3>3.3 Skill follows deliberate practice — practice with feedback, at the edge of ability</h3>
+<p>Writing expertise behaves like other complex expertise: it grows through high volumes of effortful practice on tasks slightly beyond current ability, with prompt, informative feedback (Kellogg &amp; Whiteford, 2009) <span class="b b-theory">THEORY</span>. Volume without feedback plateaus (Hillocks' free-writing result, 0.16); feedback without volume has nothing to work on. The design problem of a writing course is keeping both high without burning out the writer or the reader.</p>
+
+<div class="ladder">
+  <div class="rung"><span class="who">Most 8th graders</span><b>Knowledge telling</b> Write what comes to mind, in the order it comes. Revision = neater handwriting and fixed spelling.</div>
+  <div class="rung"><span class="who">The target of this course</span><b>Knowledge transforming</b> Sets goals, plans, rereads against criteria, reorganizes; discovers ideas by writing. Built by strategy instruction + self-assessment.</div>
+  <div class="rung"><span class="who">The long horizon</span><b>Knowledge crafting</b> Holds the <em>reader's</em> experience in mind while composing. Built by audience, publication, and years of reading like a writer.</div>
+</div>
+<p class="small">Stages after Bereiter &amp; Scardamalia (1987) and Kellogg (2008); the labels describe strategies writers use, not fixed levels — instruction moves writers up, and tired writers slide down.</p>
+
+<h2 id="s4"><span class="no">4.</span> The league table: practices ranked by effect</h2>
+
+<p>The first band is <em>Writing Next</em> (Graham &amp; Perin, 2007), all measured on quality of adolescents' writing, grades 4–12. The second band collects headline numbers from companion meta-analyses — remember the §1 caveat that cross-study numbers aren't precisely comparable.</p>
+
+<p class="small">One wrinkle worth knowing, since it explains why published lists of "the eleven elements" differ: the Carnegie report's eleven include <em>writing for content learning</em> and treat grammar as a separate cautionary note with no number attached; the peer-reviewed journal version's eleven include <em>grammar instruction</em> at −0.32 and handle content learning in its own writing-to-learn analysis. The table below shows all twelve practices, drawing the grammar figure from the journal version.</p>
+
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Practice</th><th>Effect</th><th style="width:11.5rem"></th><th>What it is / notes</th></tr></thead>
+  <tbody>
+    <tr class="band"><td colspan="4">Writing Next — the ranked elements, adolescent writing quality (Graham &amp; Perin, 2007)</td></tr>
+    <tr><td><strong>Strategy instruction</strong></td><td class="es">0.82</td><td class="barcell"><div class="bar" style="width:68%"></div></td><td>Explicitly teach planning, drafting, revising, editing strategies to independence. The SRSD variant alone: <strong>1.14</strong> (vs. 0.62 for other strategy teaching). Strongest for struggling writers (1.02) but powerful for all (0.70).</td></tr>
+    <tr><td><strong>Summarization</strong></td><td class="es">0.82</td><td class="barcell"><div class="bar" style="width:68%"></div></td><td>Explicitly and systematically teach how to summarize texts — rule-based or via gradually faded models.</td></tr>
+    <tr><td><strong>Collaborative writing</strong></td><td class="es">0.75</td><td class="barcell"><div class="bar" style="width:63%"></div></td><td>Writers work together to plan, draft, revise, edit. In a 1:1 course, the mentor is the collaborator (§5.7).</td></tr>
+    <tr><td><strong>Specific product goals</strong></td><td class="es">0.70</td><td class="barcell"><div class="bar" style="width:58%"></div></td><td>Assign concrete, reachable goals for the piece (purpose + named structural elements), not "do your best."</td></tr>
+    <tr><td><strong>Word processing</strong></td><td class="es">0.55</td><td class="barcell"><div class="bar" style="width:46%"></div></td><td>Composing on a keyboard; 0.70 for low-achieving writers. See also Morphy &amp; Graham below.</td></tr>
+    <tr><td><strong>Sentence combining</strong></td><td class="es">0.50</td><td class="barcell"><div class="bar" style="width:42%"></div></td><td>Build complex sentences from kernel sentences — the evidence-backed replacement for grammar drills.</td></tr>
+    <tr><td><strong>Prewriting</strong></td><td class="es">0.32</td><td class="barcell"><div class="bar" style="width:27%"></div></td><td>Structured idea generation and organization before drafting (gathering, visual organizers, guided planning).</td></tr>
+    <tr><td><strong>Inquiry activities</strong></td><td class="es">0.32</td><td class="barcell"><div class="bar" style="width:27%"></div></td><td>Analyze immediate concrete data (observations, artifacts, comparisons) to develop content before writing. Hillocks' own estimate was higher (0.56).</td></tr>
+    <tr><td><strong>Process writing approach</strong></td><td class="es">0.32</td><td class="barcell"><div class="bar" style="width:27%"></div></td><td>Workshop environment: extended writing, authentic audiences, cycles of drafting, personalized help. Jumps to 0.46 when teachers are trained in it; near zero when they aren't — the ingredients matter, not the ritual.</td></tr>
+    <tr><td><strong>Study of models</strong></td><td class="es">0.25</td><td class="barcell"><div class="bar" style="width:21%"></div></td><td>Read, analyze, and emulate exemplary texts. Small in the meta-analysis but a <em>moderate-evidence</em> IES recommendation when integrated with writing (§5.6).</td></tr>
+    <tr><td><strong>Writing for content learning</strong></td><td class="es">0.23</td><td class="barcell"><div class="bar" style="width:19%"></div></td><td>Writing as a tool to learn subject matter; small but consistent (~75% of studies positive).</td></tr>
+    <tr><td><strong>Traditional grammar instruction</strong></td><td class="es" style="color:var(--red)">−0.32</td><td class="barcell"><div class="bar neg" style="width:27%"></div></td><td>Parts of speech and sentence diagramming taught in isolation. The only reliably <em>negative</em> element — it displaces practices that work. (Contextualized grammar is different: §5.3.) Figure from the peer-reviewed version; the Carnegie report makes the same point without a number.</td></tr>
+
+    <tr class="band"><td colspan="4">Companion meta-analyses (different outcome measures and grade ranges)</td></tr>
+    <tr><td><strong>Feedback from an adult</strong></td><td class="es">0.87</td><td class="barcell"><div class="bar" style="width:72%"></div></td><td>Graham, Hebert &amp; Harris (2015), grades 1–8, writing quality. Self-evaluation: 0.62; peer feedback: 0.58; computer feedback: 0.38.</td></tr>
+    <tr><td><strong>Extended writing about reading</strong></td><td class="es">0.77</td><td class="barcell"><div class="bar" style="width:64%"></div></td><td>Analytic/personal written responses to texts → reading comprehension (Graham &amp; Hebert, 2010). Writing about reading overall: 0.40–0.51; summaries 0.52; structured notes 0.47.</td></tr>
+    <tr><td><strong>Reading instruction → writing</strong></td><td class="es">0.57</td><td class="barcell"><div class="bar" style="width:48%"></div></td><td>Teaching reading improves writing quality (Graham et al., 2018); more reading/observing readers alone: 0.35.</td></tr>
+    <tr><td><strong>Word processing, weaker writers</strong></td><td class="es">0.52</td><td class="barcell"><div class="bar" style="width:43%"></div></td><td>Morphy &amp; Graham (2012), writing quality. Motivation to write: <strong>1.42</strong> — the tool kids prefer is also the one they persist with.</td></tr>
+    <tr><td><strong>Writing to learn (science/SS/math)</strong></td><td class="es">0.30</td><td class="barcell"><div class="bar" style="width:25%"></div></td><td>Graham, Kiuhara &amp; MacKay (2020), 56 experiments, grades 1–12; content learning improves when students write about it.</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="small">Bars scaled to 1.2 = full width. SRSD = Self-Regulated Strategy Development. Sources and links in <a href="#s10">§10</a>.</p>
+
+<h2 id="s5"><span class="no">5.</span> The eight pillars, in depth</h2>
+<p>Everything above collapses into eight practices. Each entry gives the evidence, then the one-on-one application.</p>
+
+<h3>5.1 Explicit strategy instruction — the engine <span class="b b-meta">META</span> <span class="b b-guide">GUIDE</span></h3>
+<p>The best-supported finding in the entire literature: directly teach the mental moves skilled writers make, as named, reusable strategies. The IES secondary guide (strong evidence) frames the delivery as <strong>Model → Practice → Reflect</strong>: the teacher demonstrates the strategy while thinking aloud; the student applies it with support that fades; both reflect on how it went and when to use it again.</p>
+<p>The gold-standard version is <strong>Self-Regulated Strategy Development (SRSD)</strong> — Writing Next's 1.14, a positive What Works Clearinghouse rating, and effect sizes routinely above 1.0 across dozens of studies. Its six stages are worth memorizing because they describe good mentoring generally: <em>develop background knowledge → discuss the strategy → model it → memorize it → support it → independent use</em>. Crucially, SRSD pairs each writing strategy with self-regulation: goal setting, self-monitoring ("did I do each step?"), self-instruction, and self-reinforcement. The self-regulation half is what makes the strategies stick — and it measurably raises self-efficacy and writing knowledge too (Harris &amp; Graham, 2009).</p>
+<p>Concrete strategy examples from the SRSD literature: <strong>POW</strong> (Pick ideas → Organize notes → Write and say more) as an all-purpose frame; <strong>TREE</strong> for opinion pieces (Topic sentence, Reasons — three or more, Explain each, Ending); <strong>PLAN &amp; WRITE</strong> for essays (Pay attention to the prompt, List main ideas, Add supporting ideas, Number them; then Work from the plan, Remember goals, Include transitions, Try varied sentences, Exciting word choice).</p>
+<div class="box apply">
+  <p class="tag">In a one-on-one mentorship</p>
+  <ul>
+    <li><strong>Think aloud for real.</strong> Compose in front of her on paper or screen — false starts, crossed-out lines, "no, that verb's dead, let me try…" The messy middle is the lesson; a classroom teacher can rarely afford it, you can.</li>
+    <li><strong>One strategy at a time, to mastery.</strong> Teach a planning strategy for the current genre, use it together on two or three pieces, and don't introduce the next until she reaches for this one unprompted (criterion-based, not calendar-based — an SRSD signature).</li>
+    <li><strong>Name the moves.</strong> A strategy she can say ("I need a TREE plan") is a strategy she can deploy alone. Keep a growing anchor list of named moves in her notebook.</li>
+  </ul>
+</div>
+
+<h3>5.2 Volume: daily writing, mostly low-stakes <span class="b b-guide">GUIDE</span> <span class="b b-theory">THEORY</span> <span class="b b-wisdom">WISDOM</span></h3>
+<p>The IES elementary guide's dosage floor — an hour a day, split between instruction and genuine composing, from first grade on (panel judgment, minimal evidence: a defensible floor, not a measured optimum) — has no secondary-grade equivalent only because nobody expected secondary schools to find the time; the deliberate-practice analysis (Kellogg &amp; Whiteford) argues adolescents need <em>more</em>, not less. Increasing how much students write also improves reading comprehension (~0.30, Graham &amp; Hebert 2010). Meanwhile the practitioner canon is unanimous: Atwell, Graves, Rief, Gallagher, and Kittle all build their courses on daily sustained writing time with substantial student choice, and Rief — a career-long eighth-grade teacher — opens nearly every class with a low-stakes <strong>quickwrite</strong>: 2–3 minutes of fast, ungraded writing off a poem, a line, an image, kept in the writer's notebook as seed material.</p>
+<p>Two honest caveats from the research keep this pillar in proportion. Free writing <em>alone</em> was one of Hillocks' weakest treatments (0.16), and the process approach without trained teaching is near zero: volume is the substrate skill grows on, not the fertilizer. Volume plus instruction plus feedback is the stack.</p>
+<div class="box apply">
+  <p class="tag">In a one-on-one mentorship</p>
+  <ul>
+    <li><strong>Protect a daily writing block</strong> (30–45 minutes of actual composing, plus instruction around it) the way you'd protect math. Consistency beats intensity.</li>
+    <li><strong>Keep a writer's notebook</strong> that is hers: quickwrites, lists, overheard lines, aborted starts. Turned in or shared by invitation, never graded, never corrected (Fletcher; Rief). It's the low-stakes flywheel that feeds the polished pieces.</li>
+    <li><strong>Count everything as volume:</strong> the history summary, the letter to a cousin, the D&amp;D lore document. Cross-subject writing is writing (and improves the content learning too — 0.30).</li>
+  </ul>
+</div>
+
+<h3>5.3 Sentence-level craft: combine, expand, imitate — never drill in isolation <span class="b b-meta">META</span> <span class="b b-study">STUDY</span></h3>
+<p>Sentence combining — building one sophisticated sentence out of kernel sentences ("The dog barked. The dog was old. The barking was hoarse.") — reliably improves overall writing quality (0.50; 0.46 for weaker writers in Saddler &amp; Graham's pair-practice study). It works because it automates syntactic options, freeing working memory (§3.2), and because it's practiced <em>as writing</em> rather than as analysis of someone else's sentences. The classic exercises: combine with <em>and / but / because</em>; embed adjectives and adverbs from one kernel into another; build adjectival and adverbial clauses; then multiple embeddings.</p>
+<p>Traditional grammar instruction — terminology and diagramming as a separate subject — is the literature's one reliably negative finding (−0.32 in Writing Next; −0.29 in Hillocks; the Andrews et al. 2006 systematic review found no evidence it improves composition). But <strong>contextualized</strong> grammar is a different story: Myhill's 744-student randomized trial in England embedded grammar concepts inside writing units as <em>choices with effects</em> ("what does fronting that adverbial do for the reader?") and got significant gains in writing quality — strongest, notably, for already-able writers. The distinction is between grammar as taxonomy (harmful in practice, because it displaces writing) and grammar as a lens on drafts (helpful).</p>
+<p>This is also where <strong>The Writing Revolution</strong> (Hochman &amp; Wexler) sits: its because/but/so completions, appositive exercises, sentence expansion, and single-paragraph outlines are essentially sentence combining plus explicit structure, embedded in content. Method-specific peer-reviewed trials are still thin, so tag it <span class="b b-wisdom">WISDOM</span> resting on well-evidenced components — a reasonable bet, honestly labeled.</p>
+<div class="box apply">
+  <p class="tag">In a one-on-one mentorship</p>
+  <ul>
+    <li><strong>Ten-minute sentence workouts, ~3×/week:</strong> combining sets, expansions ("add where, when, why"), because/but/so stems on whatever she's studying, and imitation of a killer sentence from her current book.</li>
+    <li><strong>Teach grammar at the point of need,</strong> in her sentences: when a draft has three fused sentences, that's the comma-splice lesson — on those sentences, that day, then move on.</li>
+    <li><strong>Harvest from her reading.</strong> "Find the sentence in this chapter you wish you'd written; copy it; write one with the same skeleton about your topic." Imitation bridges sentence work and mentor texts (§5.6).</li>
+  </ul>
+</div>
+
+<h3>5.4 Goals and self-assessment: make the target visible <span class="b b-meta">META</span> <span class="b b-study">STUDY</span></h3>
+<p>Assigning a <strong>specific product goal</strong> is among the highest-leverage, lowest-cost practices measured (0.70). In Page-Voth and Graham's study with 7th–8th graders who struggled with writing, goals as simple as "include three or more reasons and refute one counterargument" produced substantially better essays than "write a persuasive essay." Process goals work too, especially paired with progress feedback (Schunk &amp; Swartz, 1993).</p>
+<p>The self-assessment half: Andrade's middle-school studies had students read a model essay, <em>co-generate the criteria list</em>, then self-assess drafts against the resulting rubric before anyone else saw them — raising scores on every criterion measured. Self-evaluation feedback stands at 0.62 in the formative-assessment meta-analysis, nearly as strong as adult feedback, and it's the trainable core of knowledge-transforming (§3.1). Note the same meta-analysis found <em>mere</em> progress monitoring and the packaged 6+1 Traits model added nothing detectable — criteria help when the writer internalizes and applies them, not when they sit in a binder.</p>
+<div class="box apply">
+  <p class="tag">In a one-on-one mentorship</p>
+  <ul>
+    <li><strong>Every piece gets one named goal,</strong> set together at the start and written at the top of the plan: audience + purpose + the specific feature being stretched ("this one has a real scene with dialogue that reveals character").</li>
+    <li><strong>Build rubrics from models, together.</strong> Read two strong examples of the genre, ask "what are these doing that works?", and turn her answers into a 3–5 line checklist. She self-checks the draft against it before your conference — which makes the conference a comparison of judgments, not a verdict.</li>
+    <li><strong>Keep a visible growth record:</strong> dated drafts in a portfolio, plus a short list of "moves I own now." Progress she can see funds the motivation account (§7).</li>
+  </ul>
+</div>
+
+<h3>5.5 Feedback that teaches: comments, conversation, and restraint <span class="b b-study">STUDY</span> <span class="b b-meta">META</span></h3>
+<p>The feedback literature is a minefield with a clear safe path through it:</p>
+<ul>
+  <li><strong>Butler (1988):</strong> students receiving comments-only outperformed and stayed more interested than those receiving grades — <em>or grades plus comments</em>. The grade neutralizes the comment: attention shifts from the task ("how do I improve this?") to the ego ("what am I worth?").</li>
+  <li><strong>Kluger &amp; DeNisi (1996):</strong> across 607 effect sizes, feedback helped on average (0.41) but <em>made performance worse in over a third of cases</em> — disproportionately when it directed attention to the self rather than the task.</li>
+  <li><strong>Hattie &amp; Timperley (2007):</strong> effective feedback answers three questions — where am I going, how am I going, where to next — and works at the task, process, and self-regulation levels. Praise aimed at the person ("you're so talented") is the least effective form measured.</li>
+  <li><strong>Graham, Hebert &amp; Harris (2015):</strong> feedback from an adult is the strongest single influence on writing quality measured (0.87).</li>
+  </ul>
+<p>The practitioner canon converges on the delivery format: the <strong>writing conference</strong> (Murray; Graves; Anderson; Atwell; Calkins). Its craft rules: the writer talks first ("how's it going? what are you trying to do?"); the mentor responds first as a <em>reader</em> ("here's where I leaned in; here's where I got lost"), names one thing that's working and why, then teaches <em>one</em> thing — chosen for this writer's next step, not this draft's total repair. Murray's principle: the goal is the growth of the writer, not the perfection of the current piece. Ownership stays with the writer; the mentor keeps hands off the pen.</p>
+<p><strong>On AI feedback</strong> <span class="b b-study">STUDY</span>: Steiss et al. (2024) compared trained human feedback with ChatGPT feedback on secondary students' essays. Humans were better — especially at accuracy, prioritizing what matters most, and supportive tone — but the AI feedback was respectable and essentially free, and models have improved since. The evidence-aligned use in a mentorship: AI as a <em>supplementary</em> reader between conferences or a second opinion on a rubric — never as a replacement for the human reader relationship, and never drafting her sentences for her (ghostwriting subtracts the practice volume the whole model depends on).</p>
+<div class="box apply">
+  <p class="tag">In a one-on-one mentorship</p>
+  <ul>
+    <li><strong>Weekly conference, comments only.</strong> Reader response → one genuine strength named specifically → one teaching point → agree the next goal. Write the teaching point down; it becomes a rubric line on the next piece.</li>
+    <li><strong>Don't grade drafts. Ideally, don't grade much at all</strong> — a portfolio review against her own baseline serves any record-keeping need. If something must carry a grade, grade the final published piece against the co-built rubric she's already self-assessed with, so nothing in the number is a surprise.</li>
+    <li><strong>Ration corrections.</strong> Mark patterns, not every instance: one conventions pattern per piece, taught at the point of need (§5.3), beats a bled-on page — which Kluger &amp; DeNisi predict will lower performance.</li>
+  </ul>
+</div>
+
+<h3>5.6 Read like a writer: mentor texts, summaries, and writing about reading <span class="b b-meta">META</span> <span class="b b-guide">GUIDE</span></h3>
+<p>The reading–writing connection runs in both directions and is one of only three IES secondary recommendations (moderate evidence): use texts as exemplars of the features being taught. The component numbers: studying models, 0.25 (small but consistent); teaching summarization, 0.82 (huge — because summarizing <em>is</em> compressed composition); writing about reading improves comprehension 0.40–0.51 overall, with extended analytic response the standout at 0.77; and teaching reading improves writing at 0.57. Balanced programs that genuinely split time between reading and writing improve both (Graham et al., 2018).</p>
+<p>The practitioner method for models is the <strong>mentor text routine</strong> (Gallagher; Marchetti &amp; O'Dell; Ray): read a short excellent text as a writer — <em>notice</em> a move, <em>name</em> it ("she starts mid-scene and backfills"), <em>try</em> it in your own draft that day. One caution from the meta-analytic fine print: writing about reading paid off for lower-achieving students <em>only when they were taught how</em> — the activity needs the strategy instruction of §5.1 behind it.</p>
+<div class="box apply">
+  <p class="tag">In a one-on-one mentorship</p>
+  <ul>
+    <li><strong>Every genre unit starts with two or three short mentor texts</strong> — real published writing, not textbook specimens. They generate the co-built rubric (§5.4) and the imitation sentences (§5.3).</li>
+    <li><strong>Make summarizing a standing routine</strong> across subjects: teach an explicit rule set (keep the main idea, delete the trivial and redundant, write the synopsis), model it, then hand it over.</li>
+    <li><strong>Prefer written response to her reading</strong> over comprehension questions: a paragraph arguing which character the story actually belongs to does more for both reading and writing than a worksheet.</li>
+  </ul>
+</div>
+
+<h3>5.7 Audience and collaboration: writing that's really for someone <span class="b b-study">STUDY</span> <span class="b b-wisdom">WISDOM</span></h3>
+<p>Cohen and Riel's elegant experiment: seventh graders wrote on the same topic twice — once for a grade, once for distant peers who would actually read it. The versions written for real readers were rated significantly better. Audience isn't decoration; it recruits the reader-modeling that defines mature writing (§3.1). Collaborative writing — planning, drafting, and revising with a partner — is one of the strongest Writing Next elements (0.75). And the practitioner canon's deepest commitment is the mentor who writes: Kittle, Gallagher, Rief, and the National Writing Project all insist the teacher drafts alongside students, shares their own struggled-over pages, and thereby proves writing is a thing people do rather than a thing schools assign.</p>
+<div class="box apply">
+  <p class="tag">In a one-on-one mentorship</p>
+  <ul>
+    <li><strong>Ship every third or fourth piece to a real reader:</strong> printed family collections read aloud at dinner, letters actually mailed, a submission to a youth magazine or contest, a review posted where readers are, a zine for friends. Route pieces to readers <em>beyond the mentor</em> — the grader-reader dilution is exactly what Cohen &amp; Riel measured.</li>
+    <li><strong>Be the collaborator.</strong> Co-write openings, trade alternating paragraphs of a story, or both write to the same prompt and compare drafts. You're the 0.75 element in this course.</li>
+    <li><strong>Keep your own notebook and let her see inside it</strong> — including the entries that went nowhere.</li>
+  </ul>
+</div>
+
+<h3>5.8 Write to think, across the whole course <span class="b b-meta">META</span></h3>
+<p>Writing about content improves learning of that content — 0.30 across 56 experiments in science, social studies, and math (Graham, Kiuhara &amp; MacKay, 2020), echoing Writing Next's content-learning element (0.23) and the inquiry element (0.32): analyzing concrete data or sources <em>before</em> drafting gives the writing something to be about. This pillar buys volume (§5.2), transfer, and the National Commission on Writing's founding observation: to make knowledge their own, students must "struggle with the details, wrestle with the facts, and rework raw information and dimly understood concepts into language they can communicate to someone else. In short, they must write."</p>
+<div class="box apply">
+  <p class="tag">In a one-on-one mentorship</p>
+  <ul>
+    <li><strong>Put short writing inside history and science:</strong> explain-it-to-a-friend paragraphs, prediction-then-revision notes around experiments, "what changed my mind" entries.</li>
+    <li><strong>Use inquiry to feed bigger pieces:</strong> interview a grandparent before the memoir profile; observe the dog for ten minutes taking notes before the descriptive piece; compare two primary sources before the argument.</li>
+  </ul>
+</div>
+
+<h2 id="s6"><span class="no">6.</span> What doesn't work (and what actively backfires)</h2>
+
+<div class="box warn">
+  <p class="tag">Avoid — each of these has evidence against it, not just absence of evidence for it</p>
+  <ul>
+    <li><strong>Isolated grammar drills.</strong> The one negative effect size in the canon (−0.32 Writing Next; −0.29 Hillocks; Andrews et al., 2006). Not because grammar knowledge is bad — because drill time displaces composing time and doesn't transfer. Replace with sentence combining and point-of-need teaching inside her drafts (§5.3).</li>
+    <li><strong>Grading everything.</strong> Butler's result bears repeating: grades-plus-comments performed like grades alone — the number cancels the teaching. Grade rarely, on published pieces, against criteria she already knows; let comments and the portfolio do the assessment work (§5.5).</li>
+    <li><strong>Marking every error.</strong> Feedback that swamps the writer directs attention to the self and reliably backfires (Kluger &amp; DeNisi's one-third). One conventions pattern per piece, taught, then held accountable thereafter.</li>
+    <li><strong>The five-paragraph formula as the destination.</strong> Hillocks' study of state writing tests (<em>The Testing Trap</em>, 2002) documented how formula-driven instruction displaces actual composition; Warner's <em>Why They Can't Write</em> is the book-length case. Nuance: structure <em>scaffolds</em> novices (that's the product-goals effect), so use forms as training wheels inside real genres — essay, review, letter, narrative — and remove them on schedule. <span class="b b-wisdom">WISDOM</span></li>
+    <li><strong>Talking about writing instead of writing.</strong> Hillocks' "presentational" lecture mode was the least effective of the six instructional modes he measured. If a lesson runs long, it should run long in the modeling, not the explaining.</li>
+    <li><strong>Workshop ritual without instruction.</strong> The process approach alone runs 0.32 — and near zero when the teacher isn't trained in it. Sustained writing time, choice, and conferences are the right chassis; explicit strategy instruction is the engine that has to be bolted in (Atwell's own mature workshop includes daily mini-lessons).</li>
+    <li><strong>Packaged trait rubrics as a curriculum.</strong> The 6+1 Traits model showed no meaningful effect in the formative-assessment meta-analysis. Criteria work when derived from real models with the writer (§5.4), not when laminated.</li>
+    <li><strong>AI ghostwriting.</strong> Inference from first principles rather than a study, flagged as such: every sentence a model writes for her is deliberate practice subtracted from the only mechanism that builds the skill (§3.3). AI as an extra reader/critic between conferences: aligned with the evidence. AI as the drafter: quietly fatal to the enterprise.</li>
+  </ul>
+</div>
+
+<h2 id="s7"><span class="no">7.</span> Motivation: the load-bearing wall</h2>
+
+<p><strong>Motivation is causally upstream of skill, not a pleasant side effect.</strong> Writing self-efficacy — a student's belief she can execute specific writing tasks — independently predicts adolescent writing performance even after controlling for ability, and it works partly by suppressing apprehension (Pajares &amp; Valiante; Pajares, 2003 review) <span class="b b-study">STUDY</span>. Writing apprehension, measurable since Daly &amp; Miller (1975), predicts avoidance — and avoidance forfeits the practice volume everything else depends on. The Camacho, Alves &amp; Boscolo (2021) systematic review confirms the motivation–performance link across the 2000–2018 literature and notes that motivational change needs sustained conditions, not pep talks. <span class="b b-meta">META</span></p>
+
+<p>What the evidence says feeds motivation, conveniently, is mostly things already in the stack:</p>
+<ul>
+  <li><strong>Mastery experiences</strong> — self-efficacy's primary source is succeeding at things that felt hard. Calibrated challenge plus visible progress (dated portfolio, "moves I own" list) is the mechanism. SRSD instruction itself reliably raises self-efficacy alongside quality (Harris &amp; Graham, 2009).</li>
+    <li><strong>Choice</strong> — of topic most days, of genre within bounds, of which piece goes to publication. The entire adolescent-workshop canon (Atwell, Rief, Kittle, Gallagher) treats choice as non-negotiable for this age. <span class="b b-wisdom">WISDOM</span></li>
+  <li><strong>Real audiences</strong> — the Cohen &amp; Riel effect is a motivation effect expressed as quality.</li>
+  <li><strong>Low-stakes space</strong> — the ungraded notebook keeps a zone where writing stays play. Note Morphy &amp; Graham's incidental finding: letting weaker writers compose on a keyboard moved writing quality 0.52 but <em>motivation 1.42</em> — tool comfort is motivationally enormous.</li>
+  <li><strong>Feedback tone and focus</strong> — task-focused comments enhance interest (Butler); person-focused evaluation corrodes it.</li>
+</ul>
+
+<div class="box note">
+  <p class="tag">The governing rule</p>
+  <p>For an eighth grader, enthusiasm is the scarcest input and the only unrecoverable one. Every practice in this document should be run <em>subordinate to</em> the writer's appetite: if a rubric, a correction pass, or a deadline is visibly costing the desire to write, the practice yields, not the writer. Nothing in the research contradicts this ordering — the strongest interventions (SRSD, conferencing, publication) all raise motivation and skill together, which is how you know they're the right ones.</p>
+</div>
+
+<h2 id="s8"><span class="no">8.</span> The one-on-one advantage</h2>
+
+<p><strong>Tutoring is the most powerful arrangement education knows.</strong> Bloom's famous comparison found students tutored one-on-one under mastery conditions performed about two standard deviations above conventional classrooms — the average tutored student beating 98% of the class-taught ones <span class="b b-study">STUDY</span>. Later replications suggest the average tutoring effect is smaller than Bloom's dramatic number, but tutoring remains at the top of every intervention league table. The mechanisms are exactly the levers in this document: immediate, individualized feedback; pacing gated on mastery rather than the calendar; difficulty held at the edge of ability; and zero cost to asking questions.</p>
+
+<p><strong>The classroom evidence translates almost embarrassingly well.</strong> Every effect size in §4 was earned under a teacher splitting attention thirty ways. A mentor can run the full stack — daily writing, modeling, conferences, co-built rubrics, publication — with a sample size of one and a feedback latency of minutes. Three classroom practices need deliberate adaptation:</p>
+<ul>
+  <li><strong>Collaborative writing (0.75)</strong> → the mentor is the writing partner: co-drafting, alternating paragraphs, parallel writing to the same prompt (§5.7).</li>
+  <li><strong>Peer feedback (0.58)</strong> → recruit outside readers (family, friends, pen pals, contest judges), and optionally an AI second-reader between conferences (§5.5).</li>
+  <li><strong>Share time / community</strong> → family readings, printed collections, an authentic audience calendar (§5.7).</li>
+</ul>
+
+<p><strong>The instructional frame that fits a mentorship is cognitive apprenticeship</strong> (Collins, Brown &amp; Newman, 1989) <span class="b b-theory">THEORY</span>: make expert thinking visible (modeling/think-alouds), coach during attempts, scaffold, then fade — with the learner articulating and reflecting on her own process. Notice this is also, nearly verbatim, the SRSD sequence and the IES Model-Practice-Reflect cycle: three independent traditions arriving at the same shape is about as close to certainty as education research gets.</p>
+
+<p><strong>And the mentor writes.</strong> The single most repeated instruction in the adolescent-practitioner canon — Kittle's whole book is the argument, Rief and Gallagher concur from decades in grades 8–12, the National Writing Project made it a founding principle — is that the adult in the room drafts, struggles, and shares. In a mentorship this is cheap and its effects compound: it supplies the modeling of §5.1, the collaboration of §5.7, and the credibility that makes the feedback of §5.5 land. <span class="b b-wisdom">WISDOM</span></p>
+
+<h2 id="s9"><span class="no">9.</span> Putting it together: a week that matches the evidence</h2>
+
+<p>A reference architecture — dosages per the IES guides and the deliberate-practice analysis, components per §5. Roughly 45–60 minutes of writing-related time daily, most of it actual composing.</p>
+
+<div class="tablewrap">
+<table class="sched">
+  <thead><tr><th>Rhythm</th><th>Activity</th><th>Pillar</th></tr></thead>
+  <tbody>
+    <tr><td>Daily · 3–5 min</td><td>Notebook quickwrite — her topic, fast, ungraded, never corrected. Occasionally mined for piece ideas.</td><td>Volume, motivation (§5.2, §7)</td></tr>
+    <tr><td>Daily · 25–40 min</td><td>Sustained work on the current piece, at whatever stage it's in (planning, drafting, revising). Mentor writes too, at least some days.</td><td>Volume, strategies, mentor-as-writer (§5.2, §5.1, §8)</td></tr>
+    <tr><td>2–3×/week · 5–10 min</td><td>Mini-lesson with live modeling: the strategy or craft move the current piece needs, demonstrated with a think-aloud on the mentor's own draft or a mentor text (notice → name → try).</td><td>Strategy instruction, models (§5.1, §5.6)</td></tr>
+    <tr><td>3×/week · 10 min</td><td>Sentence workout: combining sets, expansions, because/but/so stems, imitation of a harvested sentence. Grammar taught here and at point of need only.</td><td>Sentence craft (§5.3)</td></tr>
+    <tr><td>Weekly · 15–20 min</td><td>Conference: she talks first; reader response; one named strength; one teaching point; agree next goal. Comments only — no grades.</td><td>Feedback, goals (§5.5, §5.4)</td></tr>
+    <tr><td>~Weekly, in other subjects</td><td>Writing about reading: a summary, structured notes, or a short analytic paragraph on the week's history/science reading.</td><td>Reading–writing, write to think (§5.6, §5.8)</td></tr>
+    <tr><td>Every 2–4 weeks</td><td>Ship something: a finished piece goes to a real reader beyond the mentor (family reading, mailed letter, submission, printed collection).</td><td>Audience (§5.7)</td></tr>
+    <tr><td>Quarterly</td><td>Portfolio review together: earliest vs. latest work side by side; update the "moves I own" list; set one goal for the next stretch.</td><td>Self-assessment, motivation (§5.4, §7)</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box">
+  <p class="tag" style="color:var(--teal)">The per-piece cycle (the §5 pillars in running order)</p>
+  <p>Choose a real genre and audience → read 2–3 short mentor texts and co-build the criteria list → set one specific product goal → plan with the current named strategy → draft without editing → she self-assesses against the criteria → conference (comments, one teaching point) → revise for meaning → edit one conventions pattern → publish → reflect: what move does she own now?</p>
+</div>
+
+<div class="box apply">
+  <p class="tag">Signals the course is working (check quarterly)</p>
+  <ul>
+    <li>She writes without negotiation on ordinary days, and sometimes past the timer.</li>
+    <li>Drafts are getting longer <em>and</em> more organized; revision changes meaning, not just spelling.</li>
+    <li>She reaches for named strategies unprompted, and self-assesses before showing work.</li>
+    <li>She talks like a writer — notices moves in what she reads, has opinions about her own sentences.</li>
+    <li>She wants pieces to ship, and cares what real readers thought.</li>
+  </ul>
+</div>
+
+<h2 id="s10"><span class="no">10.</span> The source shelf</h2>
+
+<div class="srcgroup">
+  <h3>Meta-analyses and practice guides <span class="b b-meta">META</span> <span class="b b-guide">GUIDE</span></h3>
+  <p class="src">Graham, S., &amp; Perin, D. (2007). <em>Writing Next: Effective strategies to improve writing of adolescents in middle and high schools.</em> Carnegie Corporation / Alliance for Excellent Education. <a href="https://media.carnegie.org/filer_public/3c/f5/3cf58727-34f4-4140-a014-723a00ac56f7/ccny_report_2007_writing.pdf">Report PDF</a>. Peer-reviewed version: <em>Journal of Educational Psychology, 99</em>(3), 445–476. <a href="https://eric.ed.gov/?id=EJ772018">ERIC</a> · <a href="https://doi.org/10.1037/0022-0663.99.3.445">DOI</a>. <span class="ann">The backbone of §4.</span></p>
+  <p class="src">Hillocks, G. (1986). <em>Research on Written Composition: New Directions for Teaching.</em> NCRE/ERIC. <a href="https://eric.ed.gov/?id=ED265552">ERIC ED265552</a> · <a href="https://files.ascd.org/staticfiles/ascd/pdf/journals/ed_lead/el_198705_hillocks.pdf">1987 synthesis (PDF)</a>. <span class="ann">The founding meta-analysis; source of the environmental-mode and inquiry findings.</span></p>
+  <p class="src">Graham, S., Bruch, J., et al. (2016). <em>Teaching Secondary Students to Write Effectively</em> (WWC practice guide NCEE 2017-4002). Institute of Education Sciences. <a href="https://ies.ed.gov/ncee/wwc/practiceguide/22">Guide page</a> · <a href="https://ies.ed.gov/ncee/wwc/Docs/PracticeGuide/508_WWCPG_SecondaryWriting_122719.pdf">PDF</a>. <span class="ann">The three vetted recommendations for grades 6–12.</span></p>
+  <p class="src">Graham, S., et al. (2012). <em>Teaching Elementary School Students to Be Effective Writers</em> (WWC practice guide NCEE 2012-4058). <a href="https://ies.ed.gov/ncee/wwc/practiceguide/17">Guide page</a>. <span class="ann">Source of the hour-a-day recommendation.</span></p>
+  <p class="src">Graham, S., &amp; Hebert, M. (2010). <em>Writing to Read: Evidence for how writing can improve reading.</em> Carnegie Corporation. <a href="https://media.carnegie.org/filer_public/9d/e2/9de20604-a055-42da-bc00-77da949b29d7/ccny_report_2010_writing.pdf">Report PDF</a>. <span class="ann">Writing-about-reading effect sizes (§5.6).</span></p>
+  <p class="src">Graham, S., Hebert, M., &amp; Harris, K. R. (2015). Formative assessment and writing: A meta-analysis. <em>Elementary School Journal, 115</em>(4), 523–547. <a href="https://doi.org/10.1086/681947">DOI</a>. <span class="ann">Feedback sources: adult 0.87, self 0.62, peer 0.58, computer 0.38; 6+1 null.</span></p>
+  <p class="src">Graham, S., Kiuhara, S. A., &amp; MacKay, M. (2020). The effects of writing on learning in science, social studies, and mathematics: A meta-analysis. <em>Review of Educational Research, 90</em>(2), 179–226. <a href="https://doi.org/10.3102/0034654320914744">DOI</a>.</p>
+  <p class="src">Graham, S., Liu, X., Bartlett, B., et al. (2018). Reading for writing: A meta-analysis of the impact of reading interventions on writing. <em>Review of Educational Research, 88</em>(2), 243–284. <a href="https://doi.org/10.3102/0034654317746927">DOI</a>.</p>
+  <p class="src">Graham, S., Liu, X., Aitken, A., et al. (2018). Effectiveness of literacy programs balancing reading and writing instruction: A meta-analysis. <em>Reading Research Quarterly, 53</em>(3), 279–304. <a href="https://doi.org/10.1002/rrq.194">DOI</a>.</p>
+  <p class="src">Morphy, P., &amp; Graham, S. (2012). Word processing programs and weaker writers/readers: A meta-analysis. <em>Reading and Writing, 25</em>(3), 641–678. <a href="https://doi.org/10.1007/s11145-010-9292-5">DOI</a>.</p>
+  <p class="src">Andrews, R., Torgerson, C., Beverton, S., et al. (2006). The effect of grammar teaching on writing development. <em>British Educational Research Journal, 32</em>(1), 39–55. <span class="ann">Systematic review: no benefit from syntax teaching; sentence combining works.</span></p>
+  <p class="src">What Works Clearinghouse (2017). <em>Self-Regulated Strategy Development</em> intervention report. <a href="https://ies.ed.gov/ncee/wwc/Docs/InterventionReports/wwc_srsd_111417.pdf">PDF</a> · research digest at <a href="https://srsdonline.org/research/">srsdonline.org</a>.</p>
+</div>
+
+<div class="srcgroup">
+  <h3>Key individual studies <span class="b b-study">STUDY</span></h3>
+  <p class="src">Butler, R. (1988). Enhancing and undermining intrinsic motivation: The effects of task-involving and ego-involving evaluation on interest and performance. <em>British Journal of Educational Psychology, 58</em>(1), 1–14. <a href="https://doi.org/10.1111/j.2044-8279.1988.tb00874.x">DOI</a>. <span class="ann">Comments beat grades and grades+comments.</span></p>
+  <p class="src">Kluger, A. N., &amp; DeNisi, A. (1996). The effects of feedback interventions on performance. <em>Psychological Bulletin, 119</em>(2), 254–284. <a href="https://doi.org/10.1037/0033-2909.119.2.254">DOI</a>. <span class="ann">607 effect sizes; over a third negative.</span></p>
+  <p class="src">Hattie, J., &amp; Timperley, H. (2007). The power of feedback. <em>Review of Educational Research, 77</em>(1), 81–112. <a href="https://doi.org/10.3102/003465430298487">DOI</a>.</p>
+  <p class="src">Myhill, D., Jones, S., Lines, H., &amp; Watson, A. (2012). Re-thinking grammar: The impact of embedded grammar teaching on students' writing and metalinguistic understanding. <em>Research Papers in Education, 27</em>(2), 139–166. <a href="https://doi.org/10.1080/02671522.2011.637640">DOI</a>. Companion RCT analysis: Jones, Myhill &amp; Bailey (2013), <em>Reading and Writing, 26</em>, 1241–1263. <a href="https://doi.org/10.1007/s11145-012-9416-1">DOI</a>.</p>
+  <p class="src">Cohen, M., &amp; Riel, M. (1989). The effect of distant audiences on students' writing. <em>American Educational Research Journal, 26</em>(2), 143–159. <a href="https://doi.org/10.3102/00028312026002143">DOI</a>.</p>
+  <p class="src">Page-Voth, V., &amp; Graham, S. (1999). Effects of goal setting and strategy use on the writing performance and self-efficacy of students with writing and learning problems. <em>Journal of Educational Psychology, 91</em>(2), 230–240. <a href="https://doi.org/10.1037/0022-0663.91.2.230">DOI</a>. <span class="ann">Goal setting with 7th–8th graders.</span></p>
+  <p class="src">Saddler, B., &amp; Graham, S. (2005). The effects of peer-assisted sentence-combining instruction on the writing of more and less skilled young writers. <em>Journal of Educational Psychology, 97</em>(1), 43–54. <a href="https://doi.org/10.1037/0022-0663.97.1.43">DOI</a>.</p>
+  <p class="src">Schunk, D. H., &amp; Swartz, C. W. (1993). Goals and progress feedback: Effects on self-efficacy and writing achievement. <em>Contemporary Educational Psychology, 18</em>(3), 337–354.</p>
+  <p class="src">Andrade, H. L., Du, Y., &amp; Mycek, K. (2010). Rubric-referenced self-assessment and middle school students' writing. <em>Assessment in Education, 17</em>(2), 199–214. <a href="https://doi.org/10.1080/09695941003696172">DOI</a>.</p>
+  <p class="src">Pajares, F. (2003). Self-efficacy beliefs, motivation, and achievement in writing: A review of the literature. <em>Reading &amp; Writing Quarterly, 19</em>(2), 139–158. <a href="https://ssrlsig.org/wp-content/uploads/2018/02/pajares-2003-self-efficacy-beliefs-motivation-and-achievement-in-writing-a-review-of-the-literature.pdf">PDF</a>. <span class="ann">Summarizes the Pajares &amp; Valiante middle-school studies.</span></p>
+  <p class="src">Camacho, A., Alves, R. A., &amp; Boscolo, P. (2021). Writing motivation in school: A systematic review. <em>Educational Psychology Review, 33</em>, 213–247. <a href="https://doi.org/10.1007/s10648-020-09530-4">DOI</a>.</p>
+  <p class="src">Steiss, J., Tate, T., Graham, S., et al. (2024). Comparing the quality of human and ChatGPT feedback of students' writing. <em>Learning and Instruction, 91</em>, 101894. <a href="https://www.sciencedirect.com/science/article/pii/S0959475224000215">Article</a> · accessible summary: <a href="https://hechingerreport.org/proof-points-writing-ai-feedback/">Hechinger Report</a>.</p>
+  <p class="src">Bloom, B. S. (1984). The 2 sigma problem: The search for methods of group instruction as effective as one-to-one tutoring. <em>Educational Researcher, 13</em>(6), 4–16. <a href="https://doi.org/10.3102/0013189X013006004">DOI</a>.</p>
+  <p class="src">Applebee, A. N., &amp; Langer, J. A. (2011). A snapshot of writing instruction in middle schools and high schools. <em>English Journal, 100</em>(6), 14–27. <a href="https://eric.ed.gov/?id=EJ931760">ERIC</a> · <a href="http://sanmarcoswritingproject.pbworks.com/f/EJ.7.11.Applebee.Langer.writing%5B1%5D.pdf">PDF</a>.</p>
+  <p class="src">Kiuhara, S. A., Graham, S., &amp; Hawken, L. S. (2009). Teaching writing to high school students: A national survey. <em>Journal of Educational Psychology, 101</em>(1), 136–160.</p>
+  <p class="src">Graham, S. (2019). Changing how writing is taught. <em>Review of Research in Education, 43</em>(1), 277–303. <a href="https://doi.org/10.3102/0091732X18821125">DOI</a>.</p>
+  <p class="src">National Center for Education Statistics (2012). <em>The Nation's Report Card: Writing 2011</em>, grade 8 results. <a href="https://www.nationsreportcard.gov/writing_2011/g8_national.asp">NAEP</a>.</p>
+</div>
+
+<div class="srcgroup">
+  <h3>Foundational theory <span class="b b-theory">THEORY</span></h3>
+  <p class="src">Flower, L., &amp; Hayes, J. R. (1981). A cognitive process theory of writing. <em>College Composition and Communication, 32</em>(4), 365–387.</p>
+  <p class="src">Bereiter, C., &amp; Scardamalia, M. (1987). <em>The Psychology of Written Composition.</em> Erlbaum. <span class="ann">Knowledge telling vs. knowledge transforming.</span></p>
+  <p class="src">McCutchen, D. (1996). A capacity theory of writing: Working memory in composition. <em>Educational Psychology Review, 8</em>, 299–325.</p>
+  <p class="src">Kellogg, R. T. (2008). Training writing skills: A cognitive developmental perspective. <em>Journal of Writing Research, 1</em>(1), 1–26. And: Kellogg, R. T., &amp; Whiteford, A. P. (2009). Training advanced writing skills: The case for deliberate practice. <em>Educational Psychologist, 44</em>(4), 250–266. <a href="https://doi.org/10.1080/00461520903213600">DOI</a>.</p>
+  <p class="src">Collins, A., Brown, J. S., &amp; Newman, S. E. (1989). Cognitive apprenticeship. In L. B. Resnick (Ed.), <em>Knowing, Learning, and Instruction.</em> Erlbaum.</p>
+  <p class="src">Daly, J. A., &amp; Miller, M. D. (1975). The empirical development of an instrument to measure writing apprehension. <em>Research in the Teaching of English, 9</em>(3), 242–249.</p>
+</div>
+
+<div class="srcgroup">
+  <h3>The practitioner canon <span class="b b-wisdom">WISDOM</span></h3>
+  <p class="src">Atwell, N. (2014). <em>In the Middle: A Lifetime of Learning About Writing, Reading, and Adolescents</em> (3rd ed.). Heinemann. <span class="ann">The definitive middle-school workshop; Atwell won the inaugural Global Teacher Prize (2015).</span></p>
+  <p class="src">Rief, L. (2014). <em>Read Write Teach.</em> Heinemann; and (2018) <em>The Quickwrite Handbook.</em> Heinemann. <span class="ann">A career eighth-grade classroom — the closest practitioner match to this course.</span></p>
+  <p class="src">Kittle, P. (2008). <em>Write Beside Them.</em> Heinemann. <span class="ann">The mentor-who-writes argument, book length.</span></p>
+  <p class="src">Gallagher, K. (2011). <em>Write Like This.</em> Stenhouse. <span class="ann">Modeling and mentor texts for real-world purposes.</span></p>
+  <p class="src">Graves, D. (1983). <em>Writing: Teachers and Children at Work.</em> Heinemann. — Murray, D. (1985). <em>A Writer Teaches Writing</em> (2nd ed.). Houghton Mifflin. — Anderson, C. (2000). <em>How's It Going? A Practical Guide to Conferring with Student Writers.</em> Heinemann. <span class="ann">The conference tradition.</span></p>
+  <p class="src">Elbow, P. (1973). <em>Writing Without Teachers.</em> Oxford. — Fletcher, R. (1996). <em>A Writer's Notebook.</em> HarperCollins. <span class="ann">Freewriting and the notebook habit.</span></p>
+  <p class="src">Hochman, J. C., &amp; Wexler, N. (2017). <em>The Writing Revolution.</em> Jossey-Bass. <a href="https://www.thewritingrevolution.org/wp-content/uploads/2020/09/EVIDENCE-SUPPORTING-THE-WRITING-REVOLUTION-METHOD.pdf">TWR evidence summary (PDF)</a> · independent evidence appraisal: <a href="https://readwritethinklearn.com/blog/does-twr-work/">Read Write Think Learn</a>. <span class="ann">Sentence-first method; components evidence-based, whole-method trials still thin.</span></p>
+  <p class="src">Marchetti, A., &amp; O'Dell, R. (2015). <em>Writing with Mentors.</em> Heinemann. — Ray, K. W. (1999). <em>Wondrous Words.</em> NCTE. <span class="ann">The mentor-text method.</span></p>
+  <p class="src">Hillocks, G. (2002). <em>The Testing Trap: How State Writing Assessments Control Learning.</em> Teachers College Press. — Warner, J. (2018). <em>Why They Can't Write.</em> Johns Hopkins. <span class="ann">The case against formula-driven instruction.</span></p>
+  <p class="src">Sedita, J. (2022). <em>The Writing Rope: A Framework for Explicit Writing Instruction.</em> Brookes. <span class="ann">A useful synthesis map: critical thinking, syntax, text structure, writing craft, transcription.</span></p>
+  <p class="src">National Commission on Writing (2003). <em>The Neglected "R": The Need for a Writing Revolution.</em> College Board. — Nagin, C. / National Writing Project (2003). <em>Because Writing Matters.</em> Jossey-Bass.</p>
+</div>
+
+<footer class="doc">
+  <p><strong>Method note.</strong> Compiled August 3, 2026 from the primary reports and peer-reviewed literature; effect sizes were checked against the original documents. The <em>Writing Next</em> element effect sizes and the <em>Writing to Read</em> figures were read directly from the Carnegie reports; two figures come instead from the peer-reviewed journal version of <em>Writing Next</em> and are flagged where they appear — the 123-document / 154-effect-size counts (§1) and the −0.32 for grammar instruction (§4), which the Carnegie report discusses without attaching a number. Scope caveats: nearly all experimental evidence comes from classroom settings and is extrapolated here to one-on-one mentoring (§8 discusses why the extrapolation is favorable); effect sizes from different meta-analyses are not directly comparable; practitioner guidance is labeled <span class="b b-wisdom">WISDOM</span> and should be read as expert consensus, not experimental proof.</p>
+</footer>
+
+
+</div>
+</body>
+</html>
