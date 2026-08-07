@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Authoring a Blog Post — nathanamick.com</title>
+    <style>
+      /* Chalkboard palette, mirrored from app/global.css so this guide reads
+         like the site it documents. Fonts fall back to system faces — this
+         file is meant to open straight from disk, with no network. */
+      :root {
+        --board: hsl(150, 9%, 5%);
+        --card: hsl(140, 8%, 8%);
+        --chalk: hsl(50, 15%, 88%);
+        --dim: hsl(80, 4%, 62%);
+        --ochre: hsl(43, 60%, 62%);
+        --border: hsl(140, 6%, 15%);
+        --serif: 'Newsreader', 'Iowan Old Style', Georgia, 'Times New Roman',
+          serif;
+        --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui,
+          sans-serif;
+        --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+        color-scheme: dark;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0 1.5rem 6rem;
+        background: var(--board);
+        color: var(--chalk);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      main {
+        max-width: 46rem;
+        margin: 0 auto;
+      }
+
+      /* ---- masthead ---- */
+
+      header.masthead {
+        padding: 5rem 0 3rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .eyebrow {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ochre);
+        margin: 0;
+      }
+
+      h1 {
+        font-family: var(--serif);
+        font-weight: 400;
+        font-size: clamp(2.25rem, 6vw, 3.25rem);
+        line-height: 1.1;
+        margin: 1.25rem 0 0;
+      }
+
+      .standfirst {
+        color: var(--dim);
+        font-size: 1.0625rem;
+        margin: 1.25rem 0 0;
+        max-width: 34rem;
+      }
+
+      /* ---- structure ---- */
+
+      section {
+        padding-top: 3.5rem;
+      }
+
+      h2 {
+        font-family: var(--serif);
+        font-weight: 400;
+        font-size: 1.875rem;
+        line-height: 1.25;
+        margin: 0 0 1.25rem;
+        scroll-margin-top: 2rem;
+      }
+
+      h3 {
+        font-family: var(--serif);
+        font-weight: 400;
+        font-size: 1.3125rem;
+        margin: 2.25rem 0 0.75rem;
+      }
+
+      p {
+        margin: 0 0 1rem;
+      }
+
+      ul,
+      ol {
+        margin: 0 0 1rem;
+        padding-left: 1.35rem;
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+
+      li::marker {
+        color: var(--ochre);
+      }
+
+      a {
+        color: var(--ochre);
+        text-decoration-color: hsl(43 60% 62% / 0.4);
+        text-underline-offset: 3px;
+      }
+
+      a:hover {
+        text-decoration-color: var(--ochre);
+      }
+
+      strong {
+        color: var(--chalk);
+        font-weight: 600;
+      }
+
+      /* ---- code ---- */
+
+      code {
+        font-family: var(--mono);
+        font-size: 0.875em;
+        color: var(--ochre);
+        background: hsl(140 7% 11%);
+        padding: 0.1em 0.35em;
+        border-radius: 3px;
+      }
+
+      pre {
+        background: hsl(140 8% 7%);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1rem 1.15rem;
+        overflow-x: auto;
+        margin: 0 0 1.25rem;
+      }
+
+      pre code {
+        color: var(--chalk);
+        background: none;
+        padding: 0;
+        font-size: 0.8125rem;
+        line-height: 1.65;
+      }
+
+      .tok-key {
+        color: var(--ochre);
+      }
+      .tok-com {
+        color: var(--dim);
+        font-style: italic;
+      }
+
+      /* ---- table of contents ---- */
+
+      nav.toc {
+        margin-top: 2.5rem;
+        font-family: var(--mono);
+        font-size: 0.8125rem;
+      }
+
+      nav.toc ol {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.5rem;
+      }
+
+      nav.toc li {
+        margin: 0;
+      }
+
+      nav.toc a {
+        color: var(--dim);
+        text-decoration: none;
+      }
+
+      nav.toc a:hover {
+        color: var(--chalk);
+      }
+
+      /* ---- callouts ---- */
+
+      .quickstart {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--ochre);
+        border-radius: 8px;
+        padding: 1.5rem 1.5rem 0.75rem;
+        margin-top: 2.5rem;
+      }
+
+      .quickstart h2 {
+        font-size: 1.375rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .quickstart ol {
+        margin-bottom: 1rem;
+      }
+
+      .gotcha {
+        border: 1px solid var(--border);
+        border-left: 3px solid hsl(8, 55%, 55%);
+        border-radius: 8px;
+        padding: 1.15rem 1.35rem 0.5rem;
+        margin-bottom: 1rem;
+        background: hsl(140 8% 7%);
+      }
+
+      .gotcha h3 {
+        margin: 0 0 0.5rem;
+        font-family: var(--sans);
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      .gotcha p:last-child {
+        margin-bottom: 0.75rem;
+      }
+
+      /* ---- tables ---- */
+
+      .table-wrap {
+        overflow-x: auto;
+        margin-bottom: 1.25rem;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 0.9375rem;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 0.7rem 1rem 0.7rem 0;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+
+      th {
+        font-family: var(--mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--dim);
+        font-weight: 400;
+        white-space: nowrap;
+      }
+
+      td:first-child {
+        font-family: var(--mono);
+        font-size: 0.8125rem;
+        color: var(--ochre);
+        white-space: nowrap;
+        padding-right: 1.5rem;
+      }
+
+      td.plain:first-child {
+        font-family: var(--sans);
+        font-size: 0.9375rem;
+        color: var(--chalk);
+        white-space: normal;
+      }
+
+      footer {
+        margin-top: 5rem;
+        padding-top: 1.75rem;
+        border-top: 1px solid var(--border);
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        color: var(--dim);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="masthead">
+        <p class="eyebrow">nathanamick.com</p>
+        <h1>Authoring a blog post</h1>
+        <p class="standfirst">
+          Everything needed to add a post and its hero image — the four
+          frontmatter fields, where images live, and the three things that will
+          bite.
+        </p>
+        <nav class="toc">
+          <ol>
+            <li><a href="#quickstart">Quick version</a></li>
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#hero">Hero image</a></li>
+            <li><a href="#frontmatter">Frontmatter</a></li>
+            <li><a href="#body">Body images &amp; components</a></li>
+            <li><a href="#gotchas">Gotchas</a></li>
+            <li><a href="#map">File map</a></li>
+          </ol>
+        </nav>
+      </header>
+
+      <div class="quickstart" id="quickstart">
+        <h2>The quick version</h2>
+        <ol>
+          <li>
+            Save a <strong>1024&times;575</strong> hero image to
+            <code>public/images/hero/my-post.png</code>
+          </li>
+          <li>
+            Create <code>content/blog/my-post.mdx</code> with the four
+            frontmatter fields below
+          </li>
+          <li>Run <code>pnpm dev</code> and open <code>/blog/my-post</code></li>
+        </ol>
+        <pre><code>---
+<span class="tok-key">title</span>: My Post Title
+<span class="tok-key">publishedOn</span>: 2026-08-06
+<span class="tok-key">summary</span>: One or two sentences. Shows on the index and home page.
+<span class="tok-key">heroImage</span>: my-post.png
+---
+
+Body starts here.</code></pre>
+        <p>
+          The index, the home page, the prev/next links, the post count, the
+          year range, the read-time estimate and the chalk cover art all update
+          themselves. There is nothing else to register.
+        </p>
+      </div>
+
+      <section id="how">
+        <h2>How it works</h2>
+        <p>
+          Posts are MDX files in <code>content/blog/</code>, collected by
+          Fumadocs MDX. The
+          <strong>filename is the slug</strong> — <code>my-post.mdx</code>
+          becomes <code>/blog/my-post</code>.
+        </p>
+        <p>
+          Folders wrapped in parentheses, like <code>(2024)/</code>, are
+          <strong>route groups</strong>: they organise files on disk but do not
+          appear in the URL. The post inside <code>content/blog/(2024)/</code>
+          still lives at <code>/blog/react-server-functions</code>. Use them
+          freely, or don't — the URL is the same either way.
+        </p>
+
+        <h3>What's automatic</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>You do</th>
+                <th>The site does</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="plain">Write the MDX file</td>
+                <td>
+                  Adds it to <code>/blog</code>, the home page's three latest,
+                  and the prev/next navigation
+                </td>
+              </tr>
+              <tr>
+                <td class="plain">Set <code>publishedOn</code></td>
+                <td>
+                  Sorts every listing, updates the year range on the index
+                </td>
+              </tr>
+              <tr>
+                <td class="plain">Drop in the hero image</td>
+                <td>
+                  Generates a blur placeholder with sharp, sizes and encodes it
+                  at quality 90
+                </td>
+              </tr>
+              <tr>
+                <td class="plain">Nothing</td>
+                <td>
+                  Assigns a chalk cover from
+                  <code>public/images/hero-wrap/</code> — see
+                  <a href="#gotchas">gotcha #1</a>
+                </td>
+              </tr>
+              <tr>
+                <td class="plain">Nothing</td>
+                <td>Recalculates "about N minutes end to end" from the prose</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>The cover, in one paragraph</h3>
+        <p>
+          Every post shows a hand-drawn chalk cover that dissolves on hover to
+          reveal the real hero art underneath, then re-wraps a few seconds
+          later. Covers are handed out by
+          <strong>chronological position</strong> —
+          <code>wrap-01.jpg</code> to the oldest post, and so on through
+          <code>wrap-22.jpg</code>. This is entirely automatic; the frontmatter
+          never mentions it.
+        </p>
+      </section>
+
+      <section id="hero">
+        <h2>The hero image</h2>
+        <p>
+          Make it <strong>1024&times;575</strong>. Every existing hero is
+          exactly that size, and it is also the default width and height baked
+          into the image component, so anything else will be letterboxed or
+          cropped by the 16:9 frame.
+        </p>
+        <p>
+          Save it to <code>public/images/hero/</code>. PNG, JPG and WebP all
+          work — the existing set uses all three.
+        </p>
+        <p>
+          Then reference it in frontmatter by <strong>bare filename only</strong
+          >:
+        </p>
+        <pre><code><span class="tok-com"># correct</span>
+<span class="tok-key">heroImage</span>: my-post.png
+
+<span class="tok-com"># wrong — the path is added for you</span>
+<span class="tok-key">heroImage</span>: /images/hero/my-post.png</code></pre>
+        <p>
+          The 22 chalk covers in <code>public/images/hero-wrap/</code> are
+          already drawn and assigned automatically. Adding a post does not
+          require adding a cover.
+        </p>
+      </section>
+
+      <section id="frontmatter">
+        <h2>Frontmatter</h2>
+        <p>
+          All four fields are <strong>required</strong> — the schema in
+          <code>source.config.ts</code> validates them, and omitting one fails
+          the build rather than degrading quietly.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Field</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>title</td>
+                <td>
+                  Shown as the <code>h1</code>, in listings, and in the page
+                  title
+                </td>
+              </tr>
+              <tr>
+                <td>publishedOn</td>
+                <td>
+                  A calendar date, <code>YYYY-MM-DD</code>, unquoted. Read as
+                  UTC so it renders as the day written on any machine
+                </td>
+              </tr>
+              <tr>
+                <td>summary</td>
+                <td>
+                  Appears on the index and home page and as the meta
+                  description — but <strong>not</strong> on the post itself,
+                  since several posts open with their summary verbatim
+                </td>
+              </tr>
+              <tr>
+                <td>heroImage</td>
+                <td>
+                  Bare filename inside <code>public/images/hero/</code>. The
+                  file must exist
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="body">
+        <h2>Body images and components</h2>
+        <p>
+          Fumadocs components such as <code>&lt;Callout&gt;</code> are available
+          with no import. Plain triple-backtick code fences are picked up by
+          Code Hike and rendered through the custom
+          <code>Code</code> component — no extra syntax needed for ordinary
+          blocks.
+        </p>
+
+        <h3>Images inside the prose</h3>
+        <p>
+          These are different from the hero: put the file in
+          <code>content/blog/images/</code>, static-import it, and render it
+          with the import-image wrapper (which adds the vertical rhythm and
+          rounded border).
+        </p>
+        <pre><code><span class="tok-key">import</span> { Image } <span class="tok-key">from</span> '@/components/import-image'
+<span class="tok-key">import</span> diagram <span class="tok-key">from</span> './images/diagram.png'
+
+&lt;Image src={diagram} alt="what the diagram shows" /&gt;</code></pre>
+        <p>
+          Note there are <strong>two</strong> <code>Image</code> components in
+          this repo, and they are not interchangeable:
+        </p>
+        <ul>
+          <li>
+            <code>@/components/import-image</code> — for statically imported
+            images in post bodies. This is the one to use when writing.
+          </li>
+          <li>
+            <code>@/components/image</code> — takes a path under
+            <code>public/</code> and reads the file at build time to make a blur
+            placeholder. Used by the page templates for heroes and covers, not
+            by post authors.
+          </li>
+        </ul>
+
+        <h3>Custom demo components</h3>
+        <p>
+          One-off interactive bits live in
+          <code>content/blog/components/</code> and are imported relatively:
+        </p>
+        <pre><code><span class="tok-key">import</span> { ClickableFonts } <span class="tok-key">from</span> './components/clickable-fonts'</code></pre>
+      </section>
+
+      <section id="gotchas">
+        <h2>Gotchas</h2>
+
+        <div class="gotcha">
+          <h3>1. Back-dating a post reshuffles every cover after it</h3>
+          <p>
+            Chalk covers are assigned by chronological index. Publishing forward
+            in time is stable — a new post lands at the end of the sequence and
+            takes the next unused cover. But a post dated
+            <em>earlier</em> than existing ones inserts itself into the middle
+            and shifts every later post onto a different cover. Past 22 posts,
+            the sequence starts over.
+          </p>
+        </div>
+
+        <div class="gotcha">
+          <h3>2. A missing hero image is a hard failure, not a broken img</h3>
+          <p>
+            The image component opens the file from disk with sharp to generate
+            its blur placeholder. If <code>heroImage</code> names a file that
+            isn't in <code>public/images/hero/</code>, the page throws a server
+            error in dev and fails the production build. Add the image before
+            the MDX, or at least before committing.
+          </p>
+        </div>
+
+        <div class="gotcha">
+          <h3>3. There is no draft flag</h3>
+          <p>
+            Anything with valid frontmatter in <code>content/blog/</code> is
+            live. Keep works-in-progress outside that directory until they're
+            ready.
+          </p>
+        </div>
+      </section>
+
+      <section id="map">
+        <h2>File map</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Path</th>
+                <th>What's there</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>content/blog/*.mdx</td>
+                <td>The posts. Filename is the slug</td>
+              </tr>
+              <tr>
+                <td>content/blog/images/</td>
+                <td>Images used inside post bodies, via static import</td>
+              </tr>
+              <tr>
+                <td>content/blog/components/</td>
+                <td>One-off demo components for individual posts</td>
+              </tr>
+              <tr>
+                <td>public/images/hero/</td>
+                <td>Hero images, 1024&times;575, named in frontmatter</td>
+              </tr>
+              <tr>
+                <td>public/images/hero-wrap/</td>
+                <td>The 22 chalk covers. Assigned automatically</td>
+              </tr>
+              <tr>
+                <td>source.config.ts</td>
+                <td>Frontmatter schema and Code Hike wiring</td>
+              </tr>
+              <tr>
+                <td>lib/blog.ts</td>
+                <td>
+                  Ordering, cover assignment, date formatting, read-time
+                  estimate
+                </td>
+              </tr>
+              <tr>
+                <td>app/blog/page.tsx</td>
+                <td>The index</td>
+              </tr>
+              <tr>
+                <td>app/blog/[...slug]/page.tsx</td>
+                <td>The post template</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Running it</h3>
+        <pre><code>pnpm dev      <span class="tok-com"># http://localhost:3000</span>
+pnpm build    <span class="tok-com"># catches missing hero images</span></code></pre>
+      </section>
+
+      <footer>Nathan Amick — authoring guide</footer>
+    </main>
+  </body>
+</html>
