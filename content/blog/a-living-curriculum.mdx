@@ -1,0 +1,142 @@
+---
+title: A Living Curriculum
+publishedOn: 2026-08-06
+summary: I'm mentoring an eighth grader in writing this year, and instead of buying a curriculum I built one — a git repository with a constitution, two agent skills, and a feedback loop that steers the course toward whatever the student cares about most.
+heroImage: a-living-curriculum.png
+---
+
+I'm mentoring an eighth grader in writing this year. When I sat down to figure out what that should look like, I didn't start by shopping for a curriculum. I started by writing down what I actually wanted, and it came out as three goals.
+
+**First, I wanted to steer. ** Ph.D.-level intelligence is available now to everyone with a laptop. I wanted a system that lets me aim that intelligence, every day, at what my one particular student needs — a student who voluntarily writes eleven-hundred-word dragon stories with subverted endings, loves ferrets and Minecraft, and wants to make animations someday. (Okay, she's my daughter.) But no fixed curriculum can target exactly where she is and spark her interests.
+
+**Second, I wanted structure.** Steerable can't mean adrift. This is a real school year with a real deliverable — one full year of eighth-grade education in creative writing — so the system needed a calendar, quarters, milestones, and year-end goals it would actually hit no matter how far the daily steering wandered.
+
+**Third, it had to be at least as good as what she'd get at school.** To be frank, what she might get at a government school isn't exactly a high bar. I thought I could do a lot better. And if it didn't work, I could just buy a high-quality curriculum and work with her through that. I've built this kind of thing before with various software projects, but the work and time involved is significant. That has changed. It seems like every month or two, the intelligence tools just keep getting better. What I ended up with, at least so far, has greatly exceeded my expectations.
+
+Rather than buying a curriculum, I built a *system* that generates the curriculum — one day at a time, aimed at whatever the student's actual work says is important right now. It's a git repository. It has a constitution, agent skills, a handful of state files, and a feedback loop. Every document it produces is a self-contained HTML file that prints well from the browser. (I'll get to the printing struggles later.)
+
+It's been running for a week of real school days, producing solid lessons and helpful evaluations of the student's writing. Here's how it works.
+
+## Start with research
+
+The first thing in the repository is a research document.  If there's one thing that today's artificial intelligence is good at, it's doing extensive research And collecting that research into a highly usable format. 
+
+I cranked Claude Fable up to max and ask it whether or not it minded doing a little bit of research for me - if it wasn't too busy. (I'm kidding. Mechanistic computers don't have feelings.)  I launched it on a deep dive about what actually works in writing instruction for adolescents.  I wanted real research, learned wisdom, and sources. I got all of that and `teaching-writing-research.html` became the first file in the system. The rest of the course is built from it, and every rule in the system traces back to its findings.
+
+The backbone is *Writing Next* (Graham & Perin, 2007), a Carnegie-commissioned meta-analysis of hundreds of studies that ranked eleven instructional practices by effect size. The largest effect, by a wide margin, belongs to **explicit strategy instruction** — directly teaching step-by-step strategies for planning, drafting, and revising, rather than handing students prompts and time. Assigning writing is not teaching writing. That finding became the system's standing rule, written into the plan verbatim: every lesson teaches one nameable technique, shows it working in a mentor text, then has the student use it immediately. If a handout doesn't have a technique you can name in five words, it isn't ready to print.
+
+The most surprising finding: **traditional grammar drill had a *negative* effect** in the studies. What works instead is **sentence combining** — merging short, choppy sentences into varied, complex ones, taught inside the student's own writing. Judith Hochman's *The Writing Revolution* builds an entire method on this: a few minutes a day of deliberate sentence-level practice — combining, expanding, *because/but/so* constructions, subordinate-clause openers — and it transfers directly into longer pieces. So every handout the system generates opens with a warm-up drill built from the student's own sentences, and worksheets are banned by name.
+
+The rest of the findings mapped onto design decisions just as directly:
+
+- **Specific product goals beat vague ones.** "Add three sensory details to this scene" outperforms "make it better." → Assignment requirements must be specific and countable, and evaluation checks each piece against its own lesson's criteria and nothing else.
+- **Feedback beats grades, and limited feedback beats exhaustive feedback.** Marking every error teaches that writing is error-avoidance. → The feedback format is fixed at exactly one strength and one teaching point, and individual pieces are never graded.
+- **An authentic audience produces measurably more effort and revision** than writing that dies in a folder. → Most Fridays, something ships — read aloud, printed, or mailed to a real reader.
+- **Choice and interest drive volume, and volume drives skill.** A classroom of thirty can't let everyone write about ferrets and dragons. I can. → The student's interests are the raw material for every drill and assignment, not decoration on top of them.
+- **Mentor texts are among the cheapest, most effective tools available.** Pull apart a paragraph from a book she loves and ask how the author did it. → Every technique lesson includes one.
+
+The research also surveyed the curriculum market, which settled build-vs-buy. Nothing free rises above workbook-flavored, and the big structured programs are formulas built for reluctant writers — pointed at a student who already writes voluntarily, a formula would bore her and flatten her voice. The document's own conclusion: there is no curriculum better than the one you can build from these findings.
+
+The second input was the local school district's calendar — first day, last day, 180 days, every break. The course lives on a real calendar with real Fridays.
+
+## The plan is a constitution, not a script
+
+Then, in a fresh session, I had Claude read both documents and write the course plan. This is the document I'd point to if you asked "so what's the curriculum?" — but it deliberately contains **no pre-written lessons**. From its own opening:
+
+> Individual lessons are *not* pre-written; they are created each morning from the recipe in §6, aimed at whatever the skills tracker says matters right now. That is by design: the research says responsive teaching beats a fixed script, and it keeps the course steerable all year.
+
+What the plan *does* fix is structure:
+
+- **Year goals** — what June looks like, ending with the non-negotiable: "an intact love of writing."
+- **A weekly rhythm** that never changes: a daily freewrite, a daily sentence drill, 40–60 minutes of daily drafting, and most Fridays something *ships* — finished and shared, framed as a celebration, never a deadline.
+- **Four quarters**, each anchored in one mode of writing (narrative, informative, argument, capstone), sequenced to start where the student's enthusiasm already is.
+- **Protocols** for generating lessons, evaluating work, and — critically — changing the plan itself.
+
+It's a living document in the literal sense: it has a version number and a change log, and it's already at v1.2 after five days. The plan serves the writer, not the other way around.
+
+## Two skills run the day-to-day
+
+The daily operation is two Claude Code skills, which are basically executable standard operating procedures checked into the repo.
+
+**`/lessons`** generates the next day's printable handout. It scans the filesystem to figure out where the course stands, reads the current state files and the relevant sections of the plan, picks a technique the tracker most needs, and writes a one-to-two-page HTML handout: a warm-up drill built from the student's own sentences, a ten-minute freewrite, a mini-lesson with a mentor text, a writing assignment with specific countable requirements, and a self-checkable checklist. It commits and pushes when it's done. I print the page from the browser and school is ready.
+
+**`/evaluate`** processes finished work. The student's completed piece goes into a folder; the skill finds everything completed-but-unevaluated, checks each piece *against its own lesson's checklist* — not against everything writing could ever be — and produces two things: an evaluation record for me, and a printable feedback note for the student in a fixed format. One genuine strength, with her exact words quoted back. One teaching point. Never a list of errors.
+
+The design rule underneath both: **the filesystem is the state.** Every run starts cold and derives everything from what files exist. No conversation memory, no hidden context. If it matters, it's in a file I can read and edit.
+
+## The steering wheel
+
+Between the constitution and the skills sit three small files that do the actual steering.
+
+## `STATUS.md`
+
+The current state: where we are in the quarter, a skills tracker of 3–5 active teaching points drawn from the student's actual drafts (each with an explicit retire condition), and a "Parent notes" section the skills read but never write. That's where the **Challenge dial** lives — my authoritative settings for how hard to push: the word-count floor, the length of the writing block, the rule that word ranges are floors with headroom, never ceilings.
+
+## `GUIDANCE.md`
+
+My standing corrections file, Where I can control the tone, style, and communication flavor. I am using military-grade intelligence for this. At least, I assume it's military-grade intelligence. The U.S. government banned it for three weeks as a national security risk, and still requires guardrails lest it drift into unrequested optimizations. Most of the time it's great. Sometimes the model is too smart for its own good.
+
+```
+Requirements are sentences, never middot fragments.
+
+<bad>Product goals: door chosen · all 5 planning questions
+answered · first 400 words drafted.</bad>
+
+<good>By the end of today's studio time, you will have chosen your
+option, answered all five planning questions, and drafted
+the first 400 words of your piece.</good>
+```
+
+The "·" is doing the work that verbs and sentence boundaries did before. For an adult skimming, it's efficient; for a 13-year-old deciding what's mandatory, it can be confusing.
+
+The skills read this file on every run and never write to it. It's how the system gets *my* taste without me re-explaining it every morning.
+
+## `LOG.md`
+
+This is an append-only timeline — every lesson generated, every evaluation, every course correction, newest last. Routine runs read only the tail; the quarterly review reads the whole quarter's slice.
+
+And when these files disagree, there's an explicit precedence order: pedagogy beats voice, voice beats structure, structure beats procedure. Above all of it sits one trump rule, written into every skill: **if any rule would cost the student her enthusiasm, enthusiasm wins** — the run flags the conflict to me instead of applying the rule.
+
+## The loop: her writing steers the course
+
+Here's the part that makes it a *living* curriculum rather than just an automated one.
+
+The first lessons were deliberately open — a personal snapshot, a piece of fiction on any subject. Those weren't just warm-ups; they were sensors. The fiction came back as a complete dragon story with a planned, subverted ending — and also with comma splices, named emotions ("Clara was shocked"), runs of sentences all starting with "She…", and dialogue punctuation guessed at.
+
+That one piece populated the entire skills tracker. And the student's interests — dragons, ferrets, Minecraft, the animation goal — became the raw material for everything since. The sentence-combining drill that fixes comma splices uses *her* spliced sentences. The show-don't-tell lesson was a creature study of a ferret. The dialogue-mechanics lesson had her write the reunion scene from her own story, one year later.
+
+Evaluations then feed forward. Each one ends with a *seed* — a line for future lesson generation, usually pointing at something the student half-discovered on her own. She cut a dialogue tag herself in revision, so a lesson on zero-tag exchanges with action beats is now queued for exactly the moment she's ready for it.
+
+One week in, the loop is visibly working. The fourth piece came back with a perfect checklist — nine dialogue exchanges, every punctuation rule clean — and she caught and repaired a comma splice in her own revision, unprompted. She's running a day ahead of the calendar, over the word floor, happily.
+
+## The system absorbs corrections, too
+
+The curriculum isn't the only thing that's alive — the system itself takes feedback the same way.
+
+Mid-week, I reviewed a batch of generated lessons and didn't like them: assignments split into fragments, a tone drifting flippant. In an ordinary setup that's a morning of hand-editing, repeated forever. Here, the fix was to write seven rules into `GUIDANCE.md` as bad/good pairs, align the templates, delete the unstarted lessons, and regenerate. The bad taste became permanent, enforceable policy in one sitting — there's a self-check gate in the lesson skill that now refuses to ship a handout violating any of it.
+
+Same with policy changes. When I decided daily volume mattered more than any milestone, that became a rewritten rhythm section and a ship map in the plan, a change-log entry, and an updated dial — and every future lesson simply obeys. Version control means every one of these corrections is a commit; the course has a full audit trail of both the student's growth and my own course corrections.
+
+## Problems along the way
+
+Not everything worked on the first try. A few of the fights were instructive enough to write down.
+
+### The printing fight
+
+The first real fight was over file formats. I started out producing PDFs, for the obvious reason: they print beautifully, and a course that runs on paper — printed handouts for the student, printed records for the file — lives and dies by printing.
+
+But I kept wanting the documents to be HTML. A self-contained HTML file is a joy to browse, trivial to version in git, and easy for an agent to edit surgically instead of regenerating wholesale. And it turns out AI is *very* good at writing beautiful HTML — the course plan and handouts look better than anything I'd get out of a word processor.
+
+The problem was the printer. When I printed these documents for the classroom record, the page breaks would slice a sentence in half *horizontally* — the top halves of the letters on one page, the bottoms on the next. It looked so broken that I'd half-concluded HTML just wasn't usable for printed coursework. Then I thought: wait, this has to be a solved problem. So I just talked to the thing.
+
+It is a solved problem, and the cause is wonderfully specific. Chrome's pagination engine treats certain boxes as *monolithic* — boxes it's not permitted to split across a page boundary, which is what `overflow: hidden` (there to clip content to a rounded corner), fixed heights, and scroll wrappers all quietly declare. When a monolithic box is taller than the space left on the page, the engine can't break it properly, so it just cuts it at the page edge, mid-line. The fix is a block of print CSS that neutralizes those properties on paper, protects headings from stranding, and repeats table headers across pages.
+
+And in keeping with how everything else in this system works, the fix didn't stay a fix — it became a standard: a `how-to-print.html` document in the repo that every generated document must include verbatim, with the rules explained so future sessions understand *why*. HTML is now the canonical format; PDFs are disposable artifacts, generated from the HTML on demand and never committed. One source file that reads well on screen and breaks correctly on paper.
+
+## Why this shape
+
+A textbook curriculum optimizes for the average student, which is another way of saying it optimizes for no one. What I wanted was the thing a great human mentor does naturally — notice what this one writer needs next, meet her exactly there, and never break the thing that makes her want to write — but with the consistency, patience, and memory of a system.
+
+So the roles split cleanly. The system holds the state, the standards, the calendar, and the discipline of one-technique-per-lesson and one-teaching-point-per-feedback-note. I hold the judgment: the dial, the taste, the steering, and the only metric that decides everything — is she still lighting up when it's time to write?
+
+So far, she is. She finished Friday's lesson on Thursday because she wanted to.
