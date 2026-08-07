@@ -23,29 +23,6 @@ const now = [
   },
 ]
 
-const timeline = [
-  ['2024 –', 'Independent AI engineer & technical mentor'],
-  [
-    '2023',
-    'AI document tools, WCAG accessibility work that landed a State of California contract — Intoo',
-  ],
-  ['2020', 'HIPAA-compliant genomics platform, 100GB per patient — LifeOmic'],
-  [
-    '2018',
-    'Coursework and learning software for new programmers — Home Code Makers',
-  ],
-  ['2016', 'Peer-to-peer music platform on Electron and IPFS — All The Music'],
-  [
-    '2013',
-    'Supply-chain transparency used by Fortune 100 companies — GoodGuide',
-  ],
-  [
-    '2007',
-    'Co-founded a VPS hosting company, data centers on two continents — Seedbox',
-  ],
-  ['2001', 'Customer portals for VOIP services, PHP on Linux — Future Phone'],
-] as const
-
 const links = [
   ['GitHub', 'https://github.com/namick'],
   ['LinkedIn', 'https://linkedin.com/in/namick'],
@@ -121,23 +98,6 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-      </section>
-
-      {/* Timeline */}
-      <section className="mx-auto w-full max-w-3xl px-6 py-24 sm:px-10">
-        <h2 className="mb-12 font-mono text-sm tracking-widest text-fd-primary uppercase">
-          Before that
-        </h2>
-        <ul className="flex flex-col gap-4 border-l border-fd-border pl-6">
-          {timeline.map(([year, entry]) => (
-            <li key={year} className="flex gap-6 leading-relaxed">
-              <span className="w-14 shrink-0 font-mono text-sm text-fd-muted-foreground">
-                {year}
-              </span>
-              <span className="text-fd-foreground/80">{entry}</span>
-            </li>
-          ))}
-        </ul>
       </section>
 
       {/* Writing */}
