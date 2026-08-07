@@ -1,7 +1,7 @@
 ---
 title: A Living Curriculum
 publishedOn: 2026-08-06
-summary: I'm mentoring an eighth grader in writing this year, and instead of buying a curriculum I built one — a git repository with a constitution, two agent skills, and a feedback loop that steers the course toward whatever the student cares about most.
+summary: How to build a course that generates itself one day at a time, stable enough to hit year-end goals, steerable toward one student's actual interests, and higher quality than anything you could buy. A walkthrough of the whole system, including the research, the constitution, the agent skills, and the state files that keep it on course.
 heroImage: a-living-curriculum.png
 ---
 
@@ -19,9 +19,9 @@ It's been running for a week of real school days, producing solid lessons and he
 
 ## Start with research
 
-The first thing in the repository is a research document.  If there's one thing that today's artificial intelligence is good at, it's doing extensive research And collecting that research into a highly usable format. 
+The first thing in the repository is a research document.  If there's one thing that today's artificial intelligence is good at, it's doing extensive research and collecting that research into a highly usable format. 
 
-I cranked Claude Fable up to max and ask it whether or not it minded doing a little bit of research for me - if it wasn't too busy. (I'm kidding. Mechanistic computers don't have feelings.)  I launched it on a deep dive about what actually works in writing instruction for adolescents.  I wanted real research, learned wisdom, and sources. I got all of that and `teaching-writing-research.html` became the first file in the system. The rest of the course is built from it, and every rule in the system traces back to its findings.
+I cranked Claude Fable up to max and asked it whether or not it minded doing a little bit of research for me - if it wasn't too busy. (I'm kidding. Mechanistic computers don't have feelings.)  I launched it on a deep dive about what actually works in writing instruction for adolescents.  I wanted real research, learned wisdom, and sources. I got all of that and `teaching-writing-research.html` became the first file in the system. The rest of the course is built from it, and every rule in the system traces back to its findings.
 
 The backbone is *Writing Next* (Graham & Perin, 2007), a Carnegie-commissioned meta-analysis of hundreds of studies that ranked eleven instructional practices by effect size. The largest effect, by a wide margin, belongs to **explicit strategy instruction** — directly teaching step-by-step strategies for planning, drafting, and revising, rather than handing students prompts and time. Assigning writing is not teaching writing. That finding became the system's standing rule, written into the plan verbatim: every lesson teaches one nameable technique, shows it working in a mentor text, then has the student use it immediately. If a handout doesn't have a technique you can name in five words, it isn't ready to print.
 
