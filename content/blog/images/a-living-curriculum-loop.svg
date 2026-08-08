@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1300" viewBox="0 0 1440 1300" role="img" aria-labelledby="t d">
+  <title id="t">The loop: her writing steers the course</title>
+  <desc id="d">A circular diagram: /lessons generates a handout, it is printed, the student writes, work lands in completed/, /evaluate checks it against the lesson's own checklist, feedback and seeds update the state, and the next lesson aims at what her writing just showed. At the center sit STATUS.md, GUIDANCE.md and LOG.md — the steering wheel.</desc>
+  <defs>
+    <radialGradient id="vg" cx="50%" cy="46%" r="70%">
+      <stop offset="0%" stop-color="#161A17"/>
+      <stop offset="100%" stop-color="#111412"/>
+    </radialGradient>
+    <style>
+      .sc    { font-family: Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 600; letter-spacing: .16em; }
+      .serif { font-family: Newsreader, Georgia, 'Times New Roman', serif; }
+      .mono  { font-family: 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace; }
+      .it    { font-style: italic; }
+    </style>
+  </defs>
+
+  <rect width="1440" height="1300" fill="url(#vg)"/>
+
+  <!-- ============ header ============ -->
+  <text class="sc" x="720" y="82" font-size="21" fill="#757A72" text-anchor="middle">A LIVING CURRICULUM · THE LOOP</text>
+  <text class="serif" x="720" y="130" font-size="40" fill="#E5E4DC" text-anchor="middle">Her writing steers the course</text>
+
+  <!-- ============ ring ============ -->
+  <circle cx="720" cy="710" r="430" fill="none" stroke="#262B26" stroke-width="2.5"/>
+
+  <!-- closing segment, emphasized: node 6 back to node 1 -->
+  <path d="M 421 401 A 430 430 0 0 1 601 297" fill="none" stroke="#8FC0A0" stroke-width="3.5"/>
+
+  <!-- direction chevrons at gap midpoints (clockwise) -->
+  <g fill="#565D57">
+    <path d="M-9,-7 L10,0 L-9,7 Z" transform="translate(935,338) rotate(30)"/>
+    <path d="M-9,-7 L10,0 L-9,7 Z" transform="translate(1150,710) rotate(90)"/>
+    <path d="M-9,-7 L10,0 L-9,7 Z" transform="translate(935,1082) rotate(150)"/>
+    <path d="M-9,-7 L10,0 L-9,7 Z" transform="translate(505,1082) rotate(210)"/>
+    <path d="M-9,-7 L10,0 L-9,7 Z" transform="translate(290,710) rotate(270)"/>
+  </g>
+  <path d="M-10,-8 L12,0 L-10,8 Z" fill="#8FC0A0" transform="translate(505,338) rotate(330)"/>
+
+  <!-- ============ annotation: the payoff ============ -->
+  <g>
+    <text class="serif it" x="105" y="252" font-size="25" fill="#8FC0A0">the next lesson aims at what</text>
+    <text class="serif it" x="105" y="284" font-size="25" fill="#8FC0A0">her writing just showed</text>
+    <path d="M 340 302 C 400 322 435 328 468 337" fill="none" stroke="#8FC0A0" stroke-width="1.75" opacity="0.8"/>
+    <path d="M-7,-5.5 L8,0 L-7,5.5 Z" fill="#8FC0A0" opacity="0.8" transform="translate(472,338) rotate(14)"/>
+  </g>
+
+  <!-- ============ spokes: the skills read and write the state ============ -->
+  <g stroke="#4A514B" stroke-width="2" stroke-dasharray="7 6" fill="none">
+    <path d="M 720 384 L 720 576"/>
+    <path d="M 562 798 L 472 844"/>
+  </g>
+  <g fill="#4A514B">
+    <path d="M-7,-5.5 L8,0 L-7,5.5 Z" transform="translate(720,380) rotate(-90)"/>
+    <path d="M-7,-5.5 L8,0 L-7,5.5 Z" transform="translate(720,580) rotate(90)"/>
+    <path d="M-7,-5.5 L8,0 L-7,5.5 Z" transform="translate(468,846) rotate(155)"/>
+    <path d="M-7,-5.5 L8,0 L-7,5.5 Z" transform="translate(566,796) rotate(-25)"/>
+  </g>
+  <text class="serif it" x="736" y="486" font-size="20" fill="#8A8E85">reads · writes back</text>
+
+  <!-- ============ hub: the steering wheel ============ -->
+  <g>
+    <rect x="550" y="585" width="340" height="250" rx="16" fill="#1D211C" stroke="#41402F" stroke-width="1.5"/>
+    <rect x="562" y="603" width="4" height="214" rx="2" fill="#D8B764"/>
+    <text class="sc" x="586" y="633" font-size="17" fill="#D8B764">THE STEERING WHEEL</text>
+    <!-- dial glyph -->
+    <g stroke="#D8B764" fill="none" stroke-width="2">
+      <circle cx="856" cy="626" r="12"/>
+      <path d="M 856 626 L 863 616"/>
+    </g>
+    <text class="mono" x="586" y="676" font-size="23" fill="#E5E4DC">STATUS.md</text>
+    <text class="serif it" x="586" y="701" font-size="20" fill="#9FA29A">tracker · seeds · Challenge dial</text>
+    <text class="mono" x="586" y="738" font-size="23" fill="#E5E4DC">GUIDANCE.md</text>
+    <text class="serif it" x="586" y="763" font-size="20" fill="#9FA29A">the instructor's voice rules</text>
+    <text class="mono" x="586" y="800" font-size="23" fill="#E5E4DC">LOG.md</text>
+    <text class="serif it" x="586" y="825" font-size="20" fill="#9FA29A">append-only course timeline</text>
+  </g>
+
+  <!-- ============ node cards ============ -->
+  <!-- 01 /lessons (top) -->
+  <g>
+    <rect x="560" y="185" width="320" height="190" rx="14" fill="#1B201C" stroke="#2C322D" stroke-width="1.5"/>
+    <rect x="572" y="203" width="4" height="154" rx="2" fill="#8FC0A0"/>
+    <text class="sc" x="596" y="229" font-size="17" fill="#8FC0A0">SKILL · MORNING</text>
+    <text class="mono" x="852" y="229" font-size="18" fill="#757A72" text-anchor="end">01</text>
+    <text class="mono" x="596" y="273" font-size="30" fill="#E5E4DC">/lessons</text>
+    <text class="serif it" x="596" y="307" font-size="22" fill="#9FA29A">reads the state, picks the</text>
+    <text class="serif it" x="596" y="334" font-size="22" fill="#9FA29A">technique the tracker needs,</text>
+    <text class="serif it" x="596" y="361" font-size="22" fill="#9FA29A">writes today's handout</text>
+  </g>
+
+  <!-- 02 the handout -->
+  <g>
+    <rect x="932" y="400" width="320" height="190" rx="14" fill="#1B201C" stroke="#2C322D" stroke-width="1.5"/>
+    <rect x="944" y="418" width="4" height="154" rx="2" fill="#C9C6BC"/>
+    <text class="sc" x="968" y="444" font-size="17" fill="#A9ACA2">PAPER · PRINTED</text>
+    <text class="mono" x="1224" y="444" font-size="18" fill="#757A72" text-anchor="end">02</text>
+    <text class="serif" x="968" y="489" font-size="30" fill="#E5E4DC">The handout</text>
+    <text class="serif it" x="968" y="522" font-size="22" fill="#9FA29A">one page: drill · freewrite ·</text>
+    <text class="serif it" x="968" y="549" font-size="22" fill="#9FA29A">mini-lesson · assignment ·</text>
+    <text class="serif it" x="968" y="576" font-size="22" fill="#9FA29A">checklist · stretch</text>
+  </g>
+
+  <!-- 03 the student writes -->
+  <g>
+    <rect x="932" y="830" width="320" height="190" rx="14" fill="#1B201C" stroke="#2C322D" stroke-width="1.5"/>
+    <rect x="944" y="848" width="4" height="154" rx="2" fill="#E8926A"/>
+    <text class="sc" x="968" y="874" font-size="17" fill="#E8926A">THE STUDENT</text>
+    <text class="mono" x="1224" y="874" font-size="18" fill="#757A72" text-anchor="end">03</text>
+    <text class="serif" x="968" y="919" font-size="30" fill="#E5E4DC">She writes</text>
+    <text class="serif it" x="968" y="952" font-size="22" fill="#9FA29A">her own sentences in the</text>
+    <text class="serif it" x="968" y="979" font-size="22" fill="#9FA29A">warm-up, then 40–60 minutes</text>
+    <text class="serif it" x="968" y="1006" font-size="22" fill="#9FA29A">of real drafting</text>
+  </g>
+
+  <!-- 04 completed/ -->
+  <g>
+    <rect x="560" y="1045" width="320" height="190" rx="14" fill="#1B201C" stroke="#2C322D" stroke-width="1.5"/>
+    <rect x="572" y="1063" width="4" height="154" rx="2" fill="#9FBDE4"/>
+    <text class="sc" x="596" y="1089" font-size="17" fill="#9FBDE4">TURNED IN</text>
+    <text class="mono" x="852" y="1089" font-size="18" fill="#757A72" text-anchor="end">04</text>
+    <text class="mono" x="596" y="1133" font-size="30" fill="#E5E4DC">completed/</text>
+    <text class="serif it" x="596" y="1167" font-size="22" fill="#9FA29A">finished work dropped in a</text>
+    <text class="serif it" x="596" y="1194" font-size="22" fill="#9FA29A">folder — the filesystem</text>
+    <text class="serif it" x="596" y="1221" font-size="22" fill="#9FA29A">is the state</text>
+  </g>
+
+  <!-- 05 /evaluate -->
+  <g>
+    <rect x="188" y="830" width="320" height="190" rx="14" fill="#1B201C" stroke="#2C322D" stroke-width="1.5"/>
+    <rect x="200" y="848" width="4" height="154" rx="2" fill="#9FBDE4"/>
+    <text class="sc" x="224" y="874" font-size="17" fill="#9FBDE4">SKILL · AFTER</text>
+    <text class="mono" x="480" y="874" font-size="18" fill="#757A72" text-anchor="end">05</text>
+    <text class="mono" x="224" y="918" font-size="30" fill="#E5E4DC">/evaluate</text>
+    <text class="serif it" x="224" y="952" font-size="22" fill="#9FA29A">checks each piece against</text>
+    <text class="serif it" x="224" y="979" font-size="22" fill="#9FA29A">its own lesson's checklist —</text>
+    <text class="serif it" x="224" y="1006" font-size="22" fill="#9FA29A">nothing else</text>
+  </g>
+
+  <!-- 06 the feedback note -->
+  <g>
+    <rect x="188" y="400" width="320" height="190" rx="14" fill="#1B201C" stroke="#2C322D" stroke-width="1.5"/>
+    <rect x="200" y="418" width="4" height="154" rx="2" fill="#8FC0A0"/>
+    <text class="sc" x="224" y="444" font-size="17" fill="#8FC0A0">FEEDBACK · SEEDS</text>
+    <text class="mono" x="480" y="444" font-size="18" fill="#757A72" text-anchor="end">06</text>
+    <text class="serif" x="224" y="489" font-size="30" fill="#E5E4DC">The feedback note</text>
+    <text class="serif it" x="224" y="522" font-size="22" fill="#9FA29A">one strength, one teaching</text>
+    <text class="serif it" x="224" y="549" font-size="22" fill="#9FA29A">point — never an error list;</text>
+    <text class="serif it" x="224" y="576" font-size="22" fill="#9FA29A">seeds land in STATUS.md</text>
+  </g>
+
+  <!-- ============ corner notes ============ -->
+  <g>
+    <text class="sc" x="105" y="1128" font-size="18" fill="#D8B764">THE INSTRUCTOR'S HAND</text>
+    <text class="serif it" x="105" y="1162" font-size="22" fill="#9FA29A">sets the dial &amp; the standing rules,</text>
+    <text class="serif it" x="105" y="1190" font-size="22" fill="#9FA29A">prints the pages, decides the day,</text>
+    <text class="serif it" x="105" y="1218" font-size="22" fill="#9FA29A">drops her finished work in the folder</text>
+  </g>
+  <g text-anchor="end">
+    <text class="mono" x="1338" y="1162" font-size="19" fill="#6E7169">every run ends with</text>
+    <text class="mono" x="1338" y="1190" font-size="19" fill="#8A8E85">git commit &amp;&amp; git push</text>
+    <text class="mono" x="1338" y="1218" font-size="19" fill="#6E7169">— the course is its own audit trail</text>
+  </g>
+</svg>

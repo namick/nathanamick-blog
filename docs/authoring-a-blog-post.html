@@ -516,6 +516,16 @@ Body starts here.</code></pre>
 
 &lt;Image src={diagram} alt="what the diagram shows" /&gt;</code></pre>
         <p>
+          Every body image is <strong>click-to-enlarge</strong>, with no extra
+          prop: clicking opens it in a full-window overlay (Esc or a click
+          closes it). Worth knowing when choosing what to draw — a diagram
+          authored well above the 704px column is legible rather than wasted,
+          because the enlarged view is where it gets read. <strong>SVG is the
+          format to reach for</strong>: it is served as-is, so it stays sharp at
+          any size, while raster art stops growing at the resolution it was
+          saved at rather than going soft.
+        </p>
+        <p>
           Note there are <strong>two</strong> <code>Image</code> components in
           this repo, and they are not interchangeable:
         </p>

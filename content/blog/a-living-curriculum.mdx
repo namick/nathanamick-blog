@@ -5,6 +5,12 @@ summary: How to build a course that generates itself one day at a time, stable e
 heroImage: a-living-curriculum.png
 ---
 
+import { Image } from '@/components/import-image'
+import systemMap from './images/a-living-curriculum-system.svg'
+import handoutAnatomy from './images/a-living-curriculum-handout.svg'
+import precedenceLadder from './images/a-living-curriculum-precedence.svg'
+import theLoop from './images/a-living-curriculum-loop.svg'
+
 Normally, I'm mentoring software engineers, but this year I'm also mentoring an eighth grader in creative writing. When I sat down to figure out what that should look like, I didn't start by shopping for a curriculum. I started by writing down what I actually wanted, and it came out as three goals.
 
 **First, I wanted to steer.** Ph.D.-level intelligence is available now to everyone with a laptop. I wanted a system that lets me aim that intelligence, every day, at what my one particular student needs - a student who voluntarily writes eleven-hundred-word dragon stories with subverted endings, loves ferrets and Minecraft, and wants to make animations someday. (Okay, she's my daughter.) But regardless, no fixed curriculum can target exactly where she is and follow her interests.
@@ -15,7 +21,18 @@ Normally, I'm mentoring software engineers, but this year I'm also mentoring an 
 
 Rather than buying a curriculum, I built a *system* that generates the curriculum - one day at a time, aimed at whatever the student's actual work says is important right now. It's a git repository. It has a constitution, agent skills, a handful of state files, and a feedback loop. Every document it produces is a self-contained HTML file that prints well from the browser. (I'll get to the printing struggles later.)
 
-It's been running for a week of real school days, producing solid lessons and helpful evaluations of the student's writing. We'll see how it progresses throughout the year, but here's how it works right now. 
+It's been running for a week of real school days, producing solid lessons and helpful evaluations of the student's writing. We'll see how it progresses throughout the year, but here's how it works right now.
+
+<Image src={systemMap} alt="The system: research and document standards feed a constitution; instructor-owned steering files feed two skills that read and write the state files; the output is printed pages on her desk" />
+
+One school day, condensed:
+
+1. Morning: run `/lessons`. It reads where the course stands and writes today's printable handout.
+2. She works the page - warm-up drill, freewrite, 40–60 minutes of drafting.
+3. Her finished piece gets dropped into the `completed/` folder.
+4. Run `/evaluate`. It writes her a feedback note to print, and re-aims tomorrow's lesson.
+
+The rest of this post is just unpacking those four steps.
 
 ## Start with research
 
@@ -66,6 +83,8 @@ The daily operation is two Claude Code skills, which are basically executable st
 
 Skill **`/lessons`** generates the next day's printable handout. It scans the filesystem to figure out where the course stands, reads the current state files and the relevant sections of the plan, picks a technique the tracker most needs, and writes a one-to-two-page HTML handout: a warm-up drill built from the student's own sentences, a ten-minute freewrite, a mini-lesson with a mentor text, a writing assignment with specific countable requirements, and a self-checkable checklist. It commits and pushes when it's done. I print the page from the browser and school is ready.
 
+<Image src={handoutAnatomy} alt="Anatomy of a daily handout: the technique named in plain words, a warm-up drill from her own sentences, a freewrite, a mini-lesson with a mentor text, one labeled writing assignment with countable requirements, a self-checkable checklist that later becomes the evaluation rubric, a stretch, and a cut-out pocket card" />
+
 Skill **`/evaluate`** processes finished work. The student's completed piece goes into a folder; the skill finds everything completed-but-unevaluated, checks each piece *against its own lesson's checklist* - not against everything writing could ever be - and produces two things: an evaluation record for me, and a printable feedback note for the student in a fixed format. One genuine strength, with her exact words quoted back. One teaching point. Never a list of errors.
 
 The design rule underneath both: **the filesystem is the state.** Every run starts cold and derives everything from what files exist. No conversation memory, no hidden context. If it matters, it's in a file I can read and edit.
@@ -74,13 +93,13 @@ The design rule underneath both: **the filesystem is the state.** Every run star
 
 Between the constitution and the skills sit three small files that do the actual steering.
 
-## `STATUS.md`
+### `STATUS.md`
 
 The current state: where we are in the quarter, a skills tracker of 3–5 active teaching points drawn from the student's actual drafts (each with an explicit retire condition), and a "Parent notes" section the skills read but never write. That's where the **Challenge dial** lives - my authoritative settings for how hard to push: the word-count floor, the length of the writing block, the rule that word ranges are floors with headroom, never ceilings.
 
-## `GUIDANCE.md`
+### `GUIDANCE.md`
 
-My standing corrections file, Where I can control the tone, style, and communication flavor. I am using military-grade intelligence for this. At least, I assume it's military-grade intelligence. The U.S. government banned it for three weeks as a national security risk, and still requires guardrails lest it drift into unrequested optimizations. Most of the time it's great. Sometimes the model is too smart for its own good.
+My standing corrections file, where I can control the tone, style, and communication flavor. I am using military-grade intelligence for this. At least, I assume it's military-grade intelligence. The U.S. government banned it for three weeks as a national security risk, and still requires guardrails lest it drift into unrequested optimizations. Most of the time it's great. Sometimes the model is too smart for its own good.
 
 ```
 Requirements are sentences, never middot fragments.
@@ -97,15 +116,19 @@ The "·" is doing the work that verbs and sentence boundaries did before. For an
 
 The skills read this file on every run and never write to it. It's how the system gets *my* taste without me re-explaining it every morning.
 
-## `LOG.md`
+### `LOG.md`
 
 This is an append-only timeline - every lesson generated, every evaluation, every course correction, newest last. Routine runs read only the tail; the quarterly review reads the whole quarter's slice.
 
 And when these files disagree, there's an explicit precedence order: pedagogy beats voice, voice beats structure, structure beats procedure. Above all of it sits one trump rule, written into every skill: **if any rule would cost the student her enthusiasm, enthusiasm wins** - the run flags the conflict to me instead of applying the rule.
 
+<Image src={precedenceLadder} alt="The precedence ladder: the course plan (pedagogy) beats GUIDANCE.md (voice) beats the skeletons and print standard (structure) beats the skills' SKILL.md files (procedure) — and above everything, enthusiasm wins" />
+
 ## The loop: her writing steers the course
 
 Here's the part that makes it a *living* curriculum rather than just an automated one.
+
+<Image src={theLoop} alt="The loop: /lessons writes a handout aimed at the tracker, it's printed, the student writes, work lands in completed/, /evaluate checks it against its own lesson's checklist, feedback and seeds update the state files, and the next lesson aims at what her writing just showed" />
 
 The first lessons were deliberately open - a personal snapshot, a piece of fiction on any subject. These are warm-ups, but they're also sensors.  The fiction came back as a complete dragon story with a planned, subverted ending - and also with comma splices, named emotions ("Clara was shocked"), runs of sentences all starting with "She…", and dialogue punctuation guessed at.
 
@@ -123,11 +146,9 @@ Mid-week, I reviewed a batch of generated lessons and didn't like them: assignme
 
 Same with policy changes. When I decided daily volume mattered more than any milestone, that became a rewritten rhythm section and a ship map in the plan, a change-log entry, and an updated dial - and every future lesson simply obeys. Version control means every one of these corrections is a commit; the course has a full audit trail of both the student's growth and my own course corrections.
 
-## Problems along the way
+## The printing problem
 
-Not everything worked on the first try. A few of the issues were instructive enough to write down.
-
-### Producing a Hard Copy
+Not everything worked on the first try. This one was instructive enough to write down.
 
 I started out producing PDFs, for the obvious reason: they print beautifully, and a course that runs on paper - printed handouts for the student, printed records for the file - lives and dies by printing.
 

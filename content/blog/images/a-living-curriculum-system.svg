@@ -1,0 +1,231 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1660" viewBox="0 0 1440 1660" role="img" aria-labelledby="t d">
+  <title id="t">The system: where the knowledge lives</title>
+  <desc id="d">Four layers. Built once: the research (run twice, then audited), the course plan constitution, and the document standards. Owned by the instructor: GUIDANCE.md, the Challenge dial, and steering text. Run on demand: the /lessons and /evaluate skills around STATUS.md and LOG.md — the filesystem is the state. On paper: the handout, the student writing, the completed folder, and the feedback note.</desc>
+  <defs>
+    <radialGradient id="vg" cx="50%" cy="40%" r="75%">
+      <stop offset="0%" stop-color="#161A17"/>
+      <stop offset="100%" stop-color="#111412"/>
+    </radialGradient>
+    <style>
+      .sc    { font-family: Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 600; letter-spacing: .16em; }
+      .serif { font-family: Newsreader, Georgia, 'Times New Roman', serif; }
+      .mono  { font-family: 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace; }
+      .it    { font-style: italic; }
+      .card  { fill: #1B201C; stroke: #2C322D; stroke-width: 1.5; }
+      .lbl   { fill: #757A72; }
+      .rule  { stroke: #262B26; stroke-width: 1.5; }
+      .flow  { stroke: #565D57; stroke-width: 2.5; fill: none; }
+      .head  { fill: #565D57; }
+    </style>
+  </defs>
+
+  <rect width="1440" height="1660" fill="url(#vg)"/>
+
+  <!-- ============ header ============ -->
+  <text class="sc" x="720" y="82" font-size="21" fill="#757A72" text-anchor="middle">A LIVING CURRICULUM · THE SYSTEM</text>
+  <text class="serif" x="720" y="130" font-size="40" fill="#E5E4DC" text-anchor="middle">Where the knowledge lives</text>
+
+  <!-- ================= band 1: foundation ================= -->
+  <text class="sc lbl" x="90" y="205" font-size="19">BUILT ONCE — THE FOUNDATION</text>
+  <line class="rule" x1="472" y1="198" x2="1350" y2="198"/>
+
+  <!-- research -->
+  <g>
+    <rect class="card" x="90" y="235" width="380" height="210" rx="14"/>
+    <rect x="102" y="253" width="4" height="174" rx="2" fill="#C9C6BC"/>
+    <text class="sc" x="126" y="277" font-size="17" fill="#A9ACA2">RESEARCH ×2, THEN AUDITED</text>
+    <text class="mono" x="126" y="314" font-size="17" fill="#E5E4DC">teaching-writing-research.html</text>
+    <text class="mono" x="126" y="340" font-size="17" fill="#E5E4DC">…-research-2.html</text>
+    <text class="mono" x="126" y="366" font-size="17" fill="#E5E4DC">…-research-comparison.html</text>
+    <text class="serif it" x="126" y="400" font-size="20" fill="#9FA29A">two independent runs; the audit</text>
+    <text class="serif it" x="126" y="426" font-size="20" fill="#9FA29A">checked figures against sources</text>
+  </g>
+
+  <path class="flow" d="M 474 340 L 532 340"/>
+  <path class="head" d="M-8,-6 L9,0 L-8,6 Z" transform="translate(536,340)"/>
+
+  <!-- constitution -->
+  <g>
+    <rect x="540" y="235" width="420" height="210" rx="14" fill="#1B221D" stroke="#3E5A48" stroke-width="2"/>
+    <rect x="552" y="253" width="4" height="174" rx="2" fill="#8FC0A0"/>
+    <text class="sc" x="576" y="277" font-size="17" fill="#8FC0A0">THE CONSTITUTION</text>
+    <text class="mono" x="576" y="316" font-size="22" fill="#E5E4DC">writing-course-plan.html</text>
+    <text class="serif it" x="576" y="352" font-size="20.5" fill="#9FA29A">year goals · weekly rhythm · four</text>
+    <text class="serif it" x="576" y="378" font-size="20.5" fill="#9FA29A">quarters · protocols · change log —</text>
+    <text class="serif it" x="576" y="404" font-size="20.5" fill="#9FA29A">no pre-written lessons; mapped to</text>
+    <text class="serif it" x="576" y="430" font-size="20.5" fill="#9FA29A">the district school calendar</text>
+  </g>
+
+  <!-- standards -->
+  <g>
+    <rect class="card" x="1030" y="235" width="320" height="210" rx="14"/>
+    <rect x="1042" y="253" width="4" height="174" rx="2" fill="#C9C6BC"/>
+    <text class="sc" x="1066" y="277" font-size="17" fill="#A9ACA2">DOCUMENT STANDARDS</text>
+    <text class="mono" x="1066" y="314" font-size="18.5" fill="#E5E4DC">dev/how-to-print.html</text>
+    <text class="mono" x="1066" y="340" font-size="18.5" fill="#E5E4DC">dev/skeletons/*.html</text>
+    <text class="serif it" x="1066" y="378" font-size="20" fill="#9FA29A">structure, CSS, and the</text>
+    <text class="serif it" x="1066" y="404" font-size="20" fill="#9FA29A">print block every page</text>
+    <text class="serif it" x="1066" y="430" font-size="20" fill="#9FA29A">carries, verbatim</text>
+  </g>
+
+  <!-- ================= band 2: steering ================= -->
+  <text class="sc lbl" x="90" y="530" font-size="19">OWNED BY THE INSTRUCTOR — THE STEERING</text>
+  <line class="rule" x1="632" y1="523" x2="1350" y2="523"/>
+
+  <g>
+    <rect class="card" x="90" y="558" width="390" height="170" rx="14"/>
+    <rect x="102" y="576" width="4" height="134" rx="2" fill="#D8B764"/>
+    <text class="sc" x="126" y="600" font-size="17" fill="#D8B764">STANDING TASTE</text>
+    <text class="mono" x="126" y="638" font-size="22" fill="#E5E4DC">GUIDANCE.md</text>
+    <text class="serif it" x="126" y="672" font-size="20" fill="#9FA29A">voice &amp; format rules as bad → good</text>
+    <text class="serif it" x="126" y="698" font-size="20" fill="#9FA29A">pairs; the skills never write it</text>
+  </g>
+  <g>
+    <rect class="card" x="525" y="558" width="390" height="170" rx="14"/>
+    <rect x="537" y="576" width="4" height="134" rx="2" fill="#D8B764"/>
+    <text class="sc" x="561" y="600" font-size="17" fill="#D8B764">THE CHALLENGE DIAL</text>
+    <text class="mono" x="561" y="638" font-size="20" fill="#E5E4DC">STATUS.md · Parent notes</text>
+    <text class="serif it" x="561" y="672" font-size="20" fill="#9FA29A">word floors, writing-block length,</text>
+    <text class="serif it" x="561" y="698" font-size="20" fill="#9FA29A">this month's obsessions</text>
+  </g>
+  <g>
+    <rect class="card" x="960" y="558" width="390" height="170" rx="14"/>
+    <rect x="972" y="576" width="4" height="134" rx="2" fill="#D8B764"/>
+    <text class="sc" x="996" y="600" font-size="17" fill="#D8B764">STEERING TEXT</text>
+    <text class="mono" x="996" y="638" font-size="19" fill="#E5E4DC">/lessons 2 "lean into…"</text>
+    <text class="serif it" x="996" y="672" font-size="20" fill="#9FA29A">freeform steering at the prompt —</text>
+    <text class="serif it" x="996" y="698" font-size="20" fill="#9FA29A">always authoritative</text>
+  </g>
+
+  <!-- ================= reads rail ================= -->
+  <g stroke="#4A514B" stroke-width="2" stroke-dasharray="7 6">
+    <line x1="90" y1="778" x2="470" y2="778"/>
+    <line x1="970" y1="778" x2="1350" y2="778"/>
+  </g>
+  <text class="sc" x="720" y="785" font-size="17" fill="#8A8E85" text-anchor="middle">READ FRESH, EVERY RUN</text>
+  <g fill="#4A514B">
+    <path d="M-6,-8 L0,9 L6,-8 Z" transform="translate(200,792)"/>
+    <path d="M-6,-8 L0,9 L6,-8 Z" transform="translate(360,792)"/>
+    <path d="M-6,-8 L0,9 L6,-8 Z" transform="translate(1080,792)"/>
+    <path d="M-6,-8 L0,9 L6,-8 Z" transform="translate(1240,792)"/>
+  </g>
+
+  <!-- ================= band 3: engine ================= -->
+  <text class="sc lbl" x="90" y="858" font-size="19">RUN ON DEMAND — THE ENGINE</text>
+  <line class="rule" x1="472" y1="851" x2="1350" y2="851"/>
+
+  <g>
+    <rect class="card" x="160" y="888" width="340" height="230" rx="14"/>
+    <rect x="172" y="906" width="4" height="194" rx="2" fill="#8FC0A0"/>
+    <text class="sc" x="196" y="930" font-size="17" fill="#8FC0A0">SKILL</text>
+    <text class="mono" x="196" y="976" font-size="30" fill="#E5E4DC">/lessons</text>
+    <text class="serif it" x="196" y="1012" font-size="21" fill="#9FA29A">picks the technique the</text>
+    <text class="serif it" x="196" y="1039" font-size="21" fill="#9FA29A">tracker needs; writes the</text>
+    <text class="serif it" x="196" y="1066" font-size="21" fill="#9FA29A">day's printable handout</text>
+  </g>
+
+  <g>
+    <rect class="card" x="580" y="888" width="280" height="230" rx="14"/>
+    <rect x="592" y="906" width="4" height="194" rx="2" fill="#9FBDE4"/>
+    <text class="sc" x="616" y="930" font-size="17" fill="#9FBDE4">THE STATE</text>
+    <text class="mono" x="616" y="972" font-size="22" fill="#E5E4DC">STATUS.md</text>
+    <text class="mono" x="616" y="1004" font-size="22" fill="#E5E4DC">LOG.md</text>
+    <text class="serif it" x="616" y="1040" font-size="20" fill="#9FA29A">the filesystem is the</text>
+    <text class="serif it" x="616" y="1066" font-size="20" fill="#9FA29A">state — rewritten and</text>
+    <text class="serif it" x="616" y="1092" font-size="20" fill="#9FA29A">appended every run</text>
+  </g>
+
+  <g>
+    <rect class="card" x="940" y="888" width="340" height="230" rx="14"/>
+    <rect x="952" y="906" width="4" height="194" rx="2" fill="#9FBDE4"/>
+    <text class="sc" x="976" y="930" font-size="17" fill="#9FBDE4">SKILL</text>
+    <text class="mono" x="976" y="976" font-size="30" fill="#E5E4DC">/evaluate</text>
+    <text class="serif it" x="976" y="1012" font-size="21" fill="#9FA29A">checks each piece against</text>
+    <text class="serif it" x="976" y="1039" font-size="21" fill="#9FA29A">its lesson's checklist;</text>
+    <text class="serif it" x="976" y="1066" font-size="21" fill="#9FA29A">updates tracker &amp; seeds</text>
+  </g>
+
+  <!-- skills ⇄ state -->
+  <path class="flow" d="M 508 1003 L 572 1003"/>
+  <path class="head" d="M-8,-6 L9,0 L-8,6 Z" transform="translate(576,1003)"/>
+  <path class="head" d="M-8,-6 L9,0 L-8,6 Z" transform="translate(504,1003) rotate(180)"/>
+  <path class="flow" d="M 868 1003 L 932 1003"/>
+  <path class="head" d="M-8,-6 L9,0 L-8,6 Z" transform="translate(936,1003)"/>
+  <path class="head" d="M-8,-6 L9,0 L-8,6 Z" transform="translate(864,1003) rotate(180)"/>
+
+  <!-- ================= band 4: paper ================= -->
+  <text class="sc lbl" x="90" y="1192" font-size="19">ON PAPER — HER DESK</text>
+  <line class="rule" x1="430" y1="1185" x2="1350" y2="1185"/>
+
+  <!-- /lessons → handout -->
+  <path class="flow" d="M 405 1122 L 405 1212"/>
+  <path class="head" d="M-8,-6 L9,0 L-8,6 Z" transform="translate(405,1216) rotate(90)"/>
+  <!-- completed → /evaluate -->
+  <path class="flow" d="M 1160 1216 L 1160 1126"/>
+  <path class="head" d="M-8,-6 L9,0 L-8,6 Z" transform="translate(1160,1122) rotate(-90)"/>
+
+  <g>
+    <rect class="card" x="120" y="1222" width="300" height="160" rx="14"/>
+    <rect x="132" y="1240" width="4" height="124" rx="2" fill="#8FC0A0"/>
+    <text class="sc" x="156" y="1263" font-size="17" fill="#8FC0A0">PRINTED</text>
+    <text class="serif" x="156" y="1302" font-size="26" fill="#E5E4DC">The handout</text>
+    <text class="serif it" x="156" y="1332" font-size="20" fill="#9FA29A">drill · freewrite · lesson ·</text>
+    <text class="serif it" x="156" y="1358" font-size="20" fill="#9FA29A">assignment · checklist</text>
+  </g>
+
+  <path class="flow" d="M 424 1302 L 508 1302"/>
+  <path class="head" d="M-8,-6 L9,0 L-8,6 Z" transform="translate(512,1302)"/>
+
+  <g>
+    <rect class="card" x="520" y="1222" width="380" height="160" rx="14"/>
+    <rect x="532" y="1240" width="4" height="124" rx="2" fill="#E8926A"/>
+    <text class="sc" x="556" y="1263" font-size="17" fill="#E8926A">THE STUDENT</text>
+    <text class="serif" x="556" y="1302" font-size="26" fill="#E5E4DC">She writes</text>
+    <text class="serif it" x="556" y="1332" font-size="20" fill="#9FA29A">warm-up · freewrite ·</text>
+    <text class="serif it" x="556" y="1358" font-size="20" fill="#9FA29A">40–60 minutes of drafting</text>
+  </g>
+
+  <path class="flow" d="M 904 1302 L 998 1302"/>
+  <path class="head" d="M-8,-6 L9,0 L-8,6 Z" transform="translate(1002,1302)"/>
+
+  <g>
+    <rect class="card" x="1010" y="1222" width="300" height="160" rx="14"/>
+    <rect x="1022" y="1240" width="4" height="124" rx="2" fill="#9FBDE4"/>
+    <text class="sc" x="1046" y="1263" font-size="17" fill="#9FBDE4">TURNED IN</text>
+    <text class="mono" x="1046" y="1302" font-size="24" fill="#E5E4DC">completed/</text>
+    <text class="serif it" x="1046" y="1332" font-size="20" fill="#9FA29A">finished pieces, dropped</text>
+    <text class="serif it" x="1046" y="1358" font-size="20" fill="#9FA29A">in by the instructor</text>
+  </g>
+
+  <!-- /evaluate → feedback note, down the corridor -->
+  <path class="flow" d="M 1055 1122 C 1055 1190 955 1230 955 1330 L 955 1512 L 912 1512"/>
+  <path class="head" d="M-8,-6 L9,0 L-8,6 Z" transform="translate(908,1512) rotate(180)"/>
+  <!-- feedback → the student -->
+  <path class="flow" d="M 710 1432 L 710 1392"/>
+  <path class="head" d="M-8,-6 L9,0 L-8,6 Z" transform="translate(710,1388) rotate(-90)"/>
+
+  <g>
+    <rect class="card" x="520" y="1436" width="380" height="150" rx="14"/>
+    <rect x="532" y="1454" width="4" height="114" rx="2" fill="#8FC0A0"/>
+    <text class="sc" x="556" y="1477" font-size="17" fill="#8FC0A0">PRINTED · HALF A PAGE</text>
+    <text class="serif" x="556" y="1514" font-size="26" fill="#E5E4DC">The feedback note</text>
+    <text class="serif it" x="556" y="1544" font-size="20" fill="#9FA29A">one strength in her own words,</text>
+    <text class="serif it" x="556" y="1570" font-size="20" fill="#9FA29A">one teaching point</text>
+  </g>
+
+  <!-- ================= legend ================= -->
+  <g transform="translate(0,1628)">
+    <line x1="120" y1="-6" x2="170" y2="-6" stroke="#4A514B" stroke-width="2" stroke-dasharray="7 6"/>
+    <text class="sc" x="182" y="0" font-size="16" fill="#757A72">READ</text>
+    <line x1="252" y1="-6" x2="302" y2="-6" stroke="#565D57" stroke-width="2.5"/>
+    <text class="sc" x="314" y="0" font-size="16" fill="#757A72">WRITE / PRODUCE</text>
+    <circle cx="540" cy="-7" r="7" fill="#D8B764"/>
+    <text class="sc" x="556" y="0" font-size="16" fill="#757A72">THE INSTRUCTOR</text>
+    <circle cx="772" cy="-7" r="7" fill="#E8926A"/>
+    <text class="sc" x="788" y="0" font-size="16" fill="#757A72">THE STUDENT</text>
+    <circle cx="964" cy="-7" r="7" fill="#8FC0A0"/>
+    <text class="sc" x="980" y="0" font-size="16" fill="#757A72">PAGES FOR HER</text>
+    <circle cx="1184" cy="-7" r="7" fill="#9FBDE4"/>
+    <text class="sc" x="1200" y="0" font-size="16" fill="#757A72">EVALUATION</text>
+  </g>
+</svg>

@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1010" viewBox="0 0 1440 1010" role="img" aria-labelledby="t d">
+  <title id="t">Precedence: one right answer per conflict</title>
+  <desc id="d">A ladder of authority. Above everything, the trump rule: if any rule would cost the student her enthusiasm, the run flags it to the instructor instead of applying it. Then, in order: the course plan (pedagogy) beats GUIDANCE.md (voice) beats the skeletons and print standard (structure) beats the SKILL.md files (procedure). Each wins only in its own column.</desc>
+  <defs>
+    <radialGradient id="vg" cx="50%" cy="40%" r="75%">
+      <stop offset="0%" stop-color="#161A17"/>
+      <stop offset="100%" stop-color="#111412"/>
+    </radialGradient>
+    <style>
+      .sc    { font-family: Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 600; letter-spacing: .16em; }
+      .serif { font-family: Newsreader, Georgia, 'Times New Roman', serif; }
+      .mono  { font-family: 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, monospace; }
+      .it    { font-style: italic; }
+    </style>
+  </defs>
+
+  <rect width="1440" height="1010" fill="url(#vg)"/>
+
+  <!-- ============ header ============ -->
+  <text class="sc" x="720" y="82" font-size="21" fill="#757A72" text-anchor="middle">A LIVING CURRICULUM · WHEN DOCUMENTS DISAGREE</text>
+  <text class="serif" x="720" y="130" font-size="40" fill="#E5E4DC" text-anchor="middle">One right answer per conflict</text>
+
+  <!-- ============ trump rule ============ -->
+  <g>
+    <rect x="140" y="180" width="1160" height="128" rx="16" fill="#201813" stroke="#7A4A33" stroke-width="2"/>
+    <text class="sc" x="720" y="222" font-size="17" fill="#E8926A" text-anchor="middle">ABOVE EVERYTHING — THE TRUMP RULE</text>
+    <text class="serif it" x="720" y="258" font-size="26" fill="#E5E4DC" text-anchor="middle">If any rule would cost the student her enthusiasm, the run flags it to the</text>
+    <text class="serif it" x="720" y="290" font-size="26" fill="#E5E4DC" text-anchor="middle">instructor instead of applying it. Enthusiasm wins.</text>
+  </g>
+
+  <path d="M-7,-9 L0,10 L7,-9 Z" fill="#565D57" transform="translate(720,340)"/>
+
+  <!-- ============ rung 1 ============ -->
+  <g>
+    <text class="serif" x="118" y="435" font-size="40" fill="#565D57" text-anchor="end">1</text>
+    <rect x="150" y="372" width="1140" height="96" rx="12" fill="#1B201C" stroke="#2C322D" stroke-width="1.5"/>
+    <rect x="160" y="384" width="4" height="72" rx="2" fill="#8FC0A0"/>
+    <text class="mono" x="188" y="413" font-size="23" fill="#E5E4DC">writing/writing-course-plan.html</text>
+    <text class="sc" x="1262" y="413" font-size="17" fill="#8FC0A0" text-anchor="end">PEDAGOGY</text>
+    <text class="serif it" x="188" y="448" font-size="21" fill="#9FA29A">what gets taught, how feedback works, what never changes — the constitution</text>
+  </g>
+
+  <g>
+    <path d="M-6,-8 L0,9 L6,-8 Z" fill="#4A514B" transform="translate(720,492)"/>
+    <text class="sc" x="740" y="498" font-size="14" fill="#6E7169">BEATS</text>
+  </g>
+
+  <!-- ============ rung 2 ============ -->
+  <g>
+    <text class="serif" x="118" y="583" font-size="40" fill="#565D57" text-anchor="end">2</text>
+    <rect x="210" y="520" width="1020" height="96" rx="12" fill="#1B201C" stroke="#2C322D" stroke-width="1.5"/>
+    <rect x="220" y="532" width="4" height="72" rx="2" fill="#D8B764"/>
+    <text class="mono" x="248" y="561" font-size="23" fill="#E5E4DC">writing/GUIDANCE.md</text>
+    <text class="sc" x="1202" y="561" font-size="17" fill="#D8B764" text-anchor="end">VOICE</text>
+    <text class="serif it" x="248" y="596" font-size="21" fill="#9FA29A">how every document speaks to her — the instructor's standing corrections</text>
+  </g>
+
+  <g>
+    <path d="M-6,-8 L0,9 L6,-8 Z" fill="#4A514B" transform="translate(720,640)"/>
+    <text class="sc" x="740" y="646" font-size="14" fill="#6E7169">BEATS</text>
+  </g>
+
+  <!-- ============ rung 3 ============ -->
+  <g>
+    <text class="serif" x="118" y="731" font-size="40" fill="#565D57" text-anchor="end">3</text>
+    <rect x="270" y="668" width="900" height="96" rx="12" fill="#1B201C" stroke="#2C322D" stroke-width="1.5"/>
+    <rect x="280" y="680" width="4" height="72" rx="2" fill="#C9C6BC"/>
+    <text class="mono" x="308" y="709" font-size="23" fill="#E5E4DC">dev/skeletons/ · dev/how-to-print.html</text>
+    <text class="sc" x="1142" y="709" font-size="17" fill="#A9ACA2" text-anchor="end">STRUCTURE</text>
+    <text class="serif it" x="308" y="744" font-size="21" fill="#9FA29A">how pages are built, styled, and printed</text>
+  </g>
+
+  <g>
+    <path d="M-6,-8 L0,9 L6,-8 Z" fill="#4A514B" transform="translate(720,788)"/>
+    <text class="sc" x="740" y="794" font-size="14" fill="#6E7169">BEATS</text>
+  </g>
+
+  <!-- ============ rung 4 ============ -->
+  <g>
+    <text class="serif" x="118" y="879" font-size="40" fill="#565D57" text-anchor="end">4</text>
+    <rect x="330" y="816" width="780" height="96" rx="12" fill="#1B201C" stroke="#2C322D" stroke-width="1.5"/>
+    <rect x="340" y="828" width="4" height="72" rx="2" fill="#9FBDE4"/>
+    <text class="mono" x="368" y="857" font-size="23" fill="#E5E4DC">.claude/skills/*/SKILL.md</text>
+    <text class="sc" x="1082" y="857" font-size="17" fill="#9FBDE4" text-anchor="end">PROCEDURE</text>
+    <text class="serif it" x="368" y="892" font-size="21" fill="#9FA29A">which files, what order, what to write where</text>
+  </g>
+
+  <text class="serif it" x="720" y="956" font-size="22" fill="#757A72" text-anchor="middle">Each file wins only in its own column — voice may not override pedagogy,</text>
+  <text class="serif it" x="720" y="986" font-size="22" fill="#757A72" text-anchor="middle">and a skeleton's placeholder prose never outranks guidance.</text>
+</svg>

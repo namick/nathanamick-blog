@@ -41,3 +41,14 @@ Dark-only; theme switching is disabled deliberately (`lib/layout.shared.tsx`, `a
 - **Post pages print no summary above the body.** Several posts open with their frontmatter `summary` verbatim, so it reads as a stutter.
 - **The blog index never explains the hover-to-unwrap covers.** That is an unannounced Easter egg by choice; don't add instructions.
 - **`prose-lg` / `prose-xl` are defined locally** in `app/global.css` as `@utility` blocks. Fumadocs' typography plugin ships only `prose` and `prose-sm`.
+- **The enlarge overlay applies `min-w` to vector art only** (`components/import-image.tsx`). It exists so a diagram opens over-wide and pannable on a phone instead of returning at column width. Half the raster images in `content/blog/images/` are narrower than that floor, and `min-width` beats `max-width` — applying it to them would upscale them into blur.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
