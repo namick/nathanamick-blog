@@ -3,18 +3,28 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import defaultMdxComponents from 'fumadocs-ui/mdx'
 import { blogSource as source, type BlogPost } from '@/lib/source'
-import { coverFor, formatPublished, postsNewestFirst } from '@/lib/blog'
+import {
+  coverFor,
+  formatPublished,
+  isDraft,
+  isViewable,
+  postsNewestFirst,
+  viewablePosts,
+} from '@/lib/blog'
 import { Image } from '@/components/image'
 import { HeroWrap } from '@/components/hero-wrap'
 import { Code } from '@/components/code'
+import { DraftBadge } from '@/components/draft-badge'
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>
 }) {
   const params = await props.params
   const page = source.getPage(params.slug)
-  if (!page) notFound()
+  if (!page || !isViewable(page)) notFound()
 
+  // A draft has no place in the published sequence, so `position` is -1 and both
+  // ends of the nav come back undefined — the section drops out on its own.
   const posts = postsNewestFirst()
   const position = posts.findIndex((post) => post.url === page.url)
   const newer = position > 0 ? posts[position - 1] : undefined
@@ -26,14 +36,17 @@ export default async function Page(props: {
     <article className="my-16 flex min-w-0 flex-1 flex-col sm:my-24">
       <header className="mx-auto w-full max-w-3xl px-6 sm:px-8">
         <Link
-          href="/blog"
+          href={isDraft(page) ? '/drafts' : '/blog'}
           className="font-mono text-sm text-fd-muted-foreground transition-colors hover:text-fd-primary"
         >
-          ← writing
+          {isDraft(page) ? '← drafts' : '← writing'}
         </Link>
-        <p className="mt-12 font-mono text-sm tracking-wider text-fd-primary">
-          {formatPublished(page, 'MMMM d, yyyy')}
-        </p>
+        <div className="mt-12 flex items-center gap-4">
+          <p className="font-mono text-sm tracking-wider text-fd-primary">
+            {formatPublished(page, 'MMMM d, yyyy')}
+          </p>
+          {isDraft(page) && <DraftBadge />}
+        </div>
         {/* No standfirst here: several posts open with their own summary
             verbatim, so printing it above the body reads as a stutter. */}
         <h1 className="mt-4 font-serif text-4xl leading-tight text-fd-foreground sm:text-5xl lg:text-6xl">
@@ -104,8 +117,10 @@ function Adjacent({
   )
 }
 
+/** Built from the viewable set rather than `source.generateParams()`, so a
+ *  production build never prerenders a route for a draft. */
 export async function generateStaticParams() {
-  return source.generateParams()
+  return viewablePosts().map((post) => ({ slug: post.slugs }))
 }
 
 export async function generateMetadata(props: {
@@ -113,10 +128,13 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
   const params = await props.params
   const page = source.getPage(params.slug)
-  if (!page) notFound()
+  if (!page || !isViewable(page)) notFound()
 
   return {
-    title: page.data.title,
+    title: isDraft(page) ? `Draft — ${page.data.title}` : page.data.title,
     description: page.data.summary,
+    // Belt and braces: drafts only reach a browser under `next dev`, but this
+    // keeps one out of an index if a dev server is ever exposed.
+    robots: isDraft(page) ? { index: false, follow: false } : undefined,
   }
 }

@@ -32,6 +32,9 @@ export const blog = defineCollections({
     publishedOn: z.coerce.date(),
     summary: z.string(),
     heroImage: z.string(),
+    // Absent means published, so no existing post needs touching. See lib/blog.ts
+    // for what "draft" actually hides.
+    draft: z.boolean().default(false),
   }),
 })
 

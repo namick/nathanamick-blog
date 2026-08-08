@@ -297,9 +297,9 @@
         <p class="eyebrow">nathanamick.com</p>
         <h1>Authoring a blog post</h1>
         <p class="standfirst">
-          Everything needed to add a post and its hero image — the four
-          frontmatter fields, where images live, and the three things that will
-          bite.
+          Everything needed to add a post and its hero image — the frontmatter
+          fields, where images live, how to hold one back as a draft, and the
+          three things that will bite.
         </p>
         <nav class="toc">
           <ol>
@@ -307,6 +307,7 @@
             <li><a href="#how">How it works</a></li>
             <li><a href="#hero">Hero image</a></li>
             <li><a href="#frontmatter">Frontmatter</a></li>
+            <li><a href="#drafts">Drafts</a></li>
             <li><a href="#body">Body images &amp; components</a></li>
             <li><a href="#gotchas">Gotchas</a></li>
             <li><a href="#map">File map</a></li>
@@ -339,6 +340,11 @@ Body starts here.</code></pre>
           The index, the home page, the prev/next links, the post count, the
           year range, the read-time estimate and the chalk cover art all update
           themselves. There is nothing else to register.
+        </p>
+        <p>
+          Not ready for it to be live? Add <code>draft: true</code> and it stays
+          off the site while remaining safe to commit and push — see
+          <a href="#drafts">Drafts</a>.
         </p>
       </div>
 
@@ -447,9 +453,10 @@ Body starts here.</code></pre>
       <section id="frontmatter">
         <h2>Frontmatter</h2>
         <p>
-          All four fields are <strong>required</strong> — the schema in
+          The first four fields are <strong>required</strong> — the schema in
           <code>source.config.ts</code> validates them, and omitting one fails
-          the build rather than degrading quietly.
+          the build rather than degrading quietly. <code>draft</code> is the one
+          optional field.
         </p>
         <div class="table-wrap">
           <table>
@@ -486,12 +493,89 @@ Body starts here.</code></pre>
                 <td>heroImage</td>
                 <td>
                   Bare filename inside <code>public/images/hero/</code>. The
-                  file must exist
+                  file must exist. While drafting, <code>heroImage: ''</code>
+                  skips the hero rather than failing
+                </td>
+              </tr>
+              <tr>
+                <td>draft</td>
+                <td>
+                  Optional, defaults to <code>false</code>. <code>true</code>
+                  holds the post back — see <a href="#drafts">Drafts</a>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
+      </section>
+
+      <section id="drafts">
+        <h2>Drafts</h2>
+        <p>
+          Add <code>draft: true</code> to the frontmatter and the post stops
+          being public without leaving the repo. It can be committed and pushed
+          like anything else; nothing about it appears in production.
+        </p>
+        <pre><code>---
+<span class="tok-key">title</span>: Something Half-Finished
+<span class="tok-key">publishedOn</span>: 2026-08-08
+<span class="tok-key">summary</span>: Still working this one out.
+<span class="tok-key">heroImage</span>: ''
+<span class="tok-key">draft</span>: true
+---</code></pre>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Surface</th>
+                <th>What a draft does</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="plain"><code>/drafts</code></td>
+                <td>
+                  Lists them, newest first, with the file path. The route 404s
+                  in production; the <strong>Drafts</strong> link in the header
+                  only appears under <code>pnpm dev</code>
+                </td>
+              </tr>
+              <tr>
+                <td class="plain"><code>/blog/my-post</code></td>
+                <td>
+                  Renders normally in dev, with a <em>Draft</em> badge and a
+                  back link to <code>/drafts</code>. <strong>404 in
+                  production</strong>, and never prerendered
+                </td>
+              </tr>
+              <tr>
+                <td class="plain">/blog, home page, prev/next</td>
+                <td>
+                  Absent everywhere, dev included — the post count, year range
+                  and read-time estimate all ignore it
+                </td>
+              </tr>
+              <tr>
+                <td class="plain">sitemap.xml, search</td>
+                <td>Not indexed</td>
+              </tr>
+              <tr>
+                <td class="plain">Chalk cover</td>
+                <td>
+                  Reserved now and kept on publish, so dropping the
+                  <code>draft</code> line doesn't reshuffle the covers around it
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Publishing is deleting the line — or setting it to
+          <code>false</code>. Check <code>publishedOn</code> on the way out: it
+          was probably set the day the draft was started, and dating a post
+          earlier than an existing one has consequences of its own
+          (<a href="#gotchas">gotcha #1</a>).
+        </p>
       </section>
 
       <section id="body">
@@ -577,11 +661,15 @@ Body starts here.</code></pre>
         </div>
 
         <div class="gotcha">
-          <h3>3. There is no draft flag</h3>
+          <h3>3. A draft is hidden, not absent</h3>
           <p>
-            Anything with valid frontmatter in <code>content/blog/</code> is
-            live. Keep works-in-progress outside that directory until they're
-            ready.
+            <code>draft: true</code> keeps a post off every public surface and
+            404s its URL in production, but the MDX is still compiled into the
+            server bundle like any other file in <code>content/blog/</code>. No
+            route serves it and none of it reaches a browser — nothing appears
+            in any client bundle. Treat it as unpublished, not as a secret: for
+            writing that must not leave your machine at all, keep the file out
+            of the repo.
           </p>
         </div>
       </section>
@@ -625,7 +713,7 @@ Body starts here.</code></pre>
                 <td>lib/blog.ts</td>
                 <td>
                   Ordering, cover assignment, date formatting, read-time
-                  estimate
+                  estimate, and what <code>draft</code> hides
                 </td>
               </tr>
               <tr>
@@ -635,6 +723,10 @@ Body starts here.</code></pre>
               <tr>
                 <td>app/blog/[...slug]/page.tsx</td>
                 <td>The post template</td>
+              </tr>
+              <tr>
+                <td>app/drafts/page.tsx</td>
+                <td>The dev-only draft list</td>
               </tr>
             </tbody>
           </table>

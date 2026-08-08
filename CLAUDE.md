@@ -6,6 +6,8 @@ Personal site and blog. Next 16 (App Router) · React 19 · Fumadocs 16 · Code 
 
 **Adding a blog post or hero image: see [docs/authoring-a-blog-post.html](docs/authoring-a-blog-post.html)** — frontmatter schema, image sizes and locations, and the failure modes. Open it in a browser.
 
+`draft: true` in a post's frontmatter holds it back: hidden from every listing, 404 at its own URL in production, absent from the sitemap and search. Under `pnpm dev` it renders normally and `/drafts` lists it. Safe to commit and push. `lib/blog.ts` is the single place that decides.
+
 `docs/` is plain reference material for humans. It is not part of the site: `content/docs/` is the Fumadocs section served at `/docs`, and that is a different thing.
 
 ## Commands
@@ -42,6 +44,7 @@ Dark-only; theme switching is disabled deliberately (`lib/layout.shared.tsx`, `a
 - **The blog index never explains the hover-to-unwrap covers.** That is an unannounced Easter egg by choice; don't add instructions.
 - **`prose-lg` / `prose-xl` are defined locally** in `app/global.css` as `@utility` blocks. Fumadocs' typography plugin ships only `prose` and `prose-sm`.
 - **"A Living Curriculum" says *instructor* and *the student* where its source repo says *parent* and a name.** The post is written for the general case — the same build works for anyone teaching anyone — and the repo behind it is one instance of that. The framing is deliberate, not a stale copy: don't reconcile the post or its diagrams back to the repo's wording.
+- **Drafts take a chalk cover they don't use.** `lib/blog.ts` assigns covers over every post including drafts, so a production build "wastes" one. That's what makes publishing a draft leave the covers around it untouched, and keeps dev and production agreeing on which cover a post has.
 - **The enlarge overlay applies `min-w` to vector art only** (`components/import-image.tsx`). It exists so a diagram opens over-wide and pannable on a phone instead of returning at column width. Half the raster images in `content/blog/images/` are narrower than that floor, and `min-width` beats `max-width` — applying it to them would upscale them into blur.
 
 <!-- BEGIN:nextjs-agent-rules -->
