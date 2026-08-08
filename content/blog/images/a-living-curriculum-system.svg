@@ -84,7 +84,7 @@
     <rect class="card" x="525" y="558" width="390" height="170" rx="14"/>
     <rect x="537" y="576" width="4" height="134" rx="2" fill="#D8B764"/>
     <text class="sc" x="561" y="600" font-size="17" fill="#D8B764">THE CHALLENGE DIAL</text>
-    <text class="mono" x="561" y="638" font-size="20" fill="#E5E4DC">STATUS.md · Parent notes</text>
+    <text class="mono" x="561" y="638" font-size="20" fill="#E5E4DC">STATUS.md · Instructor notes</text>
     <text class="serif it" x="561" y="672" font-size="20" fill="#9FA29A">word floors, writing-block length,</text>
     <text class="serif it" x="561" y="698" font-size="20" fill="#9FA29A">this month's obsessions</text>
   </g>

@@ -41,6 +41,7 @@ Dark-only; theme switching is disabled deliberately (`lib/layout.shared.tsx`, `a
 - **Post pages print no summary above the body.** Several posts open with their frontmatter `summary` verbatim, so it reads as a stutter.
 - **The blog index never explains the hover-to-unwrap covers.** That is an unannounced Easter egg by choice; don't add instructions.
 - **`prose-lg` / `prose-xl` are defined locally** in `app/global.css` as `@utility` blocks. Fumadocs' typography plugin ships only `prose` and `prose-sm`.
+- **"A Living Curriculum" says *instructor* and *the student* where its source repo says *parent* and a name.** The post is written for the general case — the same build works for anyone teaching anyone — and the repo behind it is one instance of that. The framing is deliberate, not a stale copy: don't reconcile the post or its diagrams back to the repo's wording.
 - **The enlarge overlay applies `min-w` to vector art only** (`components/import-image.tsx`). It exists so a diagram opens over-wide and pannable on a phone instead of returning at column width. Half the raster images in `content/blog/images/` are narrower than that floor, and `min-width` beats `max-width` — applying it to them would upscale them into blur.
 
 <!-- BEGIN:nextjs-agent-rules -->
