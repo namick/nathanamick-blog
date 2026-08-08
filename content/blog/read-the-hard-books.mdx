@@ -20,7 +20,7 @@ That gap (between wanting to read philosophy and being able to) is what I've spe
 
 Difficult philosophy is not hard because the sentences are long. Some of them are, but that's a translation problem and a stamina problem, and stamina is cheap. It's hard because a handful of ordinary words have been bent to technical purposes, and the author assumes you already know it.
 
-*Substance*, *mode*, *attribute*, *contingency*, *intuition*, *a priori*, *Dasein*. Each one carries a specific, engineered meaning. Each one shifts between authors, and sometimes between chapters of the same author. Reach for a dictionary and you get the ordinary meaning, which is precisely the one the philosopher set aside on purpose. Miss a dozen of those and the argument dissolves. Not because the thinking is beyond you, but because you have quietly swapped in the wrong meanings and kept reading.
+*Substance*, *mode*, *attribute*, *contingency*, *intuition*, *a priori*, *Dasein*. Each one carries a specific, engineered meaning. Each one shifts between authors, and sometimes between chapters of the same author. Reach for a dictionary and you get the ordinary meaning, which is precisely the one the philosopher set aside on purpose. Miss a dozen of those and the argument dissolves. Not because the thinking is beyond you, but because you have swapped in the wrong meanings and kept reading.
 
 Readers have always known this, and they have always built tools for it. Companion volumes. Lexicons. Study guides. Margins crowded with pencil. Medieval scribes glossed manuscripts between the lines, which is where we got the word *gloss* in the first place. The practice is ancient and it works.
 
@@ -49,7 +49,7 @@ Terms are also glossed on *every* occurrence, not just the first, which is delib
 
 Two rules govern how the glosses get written, and both sit in the prompt verbatim.
 
-**An eighth grader should understand it; a college philosophy student should respect it.** Those constraints pull against each other, and that tension is the point. Most explanatory writing fails by quietly picking one.
+**An eighth grader should understand it; a college philosophy student should respect it.** Those constraints pull against each other, and that tension is the point. Most explanatory writing fails by picking one.
 
 **The gloss doesn't take the author's side.** The general definition stays neutral across philosophy. It doesn't adopt Spinoza's account of substance just because you happen to be reading Spinoza. Spinoza gets to argue for his definition; the apparatus doesn't get to argue for him. Getting this wrong would turn a reading tool into a very subtle kind of propaganda, and it would be nearly invisible.
 
@@ -92,7 +92,7 @@ Nearly all the cost lives in stage two, and getting stage two wrong is expensive
 
 The original design made **one AI call per occurrence of every term**, with every call resuming a shared session so the model kept the chapter in mind. Resuming a session sounds thrifty and is the opposite. It works something like forwarding an entire email thread to ask one new question: by the twelfth call you're sending ten thousand tokens of replayed history to get back an eighty-token answer.
 
-It was also doing something worse. It asked the model to **re-emit the entire section text, verbatim**, with `[term](#anchor)` markup inserted. Those are the most expensive output tokens there are. It can quietly alter the author's words, which for this project is close to the worst thing that could happen. And the JSON wrapper around it failed often enough that roughly a third of windows shipped with no links at all, silently.
+It was also doing something worse. It asked the model to **re-emit the entire section text, verbatim**, with `[term](#anchor)` markup inserted. Those are the most expensive output tokens there are. It can alter the author's words without anyone noticing, which for this project is close to the worst thing that could happen. And the JSON wrapper around it failed often enough that roughly a third of windows shipped with no links at all, silently.
 
 Two changes fixed it.
 
@@ -132,7 +132,7 @@ Batching the definition calls introduced a real reader-facing bug, and it's the 
 
 Anchors are numbered per term: `def-substance`, `def-substance-2`, and so on. When each batch numbered its own anchors independently, two occurrences in different batches could both come out as `def-substance-2`. The reader keys its chapter-wide content map by anchor, so one gloss silently shadowed the other. You click a word and get the explanation for a different sentence.
 
-Nothing errored. No test failed. The numbers just quietly stopped being unique. The fix was a single counter shared across all batches, plus a pass that drops any occurrence whose anchor never made it into the text. Both are pure functions with tests, because that's the only way I'd trust them again.
+Nothing errored. No test failed. The numbers just stopped being unique. The fix was a single counter shared across all batches, plus a pass that drops any occurrence whose anchor never made it into the text. Both are pure functions with tests, because that's the only way I'd trust them again.
 
 ### Vibes are not a methodology
 
