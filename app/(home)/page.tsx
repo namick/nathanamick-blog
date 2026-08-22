@@ -24,6 +24,7 @@ const now = [
 ]
 
 const links = [
+  ['Amick Labs', 'https://amicklabs.com'],
   ['GitHub', 'https://github.com/namick'],
   ['LinkedIn', 'https://linkedin.com/in/namick'],
   ['YouTube', 'https://youtube.com/@refactoringconsciousness'],
