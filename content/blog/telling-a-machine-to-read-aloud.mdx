@@ -1,0 +1,65 @@
+---
+title: Telling a Machine to Read Aloud
+publishedOn: 2026-08-25
+summary: A rule in my style guide tells my AI co-teacher to catch bad sentences by reading them aloud at speaking speed. It has no voice and no ears, and the rule works anyway. On dead metaphors, surprisal, and why instructions addressed to a human self are a precise way to steer a machine.
+heroImage: ''
+draft: true
+---
+
+This week I added a rule to the style guide that my AI co-teacher reads before it writes anything for [the writing course](/blog/a-living-curriculum) I'm running this year. The rule ends with a self-test:
+
+> Self-test before shipping any sentence: read it once at speaking speed. If at any word you must revise what an earlier word was doing, rewrite the sentence.
+
+It took me a day to notice what I had done. I wrote instructions for reading aloud, and I handed them to something with no mouth and no ears. And the instructions work.
+
+## The sentence that started it
+
+A lesson handout came back with this line at the top:
+
+> By the end of today you will have finished a story whose ending answers every question its start holds back.
+
+Read that at full speed and you stumble at "holds." I did, anyway. The phrase "every question its start holds back" arrives as a pile of nouns, and you have to back up and work out that the questions are the thing being held. My instinct said the sentence was too compressed. What I couldn't do was name the grammar, so I asked the machine to explain my own stumble to me, and the explanation was better than my instinct deserved.
+
+Two things are wrong with that phrase at once. First, the relativizer is missing. "Every question *that* its start holds back" plants a signpost before the second noun arrives. Second, "the start" is an inanimate noun doing a job that belongs to a person. "Hold back" wants a human subject: you hold back tears, a witness holds back details. A story's start can't hold anything, and your brain knows it, so it takes a small unpacking step. Oh, it means the questions weren't answered early on.
+
+Here's the detail I find genuinely useful. The first half of that same sentence has an inanimate agent too, and it's fine. "A story whose ending answers the questions" costs the reader nothing, because "answer" is a verb that information-bearing things take in ordinary English. Endings answer. Reports show. Those metaphors died a long time ago and got buried in the dictionary. "The start holds back" is still alive, and a live metaphor makes the reader do the animating themselves.
+
+So the rule I wrote isn't "never use an inanimate agent," which was my first clumsy attempt. The rule is a budget. A clause can afford one difficulty. A live personification in a plain clause is fine. A compressed clause with an ordinary subject is fine. Stack the two and the reader has to reread, and instructions for an eighth grader (or for anyone) should never need a second pass.
+
+And at the bottom of the rule, the self-test: read it once at speaking speed.
+
+## What the instruction actually does
+
+The machine will not synthesize audio and listen to itself. Nothing in there reads anything, at any speed. So why does the instruction change the output?
+
+My first answer was the deflationary one. The instruction shapes the context so that the model statistically produces the words that a human would have produced if the human had read the draft aloud. That's true, and it's worth sitting with, because it means the anthropomorphic phrasing isn't a mistake I should engineer away. Prose that survived a read-aloud pass has measurable properties: clause boundaries marked early, subjects kept close to their verbs, no sentences nested inside the middles of other sentences. "Read it at speaking speed" summons that whole cluster at once, better than listing the properties one by one would. The training data is a record of human behavior, so instructions addressed to a human self turn out to be a precise way to address the model. The phrasing names a real region of the space of possible text. It only looks like make-believe.
+
+## The part I didn't expect
+
+Then I asked the machine what it thought was happening, and it handed me something I hadn't considered.
+
+Psycholinguists measure reading difficulty with a quantity called surprisal: how unpredictable each word is, given every word before it. The idea goes back to work by John Hale and Roger Levy in the early 2000s. And when researchers need surprisal numbers, they get them from language models, because that is what a language model is, a machine for estimating exactly that probability. The lineup with human behavior is good enough to be a standard research tool. Model surprisal predicts word-by-word human reading times, and on a garden-path sentence it spikes at the same word where a human reader's eyes jump backward.
+
+Run that on my sentence and the spike lands at "holds."
+
+So the stumble that the self-test asks about has a mechanical correlate inside the model. It processes text one token at a time, left to right, carrying a guess about the structure and paying a measurable cost when the guess breaks. That is not reading aloud. But it is much closer to my reread reflex than I expected, and the reason is ordinary once you see it: the model is a compression of text produced by creatures who parse incrementally and edit with their ears. Our ear got compressed in with everything else.
+
+## What it can't tell me
+
+I want to be careful here, because there's a version of this claim that oversells.
+
+When the model applies the self-test and reports that a sentence stumbles at "holds," I have no way to know what produced the report. It might come from something functionally similar to my reread reflex. It might come from pattern-matching against ten thousand descriptions of other people's stumbles. The model can't tell me which, and that isn't modesty: its self-reports are generated text too, produced by the same machinery they claim to describe. When I asked mine, it said exactly that, which I appreciated, and which settles nothing.
+
+For a style guide, none of this matters. The instruction moves the output in the intended direction, reliably, and that is the entire job of a rule. But it does mean I hold the interesting claim (the machine stumbles where I stumble) more loosely than the practical one (the machine fixes what makes me stumble).
+
+## The recursion
+
+One more thing, and it's the part I keep turning over.
+
+By my own new rule, "the model reads the sentence" is a live personification. An inanimate noun with a person-verb. So is "the machine stumbles," and so is most of this post.
+
+But the rule's other category, the conventional pairing, was never a fixed list. It's a snapshot of wherever the language happens to be. "The report shows" was a live metaphor once; enough people used it that it died into the dictionary, and now it costs the reader nothing. "The model reads," "the model thinks," "Claude noticed": those pairings are dying into convention right now, in real time, at a speed you can almost watch. Every time one passes without raising an eyebrow, it gets a little more dead.
+
+So here is where I landed. I spent an afternoon writing a rule about when an inanimate thing may be granted agency in a sentence. Then I handed the rule to an inanimate thing to enforce. It follows an instruction to read aloud without anything to read aloud with, and it catches the stumbles I would have caught with my own ears.
+
+The sentences parse in one pass now. I'll leave the question of who read them to the philosophers, at least until that pairing stops raising my eyebrow too.

@@ -1,0 +1,90 @@
+---
+title: Correcting My Co-Teacher
+publishedOn: 2026-08-14
+summary: The AI drafts the lessons and evaluates the work, and it is exceptional at both. The interesting part of the partnership is what happens when I disagree with it.
+heroImage: ''
+draft: true
+---
+
+A week or so ago I wrote about [a system I am building](/blog/a-living-curriculum) to run a year of writing instruction. Normally I'm mentoring software engineers, but this year I'm also teaching an eighth-grade creative writing course, and I built a repository that generates targeted lessons one day at a time. Two agent skills do the daily work: one writes tomorrow's printable handout, the other evaluates finished work and writes the student a feedback note as well as a more detailed report for me.
+
+It's still running. I'm still having fun. And I've started to get a much clearer picture of where the line falls between what the machine does well and what I have to do myself.
+
+## What the machine does well
+
+Yesterday's handout was a polish pass on a finished story. The student had a complete draft, so the lesson had her read the whole thing out loud and repair what she heard: comma splices, dialogue punctuation, and three specific sentences where she had written the *name* of a feeling instead of showing the feeling.
+
+Here's a sentence from her draft:
+
+> Still not knowing what the wooden thing does, I was a little excited to find out.
+
+And here's what she replaced it with:
+
+> I felt a smile form on my face, wondering what the wooden thing does.
+
+That's a huge improvement, and it's exactly the kind of thing the system is built to notice. Following the `/evaluation` skill, the AI read her completed work, checked it against that lesson's own checklist, found the three rewrites, and picked this one as the best to name in her feedback note. It quoted her line back to her and explained what she had done right: she took out the word "excited," which only reports the feeling, and put in a smile she notices arriving on her own face. The AI also pointed out that she kept the *wondering*, so the reader still knows she has no idea what that contraption is. And of course, it went slightly overboard, leaning towards sycophancy by pointing out that, "That is the harder version of the trade: most writers delete the feeling word and lose the curiosity along with it. You kept both."
+
+In any case, I'm still happy with it.  The analysis is specific to my student. It found the before and after, identified the specific trade-offs, and named the thing she did that was harder than the assignment required.
+
+Then it wrote this:
+
+> You took out the word "excited," and you put in a smile she notices arriving on her own face — which is what being excited actually feels like from the inside.
+
+I had an almost visceral reaction. Um... no. Having a smile on your face is NOT what being excited actually feels like from the inside.
+
+I understand it's a figure of speech, but it said, "actually feels like", and "from the inside". That describes qualia. Those are consciousness words.  I admit I've been reading a lot of philosophy, theory of mind, and consciousness research lately. And some of my primary interests have to do with consciousness and AI. Is it possible I'm being pedantic and making too big a deal about this?  Yes, but there is real value in being precise about what the student did right. 
+
+## The correction
+
+Nobody can know what a feeling is actually like from the inside except the conscious person having it. A sentence does not magically inject a feeling into a reader. I wanted her to understand what she did right. Her sentence gives detail and color. It is specific enough that a reader recognizes it, or remembers a time a smile snuck up on their own face before they became aware of it. We can't inject an emotion, but we can offer a picture of something the reader has probably experienced.  If we describe it well enough, the emotion (or a memory of it) will get triggered on its own. 
+
+What we do in writing is more nuanced than showing what it "actually feels like from the inside", and I wanted the feedback to communicate that to my student.  
+
+> You took out the word "excited", replacing it with a smile she notices only after it starts to form, and you connected it with wonder. This is a detailed and colorful example of something that might happen to someone who is feeling excitement. 
+
+I updated the GUIDANCE.md file with a bad/good pair, the same way every other correction has:
+
+```
+Be accurate about what writing can and cannot do to a reader, and explain exactly what the student did right without using metaphor or figures of speech.
+
+<bad>You took out the word "excited", and put in a smile she notices arriving on her own face - which is what being excited actually feels like from the inside.</bad>
+
+<good>You took out the word "excited", replacing it with a smile she notices only after it starts to form, and you connected it with wonder. This is a detailed and colorful example of something that might happen to someone who is feeling excitement.</good>
+```
+
+The note got rewritten in place, and every feedback note from here on inherits the rule. Total elapsed time, maybe five minutes.
+
+That's the work.  Build a system that can be tuned. Choose the direction, set the goals. The AI does the reading, the checking, the drafting, and the praise - better and faster than I can.  And yet...
+
+It doesn't have an ontology about what is true. Machine intelligence is inherently mechanistic and probabilistic. It doesn't understand anything. But it's easily tuned. I can provide a sense of what needs to be taught. I can teach it when not to use metaphor. I can show it what I want it to do. This is the taste that it doesn't have. And it can never have, because it's a tool built to be everything for everyone. If you don't give it that taste, it will easily produce slop. 
+
+## Then I have it correct me
+
+I'm a software engineer who writes. I am not a professional writer, and I've never taken a graduate writing workshop. So having made a confident correction about writing instruction, I turned around and asked my co-teacher whether I was actually right, and whether my thinking on this is correct.
+
+AI is extremely good at doing research and providing references. 
+
+In this case, my writing instinct was correct, and it's older than I assumed. T.S. Eliot named the idea in 1919 as the **objective correlative**: you convey an emotion in art by finding the objects, the situation, or the chain of events that will evoke it, rather than by naming it. That's basically how I was thinking about it.  It turns out this is taught in writing for quite a while. Flannery O'Connor arguing that fiction operates through the senses. John Gardner on the vivid and continuous dream. Janet Burroway's *Writing Fiction*, which is the standard university text, and whose chapter on **significant detail** makes the same argument at length.
+
+The reader's half has a name too. The idea that meaning gets assembled by the reader out of their own experience is reader-response theory, mostly Louise Rosenblatt and Wolfgang Iser, and Rosenblatt in particular is standard issue in English-education programs. So the thing I learned about writing (mainly just from reading a lot of books) turns out to be something teachers have been formally taught for decades.
+
+## What I'm saving for the second half of the year
+
+The same conversation turned up three things that are true, useful, and IMHO, are not something that should be taught just yet.  They're going in the plan for later in the year.
+
+**Proportion.** "Show, don't tell" is the most over-applied maxim in writing instruction. You can't show everything or you get forty thousand words of a person crossing a room. The real rule is to show the moments that matter and tell the connective tissue. This one matters especially here, because the student is writing in first person, and first person is often where telling carries the voice. Huck Finn and Holden Caulfield are mostly telling you their opinions, and that's the pleasure of those books. Teach the rule too hard and I'd flatten her narrator on the way to fixing her sentences.
+
+**Detail has to earn its place.** The predictable failure right after a student learns show-don't-tell is a pile of description, all of it weighted equally. Burroway's fix is that a good detail does more than one job at once: character and mood, or setting and plot. That's the next rung up, and maybe it's a second-half-of-the-year idea.
+
+**"Excited" is weak because it carries almost no information, not because it's an emotion word.** Sometimes the precise abstract word is the best available choice, and a plain emotional sentence can work well after a long concrete passage precisely because of the contrast. Worth bringing up later, so she doesn't walk away with a rule that says to never name a feeling.
+
+
+## The irony of inanimate intelligence. 
+
+I keep coming back to how odd this intelligence is.
+
+The system holds the state, the standards, the calendar, and the discipline. It reads every piece of completed work against that day's criteria, it never gets tired, and it never forgets what it noticed three weeks ago. It writes better first drafts of feedback than I do.
+
+And yet it fails to have judgment about what's true, and holds no taste. When it wrote a sentence that used a figure of speech instead of clearly explaining what writing does, that wasn't a failure of intelligence. It was a failure of probability. It is certainly intelligent enough to do exactly what I wanted it to do. It just didn't in that coin-flip. I learnt it right good though. Now it's policy for the rest of the year.
+
+And then it turned around and taught me where my own opinion came from.
